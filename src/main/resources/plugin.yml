@@ -1,0 +1,12 @@
+name: CloudStorage
+main: net.aerulion.cloudstorage.Main
+version: 1.0
+api-version: 1.16
+depend: [Nucleus, Vault]
+author: aerulion
+commands:
+  cloudstorage:
+    description: Main command
+    aliases: [cloud]
+  itemcache:
+    description: Access temporaly stored items
