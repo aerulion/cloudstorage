@@ -1,13 +1,13 @@
 package net.aerulion.cloudstorage.cmd;
 
-import net.aerulion.cloudstorage.task.BuyCloudStorageSlotTask;
+import net.aerulion.cloudstorage.inventory.CloudShopInventory;
 import net.aerulion.cloudstorage.task.CloudInterfaceTask;
 import net.aerulion.cloudstorage.task.CloudStorageStatsTask;
 import net.aerulion.cloudstorage.task.DeletePlayerDataTask;
-import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.task.ListCloudStorageSlotsTask;
+import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.cloudstorage.utils.Permission;
-import net.aerulion.cloudstorage.utils.StorageSetting;
 import net.aerulion.nucleus.api.command.CommandUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
@@ -40,35 +40,22 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             new CloudStorageStatsTask(player);
             return true;
         }
-        if (args.length == 1 && args[0].equalsIgnoreCase("buy")) {
+        if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
             }
             Player player = (Player) commandSender;
-            if (!player.hasPermission(Permission.BUY.get())) {
+            if (!(player.hasPermission(Permission.BUY_STORAGE_SLOT.get()) || player.hasPermission(Permission.BUY_INTERFACE.get()) || player.hasPermission(Permission.BUY_WIRELESS_INTERFACE.get()))) {
                 player.sendMessage(Messages.ERROR_NO_PERMISSION.get());
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return true;
             }
-            new BuyCloudStorageSlotTask(player);
+            player.openInventory(CloudShopInventory.create());
+            SoundUtils.playSound(player, SoundType.OPEN_CONTAINER);
             return true;
         }
-        if (args.length == 1 && args[0].equalsIgnoreCase("buyinterface")) {
-            if (!(commandSender instanceof Player)) {
-                commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
-                return true;
-            }
-            Player player = (Player) commandSender;
-            if (!player.hasPermission(Permission.BUY_INTERFACE.get())) {
-                player.sendMessage(Messages.ERROR_NO_PERMISSION.get());
-                SoundUtils.playSound(player, SoundType.ERROR);
-                return true;
-            }
-            player.getInventory().addItem(Items.getCloudInterface(player.getUniqueId().toString()));
-            return true;
-        }
-        if (args.length == 2 && args[0].equalsIgnoreCase("deleteplayerdata")) {
+        if (args.length == 2 && args[0].equalsIgnoreCase("delete_player_data")) {
             if (!commandSender.hasPermission(Permission.DELETE_PLAYER_DATA.get())) {
                 commandSender.sendMessage(Messages.ERROR_NO_PERMISSION.get());
                 SoundUtils.playSound(commandSender, SoundType.ERROR);
@@ -94,15 +81,39 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return true;
             }
-            StorageSetting storageSetting;
+            CloudInterfaceMode cloudInterfaceMode;
             try {
-                storageSetting = StorageSetting.valueOf(args[1]);
+                cloudInterfaceMode = CloudInterfaceMode.valueOf(args[1]);
             } catch (IllegalArgumentException exception) {
                 player.sendMessage(Messages.ERROR_NO_VALID_STORAGE_SETTING.get());
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return true;
             }
-            new CloudInterfaceTask(player, player.getUniqueId().toString(), storageSetting);
+            new CloudInterfaceTask(player, player.getUniqueId().toString(), cloudInterfaceMode);
+            return true;
+        }
+        if ((args.length == 1 || args.length == 2) && args[0].equalsIgnoreCase("list")) {
+            if (!(commandSender instanceof Player)) {
+                commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
+                return true;
+            }
+            Player player = (Player) commandSender;
+            if (!player.hasPermission(Permission.LIST.get())) {
+                player.sendMessage(Messages.ERROR_NO_PERMISSION.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+                return true;
+            }
+            int page = 1;
+            if (args.length == 2) {
+                try {
+                    page = Integer.parseInt(args[1]);
+                } catch (NumberFormatException exception) {
+                    player.sendMessage(Messages.ERROR_NO_VALID_NUMBER.get());
+                    SoundUtils.playSound(player, SoundType.ERROR);
+                    return true;
+                }
+            }
+            new ListCloudStorageSlotsTask(player, page);
             return true;
         }
         commandSender.sendMessage(Messages.ERROR_UNKNOWN_COMMAND.get());
@@ -116,20 +127,20 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             ArrayList<String> subCommands = new ArrayList<>();
             if (commandSender.hasPermission(Permission.STATS.get()))
                 subCommands.add("stats");
-            if (commandSender.hasPermission(Permission.BUY.get()))
-                subCommands.add("buy");
-            if (commandSender.hasPermission(Permission.BUY_INTERFACE.get()))
-                subCommands.add("buyinterface");
+            if (commandSender.hasPermission(Permission.BUY_STORAGE_SLOT.get()) || commandSender.hasPermission(Permission.BUY_INTERFACE.get()) || commandSender.hasPermission(Permission.BUY_WIRELESS_INTERFACE.get()))
+                subCommands.add("shop");
             if (commandSender.hasPermission(Permission.DELETE_PLAYER_DATA.get()))
-                subCommands.add("deleteplayerdata");
+                subCommands.add("delete_player_data");
             if (commandSender.hasPermission(Permission.INTERFACE.get()))
                 subCommands.add("interface");
+            if (commandSender.hasPermission(Permission.LIST.get()))
+                subCommands.add("list");
             return CommandUtils.filterForTabCompleter(subCommands, args[0]);
         }
-        if (args.length == 2 && args[0].equalsIgnoreCase("deleteplayerdata") && commandSender.hasPermission(Permission.DELETE_PLAYER_DATA.get()))
+        if (args.length == 2 && args[0].equalsIgnoreCase("delete_player_data") && commandSender.hasPermission(Permission.DELETE_PLAYER_DATA.get()))
             return null;
         if (args.length == 2 && args[0].equalsIgnoreCase("interface") && commandSender.hasPermission(Permission.INTERFACE.get()))
-            return CommandUtils.filterForTabCompleter(new ArrayList<>(Arrays.asList(StorageSetting.ALL.name(), StorageSetting.HOTBAR_ONLY.name(), StorageSetting.INVENTORY_ONLY.name())), args[1]);
+            return CommandUtils.filterForTabCompleter(new ArrayList<>(Arrays.asList(CloudInterfaceMode.ALL.name(), CloudInterfaceMode.HOTBAR_ONLY.name(), CloudInterfaceMode.INVENTORY_ONLY.name())), args[1]);
         return Collections.emptyList();
     }
 }

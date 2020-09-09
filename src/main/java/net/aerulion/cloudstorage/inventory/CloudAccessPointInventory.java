@@ -8,7 +8,6 @@ import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.string.CenterPixel;
 import net.aerulion.nucleus.api.string.StringUtils;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -17,11 +16,10 @@ import org.bukkit.inventory.meta.ItemMeta;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AccessPointInventory {
-
+public class CloudAccessPointInventory {
     public static Inventory create(CloudStorageSlot cloudStorageSlot) {
-        Inventory inventory = Bukkit.createInventory(Main.cloudStorageInventoryHolder, 45, StringUtils.generateCenteredString(ChatColor.of(Main.PRIMARY_COLOR) + "§lCloud Access Point", CenterPixel.INVENTORY_TITLE));
-        ItemStack spacer = NbtUtils.setNBTString(NbtUtils.setNBTInt(NbtUtils.setNBTInt(NbtUtils.setNBTString(Items.GUI_SPACER.get().clone(), NBT.KEY_GUI_TYPE.get(), NBT.VALUE_GUI_TYPE_ACCESS_POINT.get()), NBT.KEY_CLOUD_STORAGE_SLOT_STORED_AMOUNT.get(), cloudStorageSlot.getStoredAmount()), NBT.KEY_CLOUD_STORAGE_SLOT_CAPACITY.get(), cloudStorageSlot.getCapacity()), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), cloudStorageSlot.getUUID());
+        Inventory inventory = Bukkit.createInventory(Main.cloudStorageInventoryHolder, 45, StringUtils.generateCenteredString(Main.PRIMARY_COLOR + "§lCloud Access Point", CenterPixel.INVENTORY_TITLE));
+        ItemStack spacer = NbtUtils.setNBTString(NbtUtils.setNBTInt(NbtUtils.setNBTInt(NbtUtils.setNBTString(Items.GUI_SPACER.get().clone(), NBT.KEY_GUI_TYPE.get(), NBT.VALUE_GUI_TYPE_CLOUD_ACCESS_POINT.get()), NBT.KEY_CLOUD_STORAGE_SLOT_STORED_AMOUNT.get(), cloudStorageSlot.getStoredAmount()), NBT.KEY_CLOUD_STORAGE_SLOT_CAPACITY.get(), cloudStorageSlot.getCapacity()), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), cloudStorageSlot.getUUID());
         for (int i = 0; i < inventory.getSize(); i++) {
             inventory.setItem(i, spacer);
         }
@@ -30,7 +28,7 @@ public class AccessPointInventory {
             ItemMeta storedItemMeta = storedItem.getItemMeta();
             List<String> lore = storedItemMeta.hasLore() ? storedItemMeta.getLore() : new ArrayList<>();
             String amountString1 = "§7Eingelagert:";
-            String amountString2 = ChatColor.of(Main.PRIMARY_COLOR) + Messages.decimalFormat.format(cloudStorageSlot.getStoredAmount()) + "§7/" + ChatColor.of(Main.PRIMARY_COLOR) + Messages.decimalFormat.format(cloudStorageSlot.getCapacity());
+            String amountString2 = Main.PRIMARY_COLOR + Messages.decimalFormat.format(cloudStorageSlot.getStoredAmount()) + "§7/" + Main.PRIMARY_COLOR + Messages.decimalFormat.format(cloudStorageSlot.getCapacity());
             int pixelLength = Math.max(StringUtils.getPixelLength(amountString1), StringUtils.getPixelLength(amountString2)) + 20;
             lore.add("§7" + StringUtils.generateLine((int) Math.round(pixelLength / 4D)));
             lore.add(StringUtils.generateCenteredString(amountString1, (int) Math.round(pixelLength / 2D)) + "§r  ");

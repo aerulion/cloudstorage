@@ -14,7 +14,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class PlaceAccessPointListener implements Listener {
+public class PlaceCloudAccessPointListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         if (event.getItemInHand().getType().equals(Material.PLAYER_HEAD)) {

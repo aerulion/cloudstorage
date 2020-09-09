@@ -1,6 +1,8 @@
 package net.aerulion.cloudstorage.utils;
 
+import net.aerulion.cloudstorage.Main;
 import net.aerulion.nucleus.api.base64.Base64Utils;
+import net.md_5.bungee.api.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -47,6 +49,6 @@ public class ItemCache {
         }
         if (CACHE.get(player.getUniqueId().toString()).isEmpty())
             CACHE.remove(player.getUniqueId().toString());
-        player.sendMessage(Messages.PREFIX.getRaw() + "§a§l" + itemsGiven + Messages.MESSAGE_CACHED_ITEMS_ADDED.getRaw() + (skipped ? Messages.MESSAGE_CACHED_ITEMS_LEFT.getRaw() : ""));
+        player.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + itemsGiven + Messages.MESSAGE_CACHED_ITEMS_ADDED.getRaw() + (skipped ? Messages.MESSAGE_CACHED_ITEMS_LEFT.getRaw() : ""));
     }
 }

@@ -1,9 +1,9 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
+import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
 import net.aerulion.cloudstorage.utils.CloudStorageSlot;
 import net.aerulion.cloudstorage.utils.Messages;
-import net.aerulion.cloudstorage.utils.StorageSetting;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
@@ -24,12 +24,12 @@ public class CloudInterfaceTask extends BukkitRunnable {
 
     private final Player PLAYER;
     private final String CLOUD_OWNER_UUID;
-    private final StorageSetting STORAGE_SETTING;
+    private final CloudInterfaceMode CLOUD_INTERFACE_MODE;
 
-    public CloudInterfaceTask(Player PLAYER, String CLOUD_OWNER_UUID, StorageSetting STORAGE_SETTING) {
-        this.PLAYER = PLAYER;
-        this.CLOUD_OWNER_UUID = CLOUD_OWNER_UUID;
-        this.STORAGE_SETTING = STORAGE_SETTING;
+    public CloudInterfaceTask(Player player, String cloudOwnerUUID, CloudInterfaceMode cloudInterfaceMode) {
+        this.PLAYER = player;
+        this.CLOUD_OWNER_UUID = cloudOwnerUUID;
+        this.CLOUD_INTERFACE_MODE = cloudInterfaceMode;
         this.runTaskAsynchronously(Main.plugin);
     }
 
@@ -42,6 +42,8 @@ public class CloudInterfaceTask extends BukkitRunnable {
             List<CloudStorageSlot> possibleItems = new ArrayList<>();
             if (resultSet != null) {
                 if (!resultSet.next()) {
+                    PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NO_AVAILABLE_SLOTS.get());
+                    SoundUtils.playSound(PLAYER, SoundType.ALERT);
                     return;
                 } else {
                     do {
@@ -50,7 +52,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
                 }
             }
             int storedAmount = 0;
-            for (int i = STORAGE_SETTING.getStartSlot(); i <= STORAGE_SETTING.getEndSlot(); i++) {
+            for (int i = CLOUD_INTERFACE_MODE.getStartSlot(); i <= CLOUD_INTERFACE_MODE.getEndSlot(); i++) {
                 ItemStack itemStack = PLAYER.getInventory().getItem(i);
                 if (itemStack != null) {
                     for (CloudStorageSlot cloudStorageSlot : possibleItems) {
@@ -63,7 +65,12 @@ public class CloudInterfaceTask extends BukkitRunnable {
                     }
                 }
             }
-            PLAYER.sendMessage(Messages.PREFIX.getRaw() + ChatColor.of(Main.PRIMARY_COLOR) + ChatColor.BOLD + storedAmount + Messages.MESSAGE_INTERFACE_ITEMS_STORED.getRaw());
+            if (storedAmount == 0) {
+                PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NO_ITEMS_STORED.get());
+                SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                return;
+            }
+            PLAYER.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + storedAmount + Messages.MESSAGE_INTERFACE_ITEMS_STORED.getRaw());
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());

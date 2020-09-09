@@ -31,7 +31,7 @@ public class DeletePlayerDataTask extends BukkitRunnable {
             preparedStatement.setString(1, UUID);
             int affectedRows = preparedStatement.executeUpdate();
             preparedStatement.close();
-            COMMANDSENDER.sendMessage(Messages.PREFIX.getRaw() + ChatColor.of(Main.PRIMARY_COLOR) + ChatColor.BOLD + affectedRows + Messages.MESSAGE_ENTRIES_DELETED.getRaw());
+            COMMANDSENDER.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + affectedRows + Messages.MESSAGE_ENTRIES_DELETED.getRaw());
             SoundUtils.playSound(COMMANDSENDER, SoundType.SUCCESS);
         } catch (SQLException exception) {
             COMMANDSENDER.sendMessage(Messages.ERROR_DELETING_DATA.get());

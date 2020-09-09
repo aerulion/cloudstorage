@@ -22,11 +22,11 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.List;
 
-public class AccessPointGUIListener implements Listener {
+public class CloudAccessPointGUIListener implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         if (event.getInventory().getHolder() != null && event.getInventory().getHolder().equals(Main.cloudStorageInventoryHolder)) {
-            if (NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_GUI_TYPE.get()).equals(NBT.VALUE_GUI_TYPE_ACCESS_POINT.get())) {
+            if (NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_GUI_TYPE.get()).equals(NBT.VALUE_GUI_TYPE_CLOUD_ACCESS_POINT.get())) {
                 event.setCancelled(true);
                 if (event.getCurrentItem() != null && !event.getCurrentItem().getType().equals(Material.AIR)) {
                     Player player = (Player) event.getWhoClicked();
