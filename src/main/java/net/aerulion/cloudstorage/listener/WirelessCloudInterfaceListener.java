@@ -21,19 +21,19 @@ import org.bukkit.inventory.ItemStack;
 public class WirelessCloudInterfaceListener implements Listener {
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
-        ItemStack itemStack = event.getItem();
-        if (itemStack != null) {
-            if (itemStack.getType().equals(Material.STRUCTURE_VOID)) {
-                String uuid = NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get());
-                if (!uuid.equals("")) {
-                    event.setCancelled(true);
-                    CloudInterfaceMode currentMode;
-                    try {
-                        currentMode = CloudInterfaceMode.valueOf(NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_MODE.get()));
-                    } catch (IllegalArgumentException exception) {
-                        currentMode = CloudInterfaceMode.ALL;
-                    }
-                    if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+        if (event.getAction().equals(Action.RIGHT_CLICK_AIR) || event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+            ItemStack itemStack = event.getItem();
+            if (itemStack != null) {
+                if (itemStack.getType().equals(Material.STRUCTURE_VOID)) {
+                    String uuid = NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get());
+                    if (!uuid.equals("")) {
+                        event.setCancelled(true);
+                        CloudInterfaceMode currentMode;
+                        try {
+                            currentMode = CloudInterfaceMode.valueOf(NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_MODE.get()));
+                        } catch (IllegalArgumentException exception) {
+                            currentMode = CloudInterfaceMode.ALL;
+                        }
                         if (event.getPlayer().isSneaking()) {
                             CloudInterfaceMode nextMode;
                             if (currentMode.equals(CloudInterfaceMode.ALL))

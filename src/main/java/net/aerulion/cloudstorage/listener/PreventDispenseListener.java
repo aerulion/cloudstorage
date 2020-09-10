@@ -14,7 +14,9 @@ public class PreventDispenseListener implements Listener {
     public void onDispense(BlockDispenseEvent event) {
         if (event.getBlock().getState() instanceof Dispenser) {
             Dispenser dispenser = (Dispenser) event.getBlock().getState();
-            ItemStack itemStack = dispenser.getInventory().getItem(0) == null ? event.getItem() : dispenser.getInventory().getItem(0);
+            ItemStack itemStack = dispenser.getInventory().getItem(0);
+            if (itemStack == null)
+                itemStack = event.getItem();
             if (itemStack.getType().equals(Material.PAPER)) {
                 if (!NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()).equals("")) {
                     event.setCancelled(true);

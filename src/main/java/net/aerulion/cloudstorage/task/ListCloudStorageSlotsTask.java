@@ -67,13 +67,13 @@ public class ListCloudStorageSlotsTask extends BukkitRunnable {
             for (CloudStorageSlot cloudStorageSlot : toBeSent) {
                 TextComponent mainMessage = new TextComponent("> ");
                 mainMessage.setColor(Main.LIGHT_ACCENT_COLOR);
-                for (BaseComponent baseComponent : new ComponentBuilder("Cloud Storage Slot ").color(Main.PRIMARY_COLOR).event(new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(JsonUtils.convertItemStackToJson(cloudStorageSlot.getStoredItem())).create())).append("#").color(Main.DARK_ACCENT_COLOR).append(String.valueOf(count)).color(Main.PRIMARY_COLOR).create())
+                for (BaseComponent baseComponent : new ComponentBuilder("Cloud Storage Slot ").color(Main.PRIMARY_COLOR).event(cloudStorageSlot.getStoredItem() == null ? new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("Leer").color(Main.PRIMARY_COLOR).create())) : new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(JsonUtils.convertItemStackToJson(cloudStorageSlot.getStoredItem())).create())).append("#").color(Main.DARK_ACCENT_COLOR).append(String.valueOf(count)).color(Main.PRIMARY_COLOR).create())
                     mainMessage.addExtra(baseComponent);
                 mainMessage.addExtra(new TextComponent("    "));
                 for (BaseComponent baseComponent : new ComponentBuilder("[").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder(String.valueOf(cloudStorageSlot.getStoredAmount())).color(Main.PRIMARY_COLOR).append("/").color(Main.DARK_ACCENT_COLOR).append(String.valueOf(cloudStorageSlot.getCapacity())).color(Main.PRIMARY_COLOR).create()))).color(Main.DARK_ACCENT_COLOR).append("Info").color(Main.PRIMARY_COLOR).bold(true).append("]").color(Main.DARK_ACCENT_COLOR).bold(false).create())
                     mainMessage.addExtra(baseComponent);
                 mainMessage.addExtra(new TextComponent("    "));
-                for (BaseComponent baseComponent : new ComponentBuilder("[").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("Klicke Hier").create()))).color(Main.DARK_ACCENT_COLOR).append("AP-Kaufen").color(Main.PRIMARY_COLOR).bold(true).append("]").color(Main.DARK_ACCENT_COLOR).bold(false).create())
+                for (BaseComponent baseComponent : new ComponentBuilder("[").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("Klicke hier, um einen Access Point zu kaufen. Kosten: ").color(Main.LIGHT_ACCENT_COLOR).append("5.000 Ct").color(Main.PRIMARY_COLOR).create()))).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/cloud buy_access_point " + cloudStorageSlot.getUUID())).color(Main.DARK_ACCENT_COLOR).append("AP-Kaufen").color(Main.PRIMARY_COLOR).bold(true).append("]").color(Main.DARK_ACCENT_COLOR).bold(false).create())
                     mainMessage.addExtra(baseComponent);
                 PLAYER.spigot().sendMessage(mainMessage);
                 count++;

@@ -1,10 +1,7 @@
 package net.aerulion.cloudstorage.listener;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.task.FetchCloudStorageSlotTask;
-import net.aerulion.cloudstorage.task.StoreItemTask;
-import net.aerulion.cloudstorage.task.ToggleAccessTask;
-import net.aerulion.cloudstorage.task.WithdrawItemTask;
+import net.aerulion.cloudstorage.task.*;
 import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.NBT;
@@ -32,20 +29,27 @@ public class CloudAccessPointGUIListener implements Listener {
                     Player player = (Player) event.getWhoClicked();
                     int capacity = NbtUtils.getNBTInt(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_CAPACITY.get());
                     int storedAmount = NbtUtils.getNBTInt(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_STORED_AMOUNT.get());
-                    ItemStack storedItem = event.getInventory().getItem(13).clone();
-                    if (!storedItem.isSimilar(Items.GUI_NO_ITEM.get())) {
-                        ItemMeta storedItemMeta = storedItem.getItemMeta();
-                        List<String> lore = storedItemMeta.getLore();
-                        if (lore.size() == 1)
-                            lore = null;
-                        else {
-                            lore.remove(lore.size() - 1);
-                            lore.remove(lore.size() - 1);
-                            lore.remove(lore.size() - 1);
-                            lore.remove(lore.size() - 1);
+                    ItemStack storedItem = event.getInventory().getItem(13);
+                    if (storedItem != null) {
+                        storedItem = storedItem.clone();
+                        if (!storedItem.isSimilar(Items.GUI_NO_ITEM.get())) {
+                            ItemMeta storedItemMeta = storedItem.getItemMeta();
+                            if (storedItemMeta != null) {
+                                List<String> lore = storedItemMeta.getLore();
+                                if (lore != null) {
+                                    if (lore.size() == 1)
+                                        lore = null;
+                                    else {
+                                        lore.remove(lore.size() - 1);
+                                        lore.remove(lore.size() - 1);
+                                        lore.remove(lore.size() - 1);
+                                        lore.remove(lore.size() - 1);
+                                    }
+                                    storedItemMeta.setLore(lore);
+                                    storedItem.setItemMeta(storedItemMeta);
+                                }
+                            }
                         }
-                        storedItemMeta.setLore(lore);
-                        storedItem.setItemMeta(storedItemMeta);
                     }
                     if ((event.getRawSlot() >= 0 && event.getRawSlot() <= event.getView().getTopInventory().getSize() - 1)) {
                         if (event.getSlot() == 13) {
@@ -55,16 +59,20 @@ public class CloudAccessPointGUIListener implements Listener {
                                     return;
                                 }
                                 if (event.getClick().equals(ClickType.RIGHT)) {
-                                    new WithdrawItemTask(player, Math.min(storedAmount, storedItem.getMaxStackSize()), NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
+                                    if (storedItem != null)
+                                        new WithdrawItemTask(player, Math.min(storedAmount, storedItem.getMaxStackSize()), NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
                                     return;
                                 }
                             }
                             return;
                         }
                         if (event.getSlot() == 29) {
-                            SoundUtils.playSound(player, SoundType.UI_CLICK);
-                            new FetchCloudStorageSlotTask(NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), player, Inventory.UPGRADE);
-                            return;
+                            ItemStack itemStack = event.getInventory().getItem(29);
+                            if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
+                                SoundUtils.playSound(player, SoundType.UI_CLICK);
+                                new FetchCloudStorageSlotTask(NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), player, Inventory.UPGRADE);
+                                return;
+                            }
                         }
                         if (event.getSlot() == 31) {
                             if (!Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
@@ -83,13 +91,15 @@ public class CloudAccessPointGUIListener implements Listener {
                                 }
                                 if (event.getClick().equals(ClickType.RIGHT)) {
                                     int amount = 0;
-                                    for (ItemStack itemStack : event.getView().getBottomInventory()) {
-                                        if (itemStack == null) {
+                                    for (int i = 0; i < 36; i++) {
+                                        ItemStack itemStack = event.getView().getBottomInventory().getItem(i);
+                                        if (itemStack == null && storedItem != null)
                                             amount += storedItem.getMaxStackSize();
-                                        }
                                     }
                                     if (amount > storedAmount)
                                         amount = storedAmount;
+                                    if (amount == storedAmount)
+                                        amount -= 1;
                                     if (amount > 0)
                                         new WithdrawItemTask(player, amount, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
                                     return;
@@ -98,8 +108,10 @@ public class CloudAccessPointGUIListener implements Listener {
                             return;
                         }
                         if (event.getSlot() == 33) {
-                            new ToggleAccessTask(NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), player);
-                            return;
+                            ItemStack itemStack = event.getInventory().getItem(33);
+                            if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
+                                new ToggleAccessTask(NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), player);
+                            }
                         }
                     } else {
                         if (event.getCurrentItem().isSimilar(storedItem) || Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
@@ -107,12 +119,14 @@ public class CloudAccessPointGUIListener implements Listener {
                                 int amount = (storedAmount + event.getCurrentItem().getAmount() <= capacity) ? event.getCurrentItem().getAmount() : (capacity - storedAmount);
                                 ItemStack itemStack = event.getCurrentItem().clone();
                                 itemStack.setAmount(1);
-                                event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - amount);
-                                new StoreItemTask(player, itemStack, amount, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), false);
-                                return;
+                                if (Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13)))
+                                    new StoreInitialItemTask(player, itemStack, amount, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get()), event.getSlot());
+                                else {
+                                    event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - amount);
+                                    new StoreItemTask(player, itemStack, amount, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), false);
+                                }
                             }
                         }
-                        return;
                     }
                 }
             }

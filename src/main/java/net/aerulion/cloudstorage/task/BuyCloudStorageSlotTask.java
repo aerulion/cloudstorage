@@ -1,10 +1,12 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.utils.*;
+import net.aerulion.cloudstorage.utils.ItemCache;
+import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.utils.Messages;
+import net.aerulion.cloudstorage.utils.Upgrade;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
-import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.milkbowl.vault.economy.EconomyResponse;
@@ -38,10 +40,10 @@ public class BuyCloudStorageSlotTask extends BukkitRunnable {
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
             PLAYER.sendMessage(Messages.MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT.get());
             if (PLAYER.getInventory().firstEmpty() == -1) {
-                ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(NbtUtils.setNBTString(Items.ACCESS_POINT.get().clone(), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid)), 1);
+                ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Items.getCloudAccessPoint(uuid, PLAYER.getUniqueId().toString())), 1);
                 PLAYER.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
             } else {
-                PLAYER.getInventory().addItem(NbtUtils.setNBTString(Items.ACCESS_POINT.get().clone(), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid));
+                PLAYER.getInventory().addItem(Items.getCloudAccessPoint(uuid, PLAYER.getUniqueId().toString()));
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_BUYING_CLOUD_STORAGE_SLOT.get());

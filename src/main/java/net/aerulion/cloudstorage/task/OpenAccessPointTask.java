@@ -33,7 +33,7 @@ public class OpenAccessPointTask extends BukkitRunnable {
             }
         }
         if (INVENTORY.equals(Inventory.ACCESS_POINT)) {
-            PLAYER.openInventory(CloudAccessPointInventory.create(CLOUDSTORAGESLOT));
+            PLAYER.openInventory(CloudAccessPointInventory.create(CLOUDSTORAGESLOT, CLOUDSTORAGESLOT.getOwnerUUID().equals(PLAYER.getUniqueId().toString())));
             Main.openGUIs.put(PLAYER.getUniqueId().toString(), CLOUDSTORAGESLOT.getUUID());
         }
         if (INVENTORY.equals(Inventory.UPGRADE)) {

@@ -5,15 +5,15 @@ import org.bukkit.inventory.ItemStack;
 public class CloudStorageSlot {
     private final String UUID;
     private final String OWNER_UUID;
-    private final int STORED_AMOUNT;
+    private int storedAmount;
     private final int CAPACITY;
     private final ItemStack STORED_ITEM;
     private final boolean PRIVATE;
 
-    public CloudStorageSlot(String UUID, String OWNER_UUID, int STORED_AMOUNT, int CAPACITY, ItemStack STORED_ITEM, boolean PRIVATE) {
+    public CloudStorageSlot(String UUID, String OWNER_UUID, int storedAmount, int CAPACITY, ItemStack STORED_ITEM, boolean PRIVATE) {
         this.UUID = UUID;
         this.OWNER_UUID = OWNER_UUID;
-        this.STORED_AMOUNT = STORED_AMOUNT;
+        this.storedAmount = storedAmount;
         this.CAPACITY = CAPACITY;
         this.STORED_ITEM = STORED_ITEM;
         this.PRIVATE = PRIVATE;
@@ -28,7 +28,11 @@ public class CloudStorageSlot {
     }
 
     public int getStoredAmount() {
-        return STORED_AMOUNT;
+        return storedAmount;
+    }
+
+    public void setStoredAmount(int storedAmount) {
+        this.storedAmount = storedAmount;
     }
 
     public int getCapacity() {

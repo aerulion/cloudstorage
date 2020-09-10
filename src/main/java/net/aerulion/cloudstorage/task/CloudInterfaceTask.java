@@ -17,8 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class CloudInterfaceTask extends BukkitRunnable {
 
@@ -39,7 +38,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM `aerulion_cloudstorage_slots` WHERE ((`ITEM` != '') AND (`AMOUNT` < `CAPACITY`) AND (`OWNER` = ?))");
             preparedStatement.setString(1, CLOUD_OWNER_UUID);
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<CloudStorageSlot> possibleItems = new ArrayList<>();
+            HashMap<ItemStack, CloudStorageSlot> possibleItems = new HashMap<>();
             if (resultSet != null) {
                 if (!resultSet.next()) {
                     PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NO_AVAILABLE_SLOTS.get());
@@ -47,7 +46,8 @@ public class CloudInterfaceTask extends BukkitRunnable {
                     return;
                 } else {
                     do {
-                        possibleItems.add(new CloudStorageSlot(resultSet.getString("UUID"), resultSet.getString("OWNER"), resultSet.getInt("AMOUNT"), resultSet.getInt("CAPACITY"), resultSet.getString("ITEM").equals("") ? null : Base64Utils.decodeItemStack(resultSet.getString("ITEM")), resultSet.getBoolean("PRIVATE")));
+                        ItemStack storedItem = resultSet.getString("ITEM").equals("") ? null : Base64Utils.decodeItemStack(resultSet.getString("ITEM"));
+                        possibleItems.put(storedItem, new CloudStorageSlot(resultSet.getString("UUID"), resultSet.getString("OWNER"), resultSet.getInt("AMOUNT"), resultSet.getInt("CAPACITY"), storedItem, resultSet.getBoolean("PRIVATE")));
                     } while (resultSet.next());
                 }
             }
@@ -55,10 +55,14 @@ public class CloudInterfaceTask extends BukkitRunnable {
             for (int i = CLOUD_INTERFACE_MODE.getStartSlot(); i <= CLOUD_INTERFACE_MODE.getEndSlot(); i++) {
                 ItemStack itemStack = PLAYER.getInventory().getItem(i);
                 if (itemStack != null) {
-                    for (CloudStorageSlot cloudStorageSlot : possibleItems) {
-                        if (cloudStorageSlot.getStoredItem().isSimilar(itemStack)) {
-                            int amount = (cloudStorageSlot.getStoredAmount() + itemStack.getAmount() <= cloudStorageSlot.getCapacity()) ? itemStack.getAmount() : (cloudStorageSlot.getCapacity() - cloudStorageSlot.getStoredAmount());
+                    ItemStack keyItemStack = itemStack.clone();
+                    keyItemStack.setAmount(1);
+                    if (possibleItems.containsKey(keyItemStack)) {
+                        CloudStorageSlot cloudStorageSlot = possibleItems.get(keyItemStack);
+                        int amount = (cloudStorageSlot.getStoredAmount() + itemStack.getAmount() <= cloudStorageSlot.getCapacity()) ? itemStack.getAmount() : (cloudStorageSlot.getCapacity() - cloudStorageSlot.getStoredAmount());
+                        if (amount > 0) {
                             storedAmount += amount;
+                            cloudStorageSlot.setStoredAmount(cloudStorageSlot.getStoredAmount() + amount);
                             itemStack.setAmount(itemStack.getAmount() - amount);
                             new StoreItemTask(PLAYER, cloudStorageSlot.getStoredItem(), amount, cloudStorageSlot.getUUID(), true);
                         }
@@ -72,7 +76,8 @@ public class CloudInterfaceTask extends BukkitRunnable {
             }
             PLAYER.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + storedAmount + Messages.MESSAGE_INTERFACE_ITEMS_STORED.getRaw());
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
-        } catch (SQLException exception) {
+        } catch (
+                SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());
             SoundUtils.playSound(PLAYER, SoundType.ERROR);
         }

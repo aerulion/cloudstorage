@@ -1,7 +1,7 @@
 package net.aerulion.cloudstorage;
 
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.aerulion.cloudstorage.cmd.CMD_cloudstorage;
-import net.aerulion.cloudstorage.cmd.CMD_itemcache;
 import net.aerulion.cloudstorage.listener.*;
 import net.aerulion.cloudstorage.utils.CloudStorageInventoryHolder;
 import net.aerulion.cloudstorage.utils.Messages;
@@ -20,6 +20,7 @@ public class Main extends JavaPlugin {
 
     public static Main plugin;
     public static Economy economy;
+    public static WorldGuardPlugin worldGuard;
     public final static ChatColor ERROR_COLOR = ChatColor.of(new Color(252, 60, 60));
     public final static ChatColor PRIMARY_COLOR = ChatColor.of(new Color(25, 181, 254));
     public final static ChatColor DARK_ACCENT_COLOR = ChatColor.of(new Color(34, 49, 63));
@@ -38,6 +39,11 @@ public class Main extends JavaPlugin {
             pluginManager.disablePlugin(this);
             return;
         }
+        if (!setupWorldGuard()) {
+            ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_WORLD_GUARD_NOT_FOUND.get());
+            pluginManager.disablePlugin(this);
+            return;
+        }
         pluginManager.registerEvents(new BreakCloudAccessPointListener(), this);
         pluginManager.registerEvents(new BreakCloudInterfaceListener(), this);
         pluginManager.registerEvents(new CloudAccessPointGUIListener(), this);
@@ -52,14 +58,12 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new PreventExplodeListener(), this);
         pluginManager.registerEvents(new PreventHopperListener(), this);
         pluginManager.registerEvents(new UpgradeGUIListener(), this);
+        pluginManager.registerEvents(new WirelessCloudAccessPointListener(), this);
         pluginManager.registerEvents(new WirelessCloudInterfaceListener(), this);
 
         PluginCommand cmdCloudStorage = getCommand("cloudstorage");
         if (cmdCloudStorage != null)
             cmdCloudStorage.setExecutor(new CMD_cloudstorage());
-        PluginCommand cmdItemCache = getCommand("itemcache");
-        if (cmdItemCache != null)
-            cmdItemCache.setExecutor(new CMD_itemcache());
 
         ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_PLUGIN_ENABLED.get());
     }
@@ -78,5 +82,10 @@ public class Main extends JavaPlugin {
             return false;
         economy = registeredServiceProvider.getProvider();
         return true;
+    }
+
+    private boolean setupWorldGuard() {
+        worldGuard = (WorldGuardPlugin) getServer().getPluginManager().getPlugin("WorldGuard");
+        return worldGuard != null;
     }
 }

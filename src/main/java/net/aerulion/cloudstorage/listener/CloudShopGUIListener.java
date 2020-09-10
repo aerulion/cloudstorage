@@ -21,7 +21,7 @@ public class CloudShopGUIListener implements Listener {
                 event.setCancelled(true);
                 if (event.getSlot() == 11) {
                     Player player = (Player) event.getWhoClicked();
-                    if (!player.hasPermission(Permission.BUY_STORAGE_SLOT.get())) {
+                    if (!player.hasPermission(Permission.BUY_CLOUD_STORAGE_SLOT.get())) {
                         player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
                         return;
@@ -43,7 +43,7 @@ public class CloudShopGUIListener implements Listener {
                 }
                 if (event.getSlot() == 13) {
                     Player player = (Player) event.getWhoClicked();
-                    if (!player.hasPermission(Permission.BUY_INTERFACE.get())) {
+                    if (!player.hasPermission(Permission.BUY_CLOUD_INTERFACE.get())) {
                         player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
                         return;
@@ -72,7 +72,7 @@ public class CloudShopGUIListener implements Listener {
                 }
                 if (event.getSlot() == 15) {
                     Player player = (Player) event.getWhoClicked();
-                    if (!player.hasPermission(Permission.BUY_WIRELESS_INTERFACE.get())) {
+                    if (!player.hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get())) {
                         player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
                         return;
@@ -97,7 +97,6 @@ public class CloudShopGUIListener implements Listener {
                         player.sendMessage(Messages.ERROR_TRANSACTION.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
                     }
-                    return;
                 }
             }
         }

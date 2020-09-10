@@ -60,7 +60,10 @@ public enum Items {
     GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT(ItemUtils.buildGuiButton(SkullUtils.getSkull("http://textures.minecraft.net/texture/3e9fc3c04c4d5a2a9291ebaad9fe8f85cb2f7719af8e47475a05405099471b2e", UUID.fromString("9e87186f-14bb-43fb-b0f9-9fcad97899f5")), Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Storage Slot", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe einen zusätzlichen Cloud", Main.LIGHT_ACCENT_COLOR + "Storage Slot für dein Cloud", Main.LIGHT_ACCENT_COLOR + "Netzwerk. Der erste Access Point", Main.LIGHT_ACCENT_COLOR + "ist im Preis inbegriffen.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Preis:", Main.PRIMARY_COLOR + "500 Ct", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
     GUI_BUTTON_SHOP_CLOUD_INTERFACE(ItemUtils.buildGuiButton(SkullUtils.getSkull("http://textures.minecraft.net/texture/d4dff0c31510dc52c21a27b099d0bdf1a9f45c4bb6f8e9c2e98c897f2082d26", UUID.fromString("e58d68f0-b0d6-4593-b456-eea6d0599559")), Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Interface", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe ein Cloud Interface", Main.LIGHT_ACCENT_COLOR + "für dein Cloud Netzwerk.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Preis:", Main.PRIMARY_COLOR + "25.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
     GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE(ItemUtils.buildGuiButton(Material.STRUCTURE_VOID, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Wireless Cloud Interface", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe ein Wireless Cloud Interface", Main.LIGHT_ACCENT_COLOR + "für dein Cloud Netzwerk.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Preis:", Main.PRIMARY_COLOR + "50.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider"), true, 2)),
-    GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT(ItemUtils.buildGuiButton(Material.ENDER_CHEST, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Zusätzlicher AP", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Erhalte einen zusätzlichen AP,", Main.LIGHT_ACCENT_COLOR + "welcher mit diesem synchronisiert", Main.LIGHT_ACCENT_COLOR + "ist, um von verschiedenen Orten", Main.LIGHT_ACCENT_COLOR + "darauf zugreifen zu können.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Linksklick: Access Point", Main.PRIMARY_COLOR + "5.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Rechtsklick: Wireless Access Point", Main.PRIMARY_COLOR + "10.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
+    GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT_NO_PERMISSION(ItemUtils.buildGuiButton(SkullUtils.getSkull("http://textures.minecraft.net/texture/3e9fc3c04c4d5a2a9291ebaad9fe8f85cb2f7719af8e47475a05405099471b2e", UUID.fromString("9e87186f-14bb-43fb-b0f9-9fcad97899f5")), Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Storage Slot", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe einen zusätzlichen Cloud", Main.LIGHT_ACCENT_COLOR + "Storage Slot für dein Cloud", Main.LIGHT_ACCENT_COLOR + "Netzwerk. Der erste Access Point", Main.LIGHT_ACCENT_COLOR + "ist im Preis inbegriffen.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.ERROR_COLOR + "Du hast nicht die benötigten", Main.ERROR_COLOR + "Rechte, dies zu kaufen.", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
+    GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION(ItemUtils.buildGuiButton(SkullUtils.getSkull("http://textures.minecraft.net/texture/d4dff0c31510dc52c21a27b099d0bdf1a9f45c4bb6f8e9c2e98c897f2082d26", UUID.fromString("e58d68f0-b0d6-4593-b456-eea6d0599559")), Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Interface", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe ein Cloud Interface", Main.LIGHT_ACCENT_COLOR + "für dein Cloud Netzwerk.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.ERROR_COLOR + "Du hast nicht die benötigten", Main.ERROR_COLOR + "Rechte, dies zu kaufen.", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
+    GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE_NO_PERMISSION(ItemUtils.buildGuiButton(Material.STRUCTURE_VOID, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Wireless Cloud Interface", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe ein Wireless Cloud Interface", Main.LIGHT_ACCENT_COLOR + "für dein Cloud Netzwerk.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.ERROR_COLOR + "Du hast nicht die benötigten", Main.ERROR_COLOR + "Rechte, dies zu kaufen.", Main.LIGHT_ACCENT_COLOR + "%divider"), true, 2)),
+    GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT(ItemUtils.buildGuiButton(SkullUtils.getSkull("http://textures.minecraft.net/texture/3e9fc3c04c4d5a2a9291ebaad9fe8f85cb2f7719af8e47475a05405099471b2e", UUID.fromString("9e87186f-14bb-43fb-b0f9-9fcad97899f5")), Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Zusätzlicher AP", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Kaufe einen zusätzlichen AP,", Main.LIGHT_ACCENT_COLOR + "welcher mit diesem synchronisiert", Main.LIGHT_ACCENT_COLOR + "ist, um von verschiedenen Orten", Main.LIGHT_ACCENT_COLOR + "darauf zugreifen zu können.", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Linksklick: Access Point", Main.PRIMARY_COLOR + "5.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Rechtsklick: Wireless Access Point", Main.PRIMARY_COLOR + "10.000 Ct", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
     GUI_NO_ITEM(ItemUtils.buildGuiButton(Material.LIGHT_BLUE_STAINED_GLASS_PANE, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Dieser CSS ist leer", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Klicke auf ein Item in", Main.LIGHT_ACCENT_COLOR + "deinem Inventar, um", Main.LIGHT_ACCENT_COLOR + "es einzulagern.", Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2)),
     GUI_SPACER(ItemUtils.buildItemStack(Material.BLACK_STAINED_GLASS_PANE, ChatColor.RESET.toString(), null, false)),
     WIRELESS_CLOUD_ACCESS_POINT(ItemUtils.buildItemStack(Material.HEART_OF_THE_SEA, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Wireless Cloud Access Point", null, true)),
@@ -88,7 +91,8 @@ public enum Items {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
         ItemStack itemStack = Items.CLOUD_INTERFACE.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setLore(Collections.singletonList(Main.LIGHT_ACCENT_COLOR + "Besitzer: " + Main.PRIMARY_COLOR + offlinePlayer.getName()));
+        if (itemMeta != null)
+            itemMeta.setLore(Collections.singletonList(Main.LIGHT_ACCENT_COLOR + "Eigentümer: " + Main.PRIMARY_COLOR + offlinePlayer.getName()));
         itemStack.setItemMeta(itemMeta);
         itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get(), uuid);
         return itemStack;
@@ -98,10 +102,35 @@ public enum Items {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
         ItemStack itemStack = Items.WIRELESS_CLOUD_INTERFACE.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setLore(Arrays.asList(Main.LIGHT_ACCENT_COLOR + "Besitzer: " + Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "Modus: " + Main.PRIMARY_COLOR + cloudInterfaceMode.getDisplay()));
+        if (itemMeta != null)
+            itemMeta.setLore(Arrays.asList(Main.LIGHT_ACCENT_COLOR + "Eigentümer: " + Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "Modus: " + Main.PRIMARY_COLOR + cloudInterfaceMode.getDisplay()));
         itemStack.setItemMeta(itemMeta);
         itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get(), uuid);
         itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_MODE.get(), cloudInterfaceMode.name());
+        return itemStack;
+    }
+
+    public static ItemStack getCloudAccessPoint(String uuid, String owner) {
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(owner));
+        ItemStack itemStack = Items.ACCESS_POINT.get().clone();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta != null)
+            itemMeta.setLore(Collections.singletonList(Main.LIGHT_ACCENT_COLOR + "Eigentümer: " + Main.PRIMARY_COLOR + offlinePlayer.getName()));
+        itemStack.setItemMeta(itemMeta);
+        itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid);
+        itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(), owner);
+        return itemStack;
+    }
+
+    public static ItemStack getWirelessCloudAccessPoint(String uuid, String owner) {
+        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(owner));
+        ItemStack itemStack = Items.WIRELESS_CLOUD_ACCESS_POINT.get().clone();
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        if (itemMeta != null)
+            itemMeta.setLore(Collections.singletonList(Main.LIGHT_ACCENT_COLOR + "Eigentümer: " + Main.PRIMARY_COLOR + offlinePlayer.getName()));
+        itemStack.setItemMeta(itemMeta);
+        itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid);
+        itemStack = NbtUtils.setNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(), owner);
         return itemStack;
     }
 }

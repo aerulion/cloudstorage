@@ -21,15 +21,17 @@ public class PlaceCloudInterfaceListener implements Listener {
         if (event.getItemInHand().getType().equals(Material.PLAYER_HEAD)) {
             String ownerUUID = NbtUtils.getNBTString(event.getItemInHand(), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get());
             if (!ownerUUID.equals("")) {
-                Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
-                    event.getBlockPlaced().setType(Material.LECTERN, true);
-                    BlockData blockData = event.getBlockPlaced().getBlockData();
-                    Directional directional = (Directional) blockData;
-                    directional.setFacing(getDirection(event.getPlayer()));
-                    event.getBlockPlaced().setBlockData(blockData);
-                    Lectern lectern = (Lectern) event.getBlockPlaced().getState();
-                    lectern.getInventory().setItem(0, NbtUtils.setNBTString(new ItemStack(Material.WRITTEN_BOOK), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get(), ownerUUID));
-                }, 1L);
+                if (Main.worldGuard.createProtectionQuery().testBlockPlace(event.getPlayer(), event.getBlock().getLocation(), Material.LECTERN)) {
+                    Bukkit.getScheduler().runTaskLater(Main.plugin, () -> {
+                        event.getBlockPlaced().setType(Material.LECTERN, true);
+                        BlockData blockData = event.getBlockPlaced().getBlockData();
+                        Directional directional = (Directional) blockData;
+                        directional.setFacing(getDirection(event.getPlayer()));
+                        event.getBlockPlaced().setBlockData(blockData);
+                        Lectern lectern = (Lectern) event.getBlockPlaced().getState();
+                        lectern.getInventory().setItem(0, NbtUtils.setNBTString(new ItemStack(Material.WRITTEN_BOOK), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get(), ownerUUID));
+                    }, 1L);
+                }
             }
         }
     }
