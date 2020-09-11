@@ -2,14 +2,13 @@ package net.aerulion.cloudstorage.listener;
 
 import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.task.CloudInterfaceTask;
-import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
-import net.aerulion.cloudstorage.utils.Items;
-import net.aerulion.cloudstorage.utils.NBT;
+import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.ComponentBuilder;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,6 +27,16 @@ public class WirelessCloudInterfaceListener implements Listener {
                     String uuid = NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get());
                     if (!uuid.equals("")) {
                         event.setCancelled(true);
+                        if (Main.DISABLED_WORLDS.contains(event.getPlayer().getWorld().getName()) && !event.getPlayer().hasPermission(Permission.BYPASS_WORLD.get())) {
+                            event.getPlayer().sendMessage(Messages.ERROR_DISABLED_WORLD.get());
+                            SoundUtils.playSound(event.getPlayer(), SoundType.ERROR);
+                            return;
+                        }
+                        if (!event.getPlayer().getGameMode().equals(GameMode.SURVIVAL) && !event.getPlayer().hasPermission(Permission.BYPASS_GAMEMODE.get())) {
+                            event.getPlayer().sendMessage(Messages.ERROR_GAME_MODE.get());
+                            SoundUtils.playSound(event.getPlayer(), SoundType.ERROR);
+                            return;
+                        }
                         CloudInterfaceMode currentMode;
                         try {
                             currentMode = CloudInterfaceMode.valueOf(NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_MODE.get()));

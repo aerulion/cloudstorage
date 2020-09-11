@@ -18,6 +18,8 @@ public enum Messages {
     ERROR_BUYING_CLOUD_STORAGE_SLOT(Main.ERROR_COLOR + "Fehler: Der Cloud Storage Slot konnte nicht gekauft werden. Dein Geld wurde zurückerstattet."),
     ERROR_BUYING_UPGRADE(Main.ERROR_COLOR + "Fehler: Das Upgrade konnte nicht gekauft werden. Dein Geld wurde zurückerstattet."),
     ERROR_DELETING_DATA(Main.ERROR_COLOR + "Fehler: Die Daten konnten nicht gelöscht werden. Bitte versuche es später erneut."),
+    ERROR_DISABLED_WORLD(Main.ERROR_COLOR + "Fehler: Du kannst diese Funktion nicht in dieser Welt nutzen."),
+    ERROR_GAME_MODE(Main.ERROR_COLOR + "Fehler: Du kannst diese Funktion nur im Survival Modus nutzen."),
     ERROR_LOADING_DATA(Main.ERROR_COLOR + "Fehler: Die Daten konnten nicht geladen werden. Bitte versuche es später erneut."),
     ERROR_NOT_ENOUGH_MONEY(Main.ERROR_COLOR + "Fehler: Du hast nicht genügend Geld."),
     ERROR_NO_PERMISSION(Main.ERROR_COLOR + "Fehler: Du hast keine Rechte diesen Befehl zu nutzen."),
@@ -49,6 +51,7 @@ public enum Messages {
     MESSAGE_NO_ACCESS(Main.LIGHT_ACCENT_COLOR + "Du hast nicht die benötigten Zugriffsrechte."),
     MESSAGE_NO_CACHED_ITEMS(Main.LIGHT_ACCENT_COLOR + "Es wurden keine Items zwischengelagert."),
     MESSAGE_NO_CLOUD_STORAGE_SLOT(Main.LIGHT_ACCENT_COLOR + "Du besitzt keine Cloud Storage Slots."),
+    MESSAGE_RELOADED(Main.LIGHT_ACCENT_COLOR + "Die Config Datei wurde neu geladen."),
     MESSAGE_WIRELESS_CLOUD_ACCESS_POINT_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich einen Wireless Cloud Access Point gekauft."),
     MESSAGE_WIRELESS_CLOUD_INTERFACE_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich ein Wireless Cloud Interface gekauft."),
 

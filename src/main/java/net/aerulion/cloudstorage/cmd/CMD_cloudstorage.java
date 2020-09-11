@@ -39,6 +39,15 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             new CloudStorageStatsTask(player);
             return true;
         }
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            if (!commandSender.hasPermission(Permission.COMMAND_RELOAD.get())) {
+                commandSender.sendMessage(Messages.ERROR_NO_PERMISSION.get());
+                SoundUtils.playSound(commandSender, SoundType.ERROR);
+                return true;
+            }
+            new ReloadTask(commandSender);
+            return true;
+        }
         if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
@@ -168,6 +177,8 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 subCommands.add("list");
             if (commandSender.hasPermission(Permission.COMMAND_ITEM_CACHE.get()))
                 subCommands.add("itemcache");
+            if (commandSender.hasPermission(Permission.COMMAND_RELOAD.get()))
+                subCommands.add("reload");
             return CommandUtils.filterForTabCompleter(subCommands, args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("delete_player_data") && commandSender.hasPermission(Permission.COMMAND_DELETE_PLAYER_DATA.get()))

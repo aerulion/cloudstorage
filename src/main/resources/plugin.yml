@@ -21,7 +21,11 @@ permissions:
     default: op
   buy.wirelesscloudinterface:
     default: op
+  bypass.gamemode:
+    default: op
   bypass.private:
+    default: op
+  bypass.world:
     default: op
   cmd.deleteplayerdata:
     default: op
@@ -30,6 +34,8 @@ permissions:
   cmd.itemcache:
     default: op
   cmd.list:
+    default: op
+  cmd.reload:
     default: op
   cmd.stats:
     default: op

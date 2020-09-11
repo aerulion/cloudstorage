@@ -7,11 +7,14 @@ public enum Permission {
     BUY_UPGRADE("buy.upgrade"),
     BUY_WIRELESS_CLOUD_ACCESS_POINT("buy.wirelesscloudaccesspoint"),
     BUY_WIRELESS_CLOUD_INTERFACE("buy.wirelesscloudinterface"),
+    BYPASS_GAMEMODE("bypass.gamemode"),
     BYPASS_PRIVATE("bypass.private"),
+    BYPASS_WORLD("bypass.world"),
     COMMAND_DELETE_PLAYER_DATA("cmd.deleteplayerdata"),
     COMMAND_INTERFACE("cmd.interface"),
     COMMAND_ITEM_CACHE("cmd.itemcache"),
     COMMAND_LIST("cmd.list"),
+    COMMAND_RELOAD("cmd.reload"),
     COMMAND_STATS("cmd.stats");
 
     private final String permission;

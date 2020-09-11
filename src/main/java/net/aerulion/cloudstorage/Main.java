@@ -2,6 +2,7 @@ package net.aerulion.cloudstorage;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.aerulion.cloudstorage.cmd.CMD_cloudstorage;
+import net.aerulion.cloudstorage.file.ConfigFile;
 import net.aerulion.cloudstorage.listener.*;
 import net.aerulion.cloudstorage.utils.CloudStorageInventoryHolder;
 import net.aerulion.cloudstorage.utils.Messages;
@@ -15,6 +16,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 import java.awt.*;
 import java.util.HashMap;
+import java.util.List;
 
 public class Main extends JavaPlugin {
 
@@ -27,10 +29,13 @@ public class Main extends JavaPlugin {
     public final static ChatColor LIGHT_ACCENT_COLOR = ChatColor.of(new Color(141, 149, 157));
     public static CloudStorageInventoryHolder cloudStorageInventoryHolder;
     public static final HashMap<String, String> openGUIs = new HashMap<>();
+    public static List<String> DISABLED_WORLDS;
 
     @Override
     public void onEnable() {
         ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_ENABLING.get());
+        ConfigFile.copyDefault();
+        DISABLED_WORLDS = ConfigFile.getFileConfiguration().getStringList("DisabledWorlds");
         plugin = this;
         cloudStorageInventoryHolder = new CloudStorageInventoryHolder();
         PluginManager pluginManager = getServer().getPluginManager();
