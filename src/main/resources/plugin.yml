@@ -1,6 +1,6 @@
 name: CloudStorage
 main: net.aerulion.cloudstorage.Main
-version: '1.0'
+version: '1.1'
 api-version: '1.16'
 depend: [ Nucleus, Vault, WorldGuard ]
 author: aerulion
@@ -9,33 +9,33 @@ commands:
     description: Main command
     aliases: [ cloud ]
 permissions:
-  buy.cloudaccesspoint:
+  cloudstorage.buy.cloudaccesspoint:
     default: op
-  buy.cloudinterface:
+  cloudstorage.buy.cloudinterface:
     default: op
-  buy.cloudstorageslot:
+  cloudstorage.buy.cloudstorageslot:
     default: op
-  buy.upgrade:
+  cloudstorage.buy.upgrade:
     default: op
-  buy.wirelesscloudaccesspoint:
+  cloudstorage.buy.wirelesscloudaccesspoint:
     default: op
-  buy.wirelesscloudinterface:
+  cloudstorage.buy.wirelesscloudinterface:
     default: op
-  bypass.gamemode:
+  cloudstorage.bypass.gamemode:
     default: op
-  bypass.private:
+  cloudstorage.bypass.private:
     default: op
-  bypass.world:
+  cloudstorage.bypass.world:
     default: op
-  cmd.deleteplayerdata:
+  cloudstorage.cmd.deleteplayerdata:
     default: op
-  cmd.interface:
+  cloudstorage.cmd.interface:
     default: op
-  cmd.itemcache:
+  cloudstorage.cmd.itemcache:
     default: op
-  cmd.list:
+  cloudstorage.cmd.list:
     default: op
-  cmd.reload:
+  cloudstorage.cmd.reload:
     default: op
-  cmd.stats:
+  cloudstorage.cmd.stats:
     default: op

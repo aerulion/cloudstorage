@@ -42,7 +42,7 @@ public enum Messages {
     MESSAGE_CACHED_ITEMS_LEFT(Main.LIGHT_ACCENT_COLOR + " Es sind weitere Items zwischengelagert."),
     MESSAGE_CLOUD_ACCESS_POINT_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich einen Cloud Access Point gekauft."),
     MESSAGE_CLOUD_INTERFACE_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich ein Cloud Interface gekauft."),
-    MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich einen zusätzlichen Cloud Storage Slot gekauft. Der damit verbundene Access Point wurde dein Inventar gelegt."),
+    MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich einen zusätzlichen Cloud Storage Slot gekauft. Der damit verbundene Access Point wurde in dein Inventar gelegt."),
     MESSAGE_ENTRIES_DELETED(Main.LIGHT_ACCENT_COLOR + " Einträge wurden erfolgreich gelöscht."),
     MESSAGE_INTERFACE_ITEMS_STORED(Main.LIGHT_ACCENT_COLOR + " Items wurden erfolgreich eingelagert."),
     MESSAGE_INTERFACE_NO_AVAILABLE_SLOTS(Main.LIGHT_ACCENT_COLOR + "Es wurden keine verfügbaren Cloud Storage Slots gefunden."),
