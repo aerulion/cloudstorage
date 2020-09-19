@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class ItemCache {
 
@@ -24,9 +25,11 @@ public class ItemCache {
     public static void getItemsFromCache(Player player) {
         int itemsGiven = 0;
         boolean skipped = false;
-        for (String s : CACHE.get(player.getUniqueId().toString()).keySet()) {
-            ItemStack itemStack = Base64Utils.decodeItemStack(s);
-            int amount = CACHE.get(player.getUniqueId().toString()).get(s);
+        Iterator<String> iterator = CACHE.get(player.getUniqueId().toString()).keySet().iterator();
+        while (iterator.hasNext()) {
+            String itemString = iterator.next();
+            ItemStack itemStack = Base64Utils.decodeItemStack(itemString);
+            int amount = CACHE.get(player.getUniqueId().toString()).get(itemString);
             int given = 0;
             while (given < amount) {
                 if (player.getInventory().firstEmpty() == -1) {
@@ -40,10 +43,10 @@ public class ItemCache {
                 itemsGiven += stackSize;
             }
             if (amount == given) {
-                CACHE.get(player.getUniqueId().toString()).remove(s);
+                iterator.remove();
             } else {
                 HashMap<String, Integer> temp = CACHE.get(player.getUniqueId().toString());
-                temp.put(s, amount - given);
+                temp.put(itemString, amount - given);
                 CACHE.put(player.getUniqueId().toString(), temp);
             }
         }
