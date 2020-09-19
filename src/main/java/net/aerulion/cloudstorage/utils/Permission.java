@@ -11,11 +11,12 @@ public enum Permission {
     BYPASS_PRIVATE("bypass.private"),
     BYPASS_WORLD("bypass.world"),
     COMMAND_DELETE_PLAYER_DATA("cmd.deleteplayerdata"),
-    COMMAND_RE_ENCODE_ITEMS("cmd.reencodeitems"),
     COMMAND_INTERFACE("cmd.interface"),
     COMMAND_ITEM_CACHE("cmd.itemcache"),
     COMMAND_LIST("cmd.list"),
+    COMMAND_MAINTENANCE_MODE("cmd.maintenancemode"),
     COMMAND_RELOAD("cmd.reload"),
+    COMMAND_RE_ENCODE_ITEMS("cmd.reencodeitems"),
     COMMAND_STATS("cmd.stats");
 
     private final String permission;

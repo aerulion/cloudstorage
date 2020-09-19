@@ -27,6 +27,11 @@ public class WirelessCloudInterfaceListener implements Listener {
                     String uuid = NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get());
                     if (!uuid.equals("")) {
                         event.setCancelled(true);
+                        if (Main.MAINTENANCE_MODE) {
+                            event.getPlayer().sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                            SoundUtils.playSound(event.getPlayer(), SoundType.ALERT);
+                            return;
+                        }
                         if (Main.DISABLED_WORLDS.contains(event.getPlayer().getWorld().getName()) && !event.getPlayer().hasPermission(Permission.BYPASS_WORLD.get())) {
                             event.getPlayer().sendMessage(Messages.ERROR_DISABLED_WORLD.get());
                             SoundUtils.playSound(event.getPlayer(), SoundType.ERROR);

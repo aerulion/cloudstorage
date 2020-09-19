@@ -4,6 +4,7 @@ import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.task.*;
 import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
@@ -27,6 +28,11 @@ public class CloudAccessPointGUIListener implements Listener {
                 event.setCancelled(true);
                 if (event.getCurrentItem() != null && !event.getCurrentItem().getType().equals(Material.AIR)) {
                     Player player = (Player) event.getWhoClicked();
+                    if (Main.MAINTENANCE_MODE) {
+                        player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                        SoundUtils.playSound(player, SoundType.ALERT);
+                        return;
+                    }
                     int capacity = NbtUtils.getNBTInt(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_CAPACITY.get());
                     int storedAmount = NbtUtils.getNBTInt(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_STORED_AMOUNT.get());
                     ItemStack storedItem = event.getInventory().getItem(13);

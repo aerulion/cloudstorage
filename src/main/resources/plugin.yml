@@ -35,7 +35,11 @@ permissions:
     default: op
   cloudstorage.cmd.list:
     default: op
+  cloudstorage.cmd.maintenancemode:
+    default: op
   cloudstorage.cmd.reload:
+    default: op
+  cloudstorage.cmd.reencodeitems:
     default: op
   cloudstorage.cmd.stats:
     default: op

@@ -24,6 +24,11 @@ public class UpgradeGUIListener implements Listener {
         if (event.getInventory().getHolder() != null && event.getInventory().getHolder().equals(Main.cloudStorageInventoryHolder)) {
             if (NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_GUI_TYPE.get()).equals(NBT.VALUE_GUI_TYPE_UPGRADE.get())) {
                 event.setCancelled(true);
+                if (Main.MAINTENANCE_MODE) {
+                    event.getWhoClicked().sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                    SoundUtils.playSound(event.getWhoClicked(), SoundType.ALERT);
+                    return;
+                }
                 if (event.getSlot() == 10)
                     handleUpgrade(event.getWhoClicked(), Upgrade.UPGRADE_1, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()), event.getCurrentItem(), null);
                 if (event.getSlot() == 11)

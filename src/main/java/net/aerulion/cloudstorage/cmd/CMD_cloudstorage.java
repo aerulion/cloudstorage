@@ -1,5 +1,6 @@
 package net.aerulion.cloudstorage.cmd;
 
+import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.inventory.CloudShopInventory;
 import net.aerulion.cloudstorage.task.*;
 import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
@@ -26,6 +27,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender commandSender, Command command, String label, String[] args) {
         if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("stats"))) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -58,6 +64,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -88,6 +99,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("interface")) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -110,6 +126,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 1 && args[0].equalsIgnoreCase("itemcache")) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -127,6 +148,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             return true;
         }
         if ((args.length == 1 || args.length == 2) && args[0].equalsIgnoreCase("list")) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -151,6 +177,11 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             return true;
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("buy_access_point")) {
+            if (Main.MAINTENANCE_MODE) {
+                commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                return true;
+            }
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
                 return true;
@@ -162,6 +193,17 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 return true;
             }
             new BuyCloudAccessPointCommandTask(player, args[1]);
+            return true;
+        }
+        if (args.length == 1 && args[0].equalsIgnoreCase("maintenance_mode")) {
+            if (!commandSender.hasPermission(Permission.COMMAND_MAINTENANCE_MODE.get())) {
+                commandSender.sendMessage(Messages.ERROR_NO_PERMISSION.get());
+                SoundUtils.playSound(commandSender, SoundType.ERROR);
+                return true;
+            }
+            Main.MAINTENANCE_MODE = !Main.MAINTENANCE_MODE;
+            commandSender.sendMessage(Main.MAINTENANCE_MODE ? Messages.MESSAGE_MAINTENANCE_MODE_ENABLED.get() : Messages.MESSAGE_MAINTENANCE_MODE_DISABLED.get());
+            SoundUtils.playSound(commandSender, SoundType.SUCCESS);
             return true;
         }
 
@@ -190,6 +232,8 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 subCommands.add("itemcache");
             if (commandSender.hasPermission(Permission.COMMAND_RELOAD.get()))
                 subCommands.add("reload");
+            if (commandSender.hasPermission(Permission.COMMAND_MAINTENANCE_MODE.get()))
+                subCommands.add("maintenance_mode");
             return CommandUtils.filterForTabCompleter(subCommands, args[0]);
         }
         if (args.length == 2 && args[0].equalsIgnoreCase("delete_player_data") && commandSender.hasPermission(Permission.COMMAND_DELETE_PLAYER_DATA.get()))

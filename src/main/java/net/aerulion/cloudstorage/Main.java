@@ -30,6 +30,7 @@ public class Main extends JavaPlugin {
     public static CloudStorageInventoryHolder cloudStorageInventoryHolder;
     public static final HashMap<String, String> openGUIs = new HashMap<>();
     public static List<String> DISABLED_WORLDS;
+    public static boolean MAINTENANCE_MODE = true;
 
     @Override
     public void onEnable() {
@@ -70,6 +71,7 @@ public class Main extends JavaPlugin {
         if (cmdCloudStorage != null)
             cmdCloudStorage.setExecutor(new CMD_cloudstorage());
 
+        MAINTENANCE_MODE = false;
         ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_PLUGIN_ENABLED.get());
     }
 
