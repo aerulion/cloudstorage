@@ -48,6 +48,15 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
             new ReloadTask(commandSender);
             return true;
         }
+        if (args.length == 1 && args[0].equalsIgnoreCase("reencode_items")) {
+            if (!commandSender.hasPermission(Permission.COMMAND_RE_ENCODE_ITEMS.get())) {
+                commandSender.sendMessage(Messages.ERROR_NO_PERMISSION.get());
+                SoundUtils.playSound(commandSender, SoundType.ERROR);
+                return true;
+            }
+            new ReEncodeItemsTask(commandSender);
+            return true;
+        }
         if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
             if (!(commandSender instanceof Player)) {
                 commandSender.sendMessage(Messages.ERROR_NO_PLAYER.get());
@@ -171,6 +180,8 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 subCommands.add("shop");
             if (commandSender.hasPermission(Permission.COMMAND_DELETE_PLAYER_DATA.get()))
                 subCommands.add("delete_player_data");
+            if (commandSender.hasPermission(Permission.COMMAND_RE_ENCODE_ITEMS.get()))
+                subCommands.add("reencode_items");
             if (commandSender.hasPermission(Permission.COMMAND_INTERFACE.get()))
                 subCommands.add("interface");
             if (commandSender.hasPermission(Permission.COMMAND_LIST.get()))

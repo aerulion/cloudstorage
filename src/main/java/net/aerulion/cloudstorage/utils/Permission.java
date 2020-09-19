@@ -11,6 +11,7 @@ public enum Permission {
     BYPASS_PRIVATE("bypass.private"),
     BYPASS_WORLD("bypass.world"),
     COMMAND_DELETE_PLAYER_DATA("cmd.deleteplayerdata"),
+    COMMAND_RE_ENCODE_ITEMS("cmd.reencodeitems"),
     COMMAND_INTERFACE("cmd.interface"),
     COMMAND_ITEM_CACHE("cmd.itemcache"),
     COMMAND_LIST("cmd.list"),
