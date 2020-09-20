@@ -61,14 +61,18 @@ public class CloudAccessPointGUIListener implements Listener {
                         if (event.getSlot() == 13) {
                             if (!Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
                                 if (event.getClick().equals(ClickType.LEFT)) {
-                                    if (storedItem != null)
-                                        new WithdrawItemTask(player, 1, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
-                                    return;
+                                    if (player.getInventory().firstEmpty() != -1) {
+                                        if (storedItem != null)
+                                            new WithdrawItemTask(player, 1, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
+                                        return;
+                                    }
                                 }
                                 if (event.getClick().equals(ClickType.RIGHT)) {
-                                    if (storedItem != null)
-                                        new WithdrawItemTask(player, Math.min(storedAmount, storedItem.getMaxStackSize()), NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
-                                    return;
+                                    if (player.getInventory().firstEmpty() != -1) {
+                                        if (storedItem != null)
+                                            new WithdrawItemTask(player, Math.min(storedAmount, storedItem.getMaxStackSize()), NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_STORAGE_SLOT_ID.get()));
+                                        return;
+                                    }
                                 }
                             }
                             return;
