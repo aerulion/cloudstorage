@@ -72,7 +72,7 @@ public class WirelessCloudInterfaceListener implements Listener {
                             return;
                         }
                         if (!event.getPlayer().hasCooldown(Material.STRUCTURE_VOID)) {
-                            event.getPlayer().setCooldown(Material.STRUCTURE_VOID, 100);
+                            event.getPlayer().setCooldown(Material.STRUCTURE_VOID, 40);
                             new CloudInterfaceTask(event.getPlayer(), uuid, currentMode);
                         }
                     }

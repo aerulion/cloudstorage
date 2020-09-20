@@ -29,7 +29,7 @@ public class CloudInterfaceGUIListener implements Listener {
                             return;
                         }
                         new CloudInterfaceTask(player, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get()), CloudInterfaceMode.HOTBAR_ONLY);
-                        player.setCooldown(Material.STRUCTURE_VOID, 100);
+                        player.setCooldown(Material.STRUCTURE_VOID, 40);
                         return;
                     }
                     if (event.getSlot() == 13) {
@@ -39,7 +39,7 @@ public class CloudInterfaceGUIListener implements Listener {
                             return;
                         }
                         new CloudInterfaceTask(player, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get()), CloudInterfaceMode.ALL);
-                        player.setCooldown(Material.STRUCTURE_VOID, 100);
+                        player.setCooldown(Material.STRUCTURE_VOID, 40);
                         return;
                     }
                     if (event.getSlot() == 15) {
@@ -49,7 +49,7 @@ public class CloudInterfaceGUIListener implements Listener {
                             return;
                         }
                         new CloudInterfaceTask(player, NbtUtils.getNBTString(event.getInventory().getItem(0), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get()), CloudInterfaceMode.INVENTORY_ONLY);
-                        player.setCooldown(Material.STRUCTURE_VOID, 100);
+                        player.setCooldown(Material.STRUCTURE_VOID, 40);
                         return;
                     }
                 }
