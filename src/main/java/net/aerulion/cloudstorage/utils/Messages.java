@@ -55,6 +55,7 @@ public enum Messages {
     MESSAGE_NO_ACCESS(Main.LIGHT_ACCENT_COLOR + "Du hast nicht die benötigten Zugriffsrechte."),
     MESSAGE_NO_CACHED_ITEMS(Main.LIGHT_ACCENT_COLOR + "Es wurden keine Items zwischengelagert."),
     MESSAGE_NO_CLOUD_STORAGE_SLOT(Main.LIGHT_ACCENT_COLOR + "Du besitzt keine Cloud Storage Slots."),
+    MESSAGE_NO_GRINDSTONE(Main.LIGHT_ACCENT_COLOR + "Du kannst dieses Item nicht in einem Schleifstein benutzen."),
     MESSAGE_RELOADED(Main.LIGHT_ACCENT_COLOR + "Die Config Datei wurde neu geladen."),
     MESSAGE_WIRELESS_CLOUD_ACCESS_POINT_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich einen Wireless Cloud Access Point gekauft."),
     MESSAGE_WIRELESS_CLOUD_INTERFACE_BOUGHT(Main.LIGHT_ACCENT_COLOR + "Du hast erfolgreich ein Wireless Cloud Interface gekauft."),

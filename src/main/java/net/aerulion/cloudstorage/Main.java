@@ -62,6 +62,7 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new PlaceCloudInterfaceListener(), this);
         pluginManager.registerEvents(new PreventDispenseListener(), this);
         pluginManager.registerEvents(new PreventExplodeListener(), this);
+        pluginManager.registerEvents(new PreventGrindstoneListener(), this);
         pluginManager.registerEvents(new PreventHopperListener(), this);
         pluginManager.registerEvents(new UpgradeGUIListener(), this);
         pluginManager.registerEvents(new WirelessCloudAccessPointListener(), this);
