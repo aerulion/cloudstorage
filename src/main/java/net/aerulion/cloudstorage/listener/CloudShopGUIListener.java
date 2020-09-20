@@ -8,6 +8,7 @@ import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -21,6 +22,8 @@ public class CloudShopGUIListener implements Listener {
                 event.setCancelled(true);
                 if (event.getSlot() == 11) {
                     Player player = (Player) event.getWhoClicked();
+                    if (player.hasCooldown(Material.PLAYER_HEAD))
+                        return;
                     if (Main.MAINTENANCE_MODE) {
                         player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
                         SoundUtils.playSound(player, SoundType.ALERT);
@@ -39,7 +42,7 @@ public class CloudShopGUIListener implements Listener {
                     EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, Upgrade.BASE.getPrice());
                     if (economyResponse.transactionSuccess()) {
                         new BuyCloudStorageSlotTask(player);
-                        player.closeInventory();
+                        player.setCooldown(Material.PLAYER_HEAD, 20);
                     } else {
                         player.sendMessage(Messages.ERROR_TRANSACTION.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
@@ -48,6 +51,8 @@ public class CloudShopGUIListener implements Listener {
                 }
                 if (event.getSlot() == 13) {
                     Player player = (Player) event.getWhoClicked();
+                    if (player.hasCooldown(Material.PLAYER_HEAD))
+                        return;
                     if (Main.MAINTENANCE_MODE) {
                         player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
                         SoundUtils.playSound(player, SoundType.ALERT);
@@ -73,7 +78,7 @@ public class CloudShopGUIListener implements Listener {
                         } else {
                             player.getInventory().addItem(Items.getCloudInterface(player.getUniqueId().toString()));
                         }
-                        player.closeInventory();
+                        player.setCooldown(Material.PLAYER_HEAD, 20);
                     } else {
                         player.sendMessage(Messages.ERROR_TRANSACTION.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
@@ -82,6 +87,8 @@ public class CloudShopGUIListener implements Listener {
                 }
                 if (event.getSlot() == 15) {
                     Player player = (Player) event.getWhoClicked();
+                    if (player.hasCooldown(Material.STRUCTURE_VOID))
+                        return;
                     if (Main.MAINTENANCE_MODE) {
                         player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
                         SoundUtils.playSound(player, SoundType.ALERT);
@@ -107,7 +114,7 @@ public class CloudShopGUIListener implements Listener {
                         } else {
                             player.getInventory().addItem(Items.getWirelessCloudInterface(player.getUniqueId().toString(), CloudInterfaceMode.ALL));
                         }
-                        player.closeInventory();
+                        player.setCooldown(Material.STRUCTURE_VOID, 20);
                     } else {
                         player.sendMessage(Messages.ERROR_TRANSACTION.get());
                         SoundUtils.playSound(player, SoundType.ERROR);
