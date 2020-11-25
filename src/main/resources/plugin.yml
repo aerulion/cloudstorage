@@ -1,6 +1,6 @@
 name: CloudStorage
 main: net.aerulion.cloudstorage.Main
-version: '1.1'
+version: '1.2'
 api-version: '1.16'
 depend: [ Nucleus, Vault, WorldGuard ]
 author: aerulion
