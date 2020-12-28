@@ -1,8 +1,8 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.inventory.CloudAccessPointInventory;
-import net.aerulion.cloudstorage.inventory.UpgradeInventory;
+import net.aerulion.cloudstorage.gui.guis.CloudAccessPointGUI;
+import net.aerulion.cloudstorage.gui.guis.CloudAccessPointUpgradeGUI;
 import net.aerulion.cloudstorage.utils.CloudStorageSlot;
 import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Messages;
@@ -33,11 +33,11 @@ public class OpenAccessPointTask extends BukkitRunnable {
             }
         }
         if (INVENTORY.equals(Inventory.ACCESS_POINT)) {
-            PLAYER.openInventory(CloudAccessPointInventory.create(CLOUDSTORAGESLOT, CLOUDSTORAGESLOT.getOwnerUUID().equals(PLAYER.getUniqueId().toString())));
+            new CloudAccessPointGUI(PLAYER, CLOUDSTORAGESLOT).open();
             Main.openGUIs.put(PLAYER.getUniqueId().toString(), CLOUDSTORAGESLOT.getUUID());
         }
         if (INVENTORY.equals(Inventory.UPGRADE)) {
-            PLAYER.openInventory(UpgradeInventory.create(CLOUDSTORAGESLOT));
+            new CloudAccessPointUpgradeGUI(PLAYER, CLOUDSTORAGESLOT).open();
         }
     }
 }

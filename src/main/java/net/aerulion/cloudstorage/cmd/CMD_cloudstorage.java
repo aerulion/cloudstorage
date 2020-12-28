@@ -1,7 +1,7 @@
 package net.aerulion.cloudstorage.cmd;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.inventory.CloudShopInventory;
+import net.aerulion.cloudstorage.gui.guis.CloudShopGUI;
 import net.aerulion.cloudstorage.task.*;
 import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
 import net.aerulion.cloudstorage.utils.ItemCache;
@@ -79,7 +79,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return true;
             }
-            player.openInventory(CloudShopInventory.create(player));
+            new CloudShopGUI(player).open();
             SoundUtils.playSound(player, SoundType.OPEN_CONTAINER);
             return true;
         }

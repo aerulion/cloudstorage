@@ -3,6 +3,7 @@ package net.aerulion.cloudstorage;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import net.aerulion.cloudstorage.cmd.CMD_cloudstorage;
 import net.aerulion.cloudstorage.file.ConfigFile;
+import net.aerulion.cloudstorage.gui.GuiHandler;
 import net.aerulion.cloudstorage.listener.*;
 import net.aerulion.cloudstorage.utils.CloudStorageInventoryHolder;
 import net.aerulion.cloudstorage.utils.Messages;
@@ -52,10 +53,6 @@ public class Main extends JavaPlugin {
         }
         pluginManager.registerEvents(new BreakCloudAccessPointListener(), this);
         pluginManager.registerEvents(new BreakCloudInterfaceListener(), this);
-        pluginManager.registerEvents(new CloudAccessPointGUIListener(), this);
-        pluginManager.registerEvents(new CloudInterfaceGUIListener(), this);
-        pluginManager.registerEvents(new CloudShopGUIListener(), this);
-        pluginManager.registerEvents(new GUICloseListener(), this);
         pluginManager.registerEvents(new OpenCloudAccessPointListener(), this);
         pluginManager.registerEvents(new OpenCloudInterfaceListener(), this);
         pluginManager.registerEvents(new PlaceCloudAccessPointListener(), this);
@@ -64,9 +61,9 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new PreventExplodeListener(), this);
         pluginManager.registerEvents(new PreventGrindstoneListener(), this);
         pluginManager.registerEvents(new PreventHopperListener(), this);
-        pluginManager.registerEvents(new UpgradeGUIListener(), this);
         pluginManager.registerEvents(new WirelessCloudAccessPointListener(), this);
         pluginManager.registerEvents(new WirelessCloudInterfaceListener(), this);
+        pluginManager.registerEvents(new GuiHandler(), this);
 
         PluginCommand cmdCloudStorage = getCommand("cloudstorage");
         if (cmdCloudStorage != null)

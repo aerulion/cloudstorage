@@ -1,7 +1,7 @@
 package net.aerulion.cloudstorage.listener;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.inventory.CloudInterfaceInventory;
+import net.aerulion.cloudstorage.gui.guis.CloudInterfaceGUI;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.cloudstorage.utils.Permission;
@@ -47,7 +47,7 @@ public class OpenCloudInterfaceListener implements Listener {
                                         return;
                                     }
                                     SoundUtils.playSound(event.getPlayer(), event.getClickedBlock().getLocation(), SoundType.OPEN_CONTAINER);
-                                    event.getPlayer().openInventory(CloudInterfaceInventory.create(uuid));
+                                    new CloudInterfaceGUI(event.getPlayer(), uuid).open();
                                 }
                             }
                         }
