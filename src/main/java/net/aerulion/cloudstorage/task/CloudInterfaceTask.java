@@ -49,7 +49,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
                     } else {
                         do {
                             CloudExperienceTerminal cloudExperienceTerminal = new CloudExperienceTerminal(resultSet2.getString("OWNER"), resultSet2.getInt("AMOUNT"), resultSet2.getInt("CAPACITY"), resultSet2.getBoolean("PRIVATE"));
-                            if (!cloudExperienceTerminal.isPRIVATE() && cloudExperienceTerminal.getStoredAmount() < cloudExperienceTerminal.getCAPACITY()) {
+                            if ((!cloudExperienceTerminal.isPRIVATE() || cloudExperienceTerminal.getOWNER_UUID().equals(PLAYER.getUniqueId().toString())) && cloudExperienceTerminal.getStoredAmount() < cloudExperienceTerminal.getCAPACITY()) {
                                 storedExperienceAmount = ((totalXP + cloudExperienceTerminal.getStoredAmount()) <= cloudExperienceTerminal.getCAPACITY()) ? totalXP : cloudExperienceTerminal.getCAPACITY() - cloudExperienceTerminal.getStoredAmount();
                                 ExperienceUtils.setTotalExperience(PLAYER, ExperienceUtils.getTotalExperience(PLAYER) - storedExperienceAmount);
                                 new StoreExperienceTask(PLAYER, storedExperienceAmount, CLOUD_OWNER_UUID, true);

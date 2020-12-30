@@ -35,7 +35,7 @@ public class BuyCloudExperienceTerminalTask extends BukkitRunnable {
             preparedStatement.executeUpdate();
             preparedStatement.close();
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
-            PLAYER.sendMessage(Messages.MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT.get());
+            PLAYER.sendMessage(Messages.MESSAGE_CLOUD_EXPERIENCE_TERMINAL_BOUGHT.get());
             if (PLAYER.getInventory().firstEmpty() == -1) {
                 ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Items.getCloudExperienceTerminal(PLAYER.getUniqueId().toString())), 1);
                 PLAYER.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
