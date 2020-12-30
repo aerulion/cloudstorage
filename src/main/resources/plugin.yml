@@ -11,6 +11,8 @@ commands:
 permissions:
   cloudstorage.buy.cloudaccesspoint:
     default: op
+  cloudstorage.buy.cloudexperienceterminal:
+    default: op
   cloudstorage.buy.cloudinterface:
     default: op
   cloudstorage.buy.cloudstorageslot:
