@@ -14,12 +14,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class ToggleAccessTask extends BukkitRunnable {
+public class ToggleCloudExperienceTerminalAccessTask extends BukkitRunnable {
 
     private final String UUID;
     private final Player PLAYER;
 
-    public ToggleAccessTask(String UUID, Player PLAYER) {
+    public ToggleCloudExperienceTerminalAccessTask(String UUID, Player PLAYER) {
         this.UUID = UUID;
         this.PLAYER = PLAYER;
         this.runTaskAsynchronously(Main.plugin);
@@ -28,7 +28,7 @@ public class ToggleAccessTask extends BukkitRunnable {
     @Override
     public void run() {
         try (Connection connection = MySQLUtils.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE aerulion_cloudstorage_slots SET PRIVATE = IF(OWNER = ?, IF(PRIVATE = 0, 1, 0), PRIVATE) WHERE UUID = ?");
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE cloudstorage_experience_terminals SET PRIVATE = IF(OWNER = ?, IF(PRIVATE = 0, 1, 0), PRIVATE) WHERE OWNER = ?");
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
             preparedStatement.setString(2, UUID);
             int returnValue = preparedStatement.executeUpdate();
@@ -41,7 +41,7 @@ public class ToggleAccessTask extends BukkitRunnable {
                 if (Main.openGUIs.get(s).equals(UUID)) {
                     Player player = Bukkit.getPlayer(java.util.UUID.fromString(s));
                     if (player != null)
-                        new FetchCloudStorageSlotTask(UUID, player, Inventory.ACCESS_POINT);
+                        new FetchCloudExperienceTerminalTask(UUID, player, Inventory.EXPERIENCE_TERMINAL);
                 }
             }
             SoundUtils.playSound(PLAYER, SoundType.UI_CLICK);

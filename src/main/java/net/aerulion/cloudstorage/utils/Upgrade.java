@@ -3,7 +3,8 @@ package net.aerulion.cloudstorage.utils;
 import org.bukkit.Material;
 
 public enum Upgrade {
-    BASE(0, 2048, 500D, Material.CHEST),
+    EXPERIENCE_TERMINAL_BASE(0,2048,5000D, Material.EXPERIENCE_BOTTLE),
+    CLOUD_STORAGE_SLOT_BASE(0, 2048, 500D, Material.CHEST),
     UPGRADE_1(1, 4096, 2500D, Material.GOLD_NUGGET),
     UPGRADE_2(2, 8192, 4000D, Material.GOLD_NUGGET),
     UPGRADE_3(3, 16384, 6000D, Material.GOLD_NUGGET),

@@ -2,6 +2,7 @@ package net.aerulion.cloudstorage.utils;
 
 public enum Permission {
     BUY_CLOUD_ACCESS_POINT("buy.cloudaccesspoint"),
+    BUY_CLOUD_EXPERIENCE_TERMINAL("buy.cloudexperienceterminal"),
     BUY_CLOUD_INTERFACE("buy.cloudinterface"),
     BUY_CLOUD_STORAGE_SLOT("buy.cloudstorageslot"),
     BUY_UPGRADE("buy.upgrade"),

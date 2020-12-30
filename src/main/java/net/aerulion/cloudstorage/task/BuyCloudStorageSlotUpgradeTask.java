@@ -15,13 +15,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class BuyUpgradeTask extends BukkitRunnable {
+public class BuyCloudStorageSlotUpgradeTask extends BukkitRunnable {
 
     private final Player PLAYER;
     private final String UUID;
     private final Upgrade UPGRADE;
 
-    public BuyUpgradeTask(Player PLAYER, String UUID, Upgrade UPGRADE) {
+    public BuyCloudStorageSlotUpgradeTask(Player PLAYER, String UUID, Upgrade UPGRADE) {
         this.PLAYER = PLAYER;
         this.UUID = UUID;
         this.UPGRADE = UPGRADE;

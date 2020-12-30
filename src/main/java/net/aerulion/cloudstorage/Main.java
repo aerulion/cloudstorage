@@ -5,7 +5,6 @@ import net.aerulion.cloudstorage.cmd.CMD_cloudstorage;
 import net.aerulion.cloudstorage.file.ConfigFile;
 import net.aerulion.cloudstorage.gui.GuiHandler;
 import net.aerulion.cloudstorage.listener.*;
-import net.aerulion.cloudstorage.utils.CloudStorageInventoryHolder;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.console.ConsoleUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -28,7 +27,6 @@ public class Main extends JavaPlugin {
     public final static ChatColor PRIMARY_COLOR = ChatColor.of(new Color(25, 181, 254));
     public final static ChatColor DARK_ACCENT_COLOR = ChatColor.of(new Color(34, 49, 63));
     public final static ChatColor LIGHT_ACCENT_COLOR = ChatColor.of(new Color(141, 149, 157));
-    public static CloudStorageInventoryHolder cloudStorageInventoryHolder;
     public static final HashMap<String, String> openGUIs = new HashMap<>();
     public static List<String> DISABLED_WORLDS;
     public static boolean MAINTENANCE_MODE = true;
@@ -39,7 +37,6 @@ public class Main extends JavaPlugin {
         ConfigFile.copyDefault();
         DISABLED_WORLDS = ConfigFile.getFileConfiguration().getStringList("DisabledWorlds");
         plugin = this;
-        cloudStorageInventoryHolder = new CloudStorageInventoryHolder();
         PluginManager pluginManager = getServer().getPluginManager();
         if (!setupEconomy()) {
             ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_VAULT_NOT_FOUND.get());
@@ -64,6 +61,9 @@ public class Main extends JavaPlugin {
         pluginManager.registerEvents(new WirelessCloudAccessPointListener(), this);
         pluginManager.registerEvents(new WirelessCloudInterfaceListener(), this);
         pluginManager.registerEvents(new GuiHandler(), this);
+        pluginManager.registerEvents(new PlaceCloudExperienceTerminalListener(), this);
+        pluginManager.registerEvents(new BreakCloudExperienceTerminalListener(), this);
+        pluginManager.registerEvents(new OpenCloudExperienceTerminalListener(), this);
 
         PluginCommand cmdCloudStorage = getCommand("cloudstorage");
         if (cmdCloudStorage != null)

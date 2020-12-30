@@ -2,7 +2,7 @@ package net.aerulion.cloudstorage.gui.guis;
 
 import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.gui.GUI;
-import net.aerulion.cloudstorage.task.BuyUpgradeTask;
+import net.aerulion.cloudstorage.task.BuyCloudStorageSlotUpgradeTask;
 import net.aerulion.cloudstorage.task.FetchCloudStorageSlotTask;
 import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.base64.Base64Utils;
@@ -191,7 +191,7 @@ public class CloudAccessPointUpgradeGUI extends GUI {
             }
             EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, upgrade.getPrice());
             if (economyResponse.transactionSuccess()) {
-                new BuyUpgradeTask(player, cloudStorageSlotID, upgrade);
+                new BuyCloudStorageSlotUpgradeTask(player, cloudStorageSlotID, upgrade);
             } else {
                 player.sendMessage(Messages.ERROR_TRANSACTION.get());
                 SoundUtils.playSound(player, SoundType.ERROR);

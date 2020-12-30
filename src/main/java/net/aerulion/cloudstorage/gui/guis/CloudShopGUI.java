@@ -2,6 +2,7 @@ package net.aerulion.cloudstorage.gui.guis;
 
 import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.gui.GUI;
+import net.aerulion.cloudstorage.task.BuyCloudExperienceTerminalTask;
 import net.aerulion.cloudstorage.task.BuyCloudStorageSlotTask;
 import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.base64.Base64Utils;
@@ -32,7 +33,8 @@ public class CloudShopGUI extends GUI {
     @Override
     public void setContent() {
         inventory.setItem(11, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_STORAGE_SLOT.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT.get() : Items.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT_NO_PERMISSION.get());
-        inventory.setItem(13, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_INTERFACE.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE.get() : Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION.get());
+        inventory.setItem(12, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_EXPERIENCE_TERMINAL.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL.get() : Items.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL_NO_PERMISSION.get());
+        inventory.setItem(14, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_INTERFACE.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE.get() : Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION.get());
         inventory.setItem(15, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get()) ? Items.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE.get() : Items.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE_NO_PERMISSION.get());
         fillSpacers();
     }
@@ -53,12 +55,12 @@ public class CloudShopGUI extends GUI {
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return;
             }
-            if (!Main.economy.has(player, Upgrade.BASE.getPrice())) {
+            if (!Main.economy.has(player, Upgrade.CLOUD_STORAGE_SLOT_BASE.getPrice())) {
                 player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
                 SoundUtils.playSound(player, SoundType.ERROR);
                 return;
             }
-            EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, Upgrade.BASE.getPrice());
+            EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, Upgrade.CLOUD_STORAGE_SLOT_BASE.getPrice());
             if (economyResponse.transactionSuccess()) {
                 new BuyCloudStorageSlotTask(player);
                 player.setCooldown(Material.PLAYER_HEAD, 20);
@@ -68,7 +70,36 @@ public class CloudShopGUI extends GUI {
             }
             return;
         }
-        if (event.getRawSlot() == 13) {
+        if (event.getRawSlot() == 12) {
+            Player player = (Player) event.getWhoClicked();
+            if (player.hasCooldown(Material.PLAYER_HEAD))
+                return;
+            if (Main.MAINTENANCE_MODE) {
+                player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(player, SoundType.ALERT);
+                return;
+            }
+            if (!player.hasPermission(Permission.BUY_CLOUD_EXPERIENCE_TERMINAL.get())) {
+                player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+                return;
+            }
+            if (!Main.economy.has(player, Upgrade.EXPERIENCE_TERMINAL_BASE.getPrice())) {
+                player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+                return;
+            }
+            EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, Upgrade.EXPERIENCE_TERMINAL_BASE.getPrice());
+            if (economyResponse.transactionSuccess()) {
+                new BuyCloudExperienceTerminalTask(player);
+                player.setCooldown(Material.PLAYER_HEAD, 20);
+            } else {
+                player.sendMessage(Messages.ERROR_TRANSACTION.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+            }
+            return;
+        }
+        if (event.getRawSlot() == 14) {
             Player player = (Player) event.getWhoClicked();
             if (player.hasCooldown(Material.PLAYER_HEAD))
                 return;

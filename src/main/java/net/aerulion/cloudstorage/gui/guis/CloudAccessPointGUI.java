@@ -65,10 +65,10 @@ public class CloudAccessPointGUI extends GUI {
         }
         inventory.setItem(13, storedItem);
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(29, Items.GUI_BUTTON_UPGRADES.get().clone());
-        inventory.setItem(31, Items.GUI_BUTTON_INVENTORY.get().clone());
+            inventory.setItem(29, Items.GUI_BUTTON_CSS_UPGRADES.get().clone());
+        inventory.setItem(31, Items.GUI_BUTTON_WHOLE_INVENTORY.get().clone());
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_ACCESS_PUBLIC.get());
+            inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_CSS_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CSS_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudStorageSlot().getOwnerUUID()));
         ItemStack itemStack = ItemUtils.buildGuiButton(Material.KNOWLEDGE_BOOK, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2);
         inventory.setItem(44, itemStack);
@@ -170,7 +170,7 @@ public class CloudAccessPointGUI extends GUI {
                 if (event.getRawSlot() == 33) {
                     ItemStack itemStack = event.getInventory().getItem(33);
                     if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
-                        new ToggleAccessTask(dataContainer.getCloudStorageSlot().getUUID(), player);
+                        new ToggleCloudStorageSlotAccessTask(dataContainer.getCloudStorageSlot().getUUID(), player);
                     }
                 }
             } else {
