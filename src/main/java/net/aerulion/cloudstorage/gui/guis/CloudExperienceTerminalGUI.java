@@ -97,7 +97,16 @@ public class CloudExperienceTerminalGUI extends GUI {
             }
             if (event.getClick().equals(ClickType.RIGHT)) {
                 if (dataContainer.getCloudExperienceTerminal().getStoredAmount() > 0)
-                    new WithdrawExperienceTask(player, dataContainer.getCloudExperienceTerminal().getStoredAmount(), dataContainer.getCloudExperienceTerminal().getOWNER_UUID());
+                    new WithdrawExperienceTask(player, dataContainer.getCloudExperienceTerminal().getStoredAmount(), dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), false);
+                return;
+            }
+            if (event.getClick().equals(ClickType.SHIFT_RIGHT)) {
+                if (dataContainer.getCloudExperienceTerminal().getStoredAmount() > 0) {
+                    int amount = Math.min(dataContainer.getCloudExperienceTerminal().getStoredAmount(), 448);
+                    amount = amount - (amount % 7);
+                    if (amount > 0)
+                        new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), true);
+                }
                 return;
             }
             return;
@@ -126,7 +135,7 @@ public class CloudExperienceTerminalGUI extends GUI {
                 if (dataContainer.getCloudExperienceTerminal().getStoredAmount() < amount)
                     amount = dataContainer.getCloudExperienceTerminal().getStoredAmount();
                 if (amount > 0)
-                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID());
+                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), false);
                 return;
             }
             return;
@@ -147,7 +156,7 @@ public class CloudExperienceTerminalGUI extends GUI {
                 if (dataContainer.getCloudExperienceTerminal().getStoredAmount() < amount)
                     amount = dataContainer.getCloudExperienceTerminal().getStoredAmount();
                 if (amount > 0)
-                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID());
+                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), false);
                 return;
             }
             return;
@@ -168,7 +177,7 @@ public class CloudExperienceTerminalGUI extends GUI {
                 if (dataContainer.getCloudExperienceTerminal().getStoredAmount() < amount)
                     amount = dataContainer.getCloudExperienceTerminal().getStoredAmount();
                 if (amount > 0)
-                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID());
+                    new WithdrawExperienceTask(player, amount, dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), false);
                 return;
             }
             return;

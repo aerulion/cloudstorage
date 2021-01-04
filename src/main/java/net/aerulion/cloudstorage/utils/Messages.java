@@ -31,6 +31,7 @@ public enum Messages {
     ERROR_ONLY_OWNER(Main.ERROR_COLOR + "Fehler: Dies kann nur vom Eigentümer durchgeführt werden."),
     ERROR_PLAYER_NOT_FOUND(Main.ERROR_COLOR + "Fehler: Dieser Spieler konnte nicht gefunden werden."),
     ERROR_REFUNDING_PLAYER(Main.ERROR_COLOR + "Fehler: Der Betrag konnte nicht zurückerstattet werden. Bitte wende dich an den Staff."),
+    ERROR_STORING_EXPERIENCE(Main.ERROR_COLOR + "Fehler: Die Erfahrungspunkte konnten nicht eingelagert werden und wurden zurückerstattet."),
     ERROR_STORING_ITEMS(Main.ERROR_COLOR + "Fehler: Die Items konnten nicht eingelagert werden. Deine Items wurden temporär zwischengelagert. Gib '/cloud itemcache' ein, um deine Items zu erhalten."),
     ERROR_TOGGLE_ACCESS(Main.ERROR_COLOR + "Fehler: Die Zugriffseinstellung konnte nicht aktualisiert werden."),
     ERROR_TOGGLE_ACCESS_NO_OWNER(Main.ERROR_COLOR + "Fehler: Nur der Eigentümer kann diese Einstellung ändern."),

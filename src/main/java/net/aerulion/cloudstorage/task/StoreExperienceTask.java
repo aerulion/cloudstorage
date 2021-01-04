@@ -51,7 +51,7 @@ public class StoreExperienceTask extends BukkitRunnable {
                 SoundUtils.playSound(PLAYER, SoundType.ITEM_PICKUP);
         } catch (SQLException exception) {
             PLAYER.giveExp(AMOUNT);
-            PLAYER.sendMessage(Messages.ERROR_STORING_ITEMS.get());
+            PLAYER.sendMessage(Messages.ERROR_STORING_EXPERIENCE.get());
         }
     }
 }
