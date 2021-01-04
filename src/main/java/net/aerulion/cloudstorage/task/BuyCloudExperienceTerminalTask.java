@@ -31,7 +31,7 @@ public class BuyCloudExperienceTerminalTask extends BukkitRunnable {
         try (Connection connection = MySQLUtils.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO cloudstorage_experience_terminals (OWNER, AMOUNT, CAPACITY, PRIVATE) VALUES (?,'0',?,'0') ON DUPLICATE KEY UPDATE OWNER=OWNER");
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
-            preparedStatement.setInt(2, Upgrade.EXPERIENCE_TERMINAL_BASE.getCapacity());
+            preparedStatement.setInt(2, Upgrade.EXPERIENCE_TERMINAL_BASE.getCapacityItem());
             preparedStatement.executeUpdate();
             preparedStatement.close();
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);

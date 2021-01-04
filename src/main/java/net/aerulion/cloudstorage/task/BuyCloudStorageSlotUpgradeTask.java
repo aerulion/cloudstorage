@@ -33,8 +33,8 @@ public class BuyCloudStorageSlotUpgradeTask extends BukkitRunnable {
         try (Connection connection = MySQLUtils.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `aerulion_cloudstorage_slots` SET `CAPACITY` = IF(`OWNER` = ?, IF(`CAPACITY` < ?, ?, `CAPACITY`), `CAPACITY`) WHERE `UUID` = ?");
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
-            preparedStatement.setInt(2, UPGRADE.getCapacity());
-            preparedStatement.setInt(3, UPGRADE.getCapacity());
+            preparedStatement.setInt(2, UPGRADE.getCapacityItem());
+            preparedStatement.setInt(3, UPGRADE.getCapacityItem());
             preparedStatement.setString(4, UUID);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows < 1)
