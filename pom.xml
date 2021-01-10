@@ -93,7 +93,7 @@
         <dependency>
             <groupId>net.aerulion</groupId>
             <artifactId>nucleus</artifactId>
-            <version>1.10</version>
+            <version>1.11</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
