@@ -60,7 +60,7 @@ public class ListCloudStorageSlotsTask extends BukkitRunnable {
             List<CloudStorageSlot> toBeSent = cloudStorageSlotList.subList(from, to);
             int count = from + 1;
 
-            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR.toString());
+            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
             PLAYER.sendMessage("");
             ChatUtils.sendCenteredChatMessage(PLAYER, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Deine Cloud Storage Slots:");
             PLAYER.sendMessage("");
@@ -90,7 +90,7 @@ public class ListCloudStorageSlotsTask extends BukkitRunnable {
                 PLAYER.spigot().sendMessage(pageButtons);
             }
             PLAYER.sendMessage("");
-            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR.toString());
+            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
             preparedStatement.close();
             if (resultSet != null)
                 resultSet.close();

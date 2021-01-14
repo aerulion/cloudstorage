@@ -36,7 +36,7 @@ public class CloudStorageStatsTask extends BukkitRunnable {
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR.toString());
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
                 PLAYER.sendMessage("");
                 ChatUtils.sendCenteredChatMessage(PLAYER, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Deine Cloud Statistik:");
                 PLAYER.sendMessage("");
@@ -63,7 +63,7 @@ public class CloudStorageStatsTask extends BukkitRunnable {
                 storageBar.addExtra(barEmpty);
                 PLAYER.spigot().sendMessage(storageBar);
                 PLAYER.sendMessage("");
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR.toString());
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());

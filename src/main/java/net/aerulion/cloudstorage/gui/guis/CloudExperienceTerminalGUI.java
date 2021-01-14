@@ -11,7 +11,7 @@ import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.experience.ExperienceUtils;
-import net.aerulion.nucleus.api.item.ItemUtils;
+import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -24,7 +24,6 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 public class CloudExperienceTerminalGUI extends GUI {
@@ -46,7 +45,7 @@ public class CloudExperienceTerminalGUI extends GUI {
 
     @Override
     public void setContent() {
-        inventory.setItem(13, ItemUtils.buildGuiButton(Material.EXPERIENCE_BOTTLE, Main.PRIMARY_COLOR.toString() + ChatColor.BOLD + "Erfahrung", Arrays.asList(
+        inventory.setItem(13, GuiButtonBuilder.of(Material.EXPERIENCE_BOTTLE).withDisplayName(Main.PRIMARY_COLOR.toString() + ChatColor.BOLD + "Erfahrung").withLore(
                 Main.LIGHT_ACCENT_COLOR + "%divider",
                 Main.LIGHT_ACCENT_COLOR + "Eingelagert:",
                 Main.PRIMARY_COLOR + Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getStoredAmount()) + Main.LIGHT_ACCENT_COLOR + "/" + Main.PRIMARY_COLOR + Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getCAPACITY()),
@@ -57,7 +56,7 @@ public class CloudExperienceTerminalGUI extends GUI {
                 Main.LIGHT_ACCENT_COLOR + "Rechtsklick:",
                 Main.LIGHT_ACCENT_COLOR + "Gesamte Erfahrung auslagern",
                 Main.LIGHT_ACCENT_COLOR + "%divider"
-        ), false, 2));
+        ).build());
         inventory.setItem(16, Items.GUI_BUTTON_EXP_BOTTLES.get());
         if (dataContainer.getCloudExperienceTerminal().getOWNER_UUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(28, Items.GUI_BUTTON_CET_UPGRADES.get());
@@ -67,8 +66,7 @@ public class CloudExperienceTerminalGUI extends GUI {
         if (dataContainer.getCloudExperienceTerminal().getOWNER_UUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Items.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudExperienceTerminal().getOWNER_UUID()));
-        ItemStack itemStack = ItemUtils.buildGuiButton(Material.KNOWLEDGE_BOOK, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2);
-        inventory.setItem(44, itemStack);
+        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info").withLore(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider").build());
         fillSpacers();
     }
 

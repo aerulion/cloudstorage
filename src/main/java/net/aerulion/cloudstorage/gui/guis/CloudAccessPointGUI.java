@@ -7,7 +7,7 @@ import net.aerulion.cloudstorage.utils.CloudStorageSlot;
 import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.Messages;
-import net.aerulion.nucleus.api.item.ItemUtils;
+import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.aerulion.nucleus.api.string.StringUtils;
@@ -23,7 +23,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,8 +69,7 @@ public class CloudAccessPointGUI extends GUI {
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_CSS_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CSS_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudStorageSlot().getOwnerUUID()));
-        ItemStack itemStack = ItemUtils.buildGuiButton(Material.KNOWLEDGE_BOOK, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2);
-        inventory.setItem(44, itemStack);
+        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info").withLore(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider").build());
         fillSpacers();
     }
 
@@ -84,42 +82,20 @@ public class CloudAccessPointGUI extends GUI {
                 SoundUtils.playSound(player, SoundType.ALERT);
                 return;
             }
-            ItemStack storedItem = event.getInventory().getItem(13);
-            if (storedItem != null) {
-                storedItem = storedItem.clone();
-                if (!storedItem.isSimilar(Items.GUI_NO_ITEM.get())) {
-                    ItemMeta storedItemMeta = storedItem.getItemMeta();
-                    if (storedItemMeta != null) {
-                        List<String> lore = storedItemMeta.getLore();
-                        if (lore != null) {
-                            if (lore.size() == 1)
-                                lore = null;
-                            else {
-                                lore.remove(lore.size() - 1);
-                                lore.remove(lore.size() - 1);
-                                lore.remove(lore.size() - 1);
-                                lore.remove(lore.size() - 1);
-                            }
-                            storedItemMeta.setLore(lore);
-                            storedItem.setItemMeta(storedItemMeta);
-                        }
-                    }
-                }
-            }
             if ((event.getRawSlot() >= 0 && event.getRawSlot() <= event.getView().getTopInventory().getSize() - 1)) {
                 if (event.getRawSlot() == 13) {
                     if (!Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
                         if (event.getClick().equals(ClickType.LEFT)) {
                             if (player.getInventory().firstEmpty() != -1) {
-                                if (storedItem != null)
+                                if (dataContainer.getCloudStorageSlot().getStoredItem() != null)
                                     new WithdrawItemTask(player, 1, dataContainer.getCloudStorageSlot().getUUID());
                                 return;
                             }
                         }
                         if (event.getClick().equals(ClickType.RIGHT)) {
                             if (player.getInventory().firstEmpty() != -1) {
-                                if (storedItem != null)
-                                    new WithdrawItemTask(player, Math.min(dataContainer.getCloudStorageSlot().getStoredAmount(), storedItem.getMaxStackSize()), dataContainer.getCloudStorageSlot().getUUID());
+                                if (dataContainer.getCloudStorageSlot().getStoredItem() != null)
+                                    new WithdrawItemTask(player, Math.min(dataContainer.getCloudStorageSlot().getStoredAmount(), dataContainer.getCloudStorageSlot().getStoredItem().getMaxStackSize()), dataContainer.getCloudStorageSlot().getUUID());
                                 return;
                             }
                         }
@@ -139,22 +115,22 @@ public class CloudAccessPointGUI extends GUI {
                         if (event.getClick().equals(ClickType.LEFT)) {
                             int amount = 0;
                             for (ItemStack itemStack : event.getView().getBottomInventory()) {
-                                if (itemStack != null && itemStack.isSimilar(storedItem)) {
+                                if (itemStack != null && itemStack.isSimilar(dataContainer.getCloudStorageSlot().getStoredItem())) {
                                     int stackAmount = ((itemStack.getAmount() + amount + dataContainer.getCloudStorageSlot().getStoredAmount()) <= dataContainer.getCloudStorageSlot().getCapacity()) ? itemStack.getAmount() : (dataContainer.getCloudStorageSlot().getCapacity() - (dataContainer.getCloudStorageSlot().getStoredAmount() + amount));
                                     itemStack.setAmount(itemStack.getAmount() - stackAmount);
                                     amount += stackAmount;
                                 }
                             }
                             if (amount > 0)
-                                new StoreItemTask(player, storedItem, amount, dataContainer.getCloudStorageSlot().getUUID(), false);
+                                new StoreItemTask(player, dataContainer.getCloudStorageSlot().getStoredItem(), amount, dataContainer.getCloudStorageSlot().getUUID(), false);
                             return;
                         }
                         if (event.getClick().equals(ClickType.RIGHT)) {
                             int amount = 0;
                             for (int i = 0; i < 36; i++) {
                                 ItemStack itemStack = event.getView().getBottomInventory().getItem(i);
-                                if (itemStack == null && storedItem != null)
-                                    amount += storedItem.getMaxStackSize();
+                                if (itemStack == null && dataContainer.getCloudStorageSlot().getStoredItem() != null)
+                                    amount += dataContainer.getCloudStorageSlot().getStoredItem().getMaxStackSize();
                             }
                             if (amount > dataContainer.getCloudStorageSlot().getStoredAmount())
                                 amount = dataContainer.getCloudStorageSlot().getStoredAmount();
@@ -174,7 +150,7 @@ public class CloudAccessPointGUI extends GUI {
                     }
                 }
             } else {
-                if (event.getCurrentItem().isSimilar(storedItem) || Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
+                if (event.getCurrentItem().isSimilar(dataContainer.getCloudStorageSlot().getStoredItem()) || Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {
                     if (dataContainer.getCloudStorageSlot().getStoredAmount() < dataContainer.getCloudStorageSlot().getCapacity()) {
                         int amount = (dataContainer.getCloudStorageSlot().getStoredAmount() + event.getCurrentItem().getAmount() <= dataContainer.getCloudStorageSlot().getCapacity()) ? event.getCurrentItem().getAmount() : (dataContainer.getCloudStorageSlot().getCapacity() - dataContainer.getCloudStorageSlot().getStoredAmount());
                         ItemStack itemStack = event.getCurrentItem().clone();

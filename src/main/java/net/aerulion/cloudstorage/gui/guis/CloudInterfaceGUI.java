@@ -6,7 +6,7 @@ import net.aerulion.cloudstorage.task.CloudInterfaceTask;
 import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
 import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.Messages;
-import net.aerulion.nucleus.api.item.ItemUtils;
+import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.md_5.bungee.api.ChatColor;
@@ -16,9 +16,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.inventory.ItemStack;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 public class CloudInterfaceGUI extends GUI {
@@ -41,8 +39,7 @@ public class CloudInterfaceGUI extends GUI {
     @Override
     public void setContent() {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudInterfaceOwner()));
-        ItemStack itemStack = ItemUtils.buildGuiButton(Material.KNOWLEDGE_BOOK, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info", Arrays.asList(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider"), false, 2);
-        inventory.setItem(26, itemStack);
+        inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info").withLore(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider").build());
         inventory.setItem(11, Items.GUI_BUTTON_INTERFACE_HOTBAR.get());
         inventory.setItem(13, Items.GUI_BUTTON_INTERFACE_ALL.get());
         inventory.setItem(15, Items.GUI_BUTTON_INTERFACE_INVENTORY.get());
