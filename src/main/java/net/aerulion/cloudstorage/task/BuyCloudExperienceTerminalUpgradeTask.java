@@ -31,11 +31,10 @@ public class BuyCloudExperienceTerminalUpgradeTask extends BukkitRunnable {
     @Override
     public void run() {
         try (Connection connection = MySQLUtils.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `cloudstorage_experience_terminals` SET `CAPACITY` = IF(`OWNER` = ?, IF(`CAPACITY` < ?, ?, `CAPACITY`), `CAPACITY`) WHERE `OWNER` = ?");
-            preparedStatement.setString(1, PLAYER.getUniqueId().toString());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `cloudstorage_experience_terminals` SET `CAPACITY` = IF(`CAPACITY` < ?, ?, `CAPACITY`) WHERE `OWNER` = ?");
+            preparedStatement.setInt(1, UPGRADE.getCapacityExperience());
             preparedStatement.setInt(2, UPGRADE.getCapacityExperience());
-            preparedStatement.setInt(3, UPGRADE.getCapacityExperience());
-            preparedStatement.setString(4, UUID);
+            preparedStatement.setString(3, UUID);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows < 1)
                 throw new SQLException();

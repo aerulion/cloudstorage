@@ -31,11 +31,10 @@ public class BuyCloudStorageSlotUpgradeTask extends BukkitRunnable {
     @Override
     public void run() {
         try (Connection connection = MySQLUtils.getConnection()) {
-            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `aerulion_cloudstorage_slots` SET `CAPACITY` = IF(`OWNER` = ?, IF(`CAPACITY` < ?, ?, `CAPACITY`), `CAPACITY`) WHERE `UUID` = ?");
-            preparedStatement.setString(1, PLAYER.getUniqueId().toString());
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE `aerulion_cloudstorage_slots` SET `CAPACITY` = IF(`CAPACITY` < ?, ?, `CAPACITY`) WHERE `UUID` = ?");
+            preparedStatement.setInt(1, UPGRADE.getCapacityItem());
             preparedStatement.setInt(2, UPGRADE.getCapacityItem());
-            preparedStatement.setInt(3, UPGRADE.getCapacityItem());
-            preparedStatement.setString(4, UUID);
+            preparedStatement.setString(3, UUID);
             int affectedRows = preparedStatement.executeUpdate();
             if (affectedRows < 1)
                 throw new SQLException();

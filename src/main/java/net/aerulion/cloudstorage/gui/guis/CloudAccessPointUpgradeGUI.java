@@ -9,6 +9,7 @@ import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.milkbowl.vault.economy.EconomyResponse;
+import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
@@ -51,7 +52,8 @@ public class CloudAccessPointUpgradeGUI extends GUI {
         inventory.setItem(24, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_13.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_13_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_13.get());
         inventory.setItem(25, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_14.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_14_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_14.get());
         inventory.setItem(31, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_15.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_15_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_15.get());
-        inventory.setItem(37, Items.GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT.get());
+        if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
+            inventory.setItem(37, Items.GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT.get());
         inventory.setItem(43, Items.BACK.get());
         fillSpacers();
     }
@@ -94,62 +96,65 @@ public class CloudAccessPointUpgradeGUI extends GUI {
         if (event.getRawSlot() == 31)
             handleUpgrade(event.getWhoClicked(), Upgrade.UPGRADE_15, dataContainer.getCloudStorageSlot().getUUID(), event.getCurrentItem(), event.getInventory().getItem(25));
         if (event.getRawSlot() == 37) {
-            Player player = (Player) event.getWhoClicked();
-            if (event.getClick().equals(ClickType.LEFT)) {
-                if (!player.hasPermission(Permission.BUY_CLOUD_ACCESS_POINT.get())) {
-                    player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
-                    return;
-                }
-                if (!Main.economy.has(player, 5000D)) {
-                    player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
-                    return;
-                }
-                EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 5000D);
-                if (economyResponse.transactionSuccess()) {
-                    player.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
-                    SoundUtils.playSound(player, SoundType.SUCCESS);
-                    if (player.getInventory().firstEmpty() == -1) {
-                        ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
-                        player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
-                    } else {
-                        player.getInventory().addItem(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+            ItemStack itemStack = event.getInventory().getItem(33);
+            if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
+                Player player = (Player) event.getWhoClicked();
+                if (event.getClick().equals(ClickType.LEFT)) {
+                    if (!player.hasPermission(Permission.BUY_CLOUD_ACCESS_POINT.get())) {
+                        player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                        return;
                     }
-                    player.closeInventory();
-                } else {
-                    player.sendMessage(Messages.ERROR_TRANSACTION.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
-                }
-                return;
-            }
-            if (event.getClick().equals(ClickType.RIGHT)) {
-                if (!player.hasPermission(Permission.BUY_WIRELESS_CLOUD_ACCESS_POINT.get())) {
-                    player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
-                    return;
-                }
-                if (!Main.economy.has(player, 5000D)) {
-                    player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
-                    return;
-                }
-                EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 5000D);
-                if (economyResponse.transactionSuccess()) {
-                    player.sendMessage(Messages.MESSAGE_WIRELESS_CLOUD_ACCESS_POINT_BOUGHT.get());
-                    SoundUtils.playSound(player, SoundType.SUCCESS);
-                    if (player.getInventory().firstEmpty() == -1) {
-                        ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
-                        player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
-                    } else {
-                        player.getInventory().addItem(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                    if (!Main.economy.has(player, 5000D)) {
+                        player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                        return;
                     }
-                    player.closeInventory();
-                } else {
-                    player.sendMessage(Messages.ERROR_TRANSACTION.get());
-                    SoundUtils.playSound(player, SoundType.ERROR);
+                    EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 5000D);
+                    if (economyResponse.transactionSuccess()) {
+                        player.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
+                        SoundUtils.playSound(player, SoundType.SUCCESS);
+                        if (player.getInventory().firstEmpty() == -1) {
+                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
+                            player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
+                        } else {
+                            player.getInventory().addItem(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                        }
+                        player.closeInventory();
+                    } else {
+                        player.sendMessage(Messages.ERROR_TRANSACTION.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                    }
+                    return;
                 }
-                return;
+                if (event.getClick().equals(ClickType.RIGHT)) {
+                    if (!player.hasPermission(Permission.BUY_WIRELESS_CLOUD_ACCESS_POINT.get())) {
+                        player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                        return;
+                    }
+                    if (!Main.economy.has(player, 5000D)) {
+                        player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                        return;
+                    }
+                    EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 5000D);
+                    if (economyResponse.transactionSuccess()) {
+                        player.sendMessage(Messages.MESSAGE_WIRELESS_CLOUD_ACCESS_POINT_BOUGHT.get());
+                        SoundUtils.playSound(player, SoundType.SUCCESS);
+                        if (player.getInventory().firstEmpty() == -1) {
+                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
+                            player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
+                        } else {
+                            player.getInventory().addItem(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                        }
+                        player.closeInventory();
+                    } else {
+                        player.sendMessage(Messages.ERROR_TRANSACTION.get());
+                        SoundUtils.playSound(player, SoundType.ERROR);
+                    }
+                    return;
+                }
             }
         }
         if (event.getRawSlot() == 43) {

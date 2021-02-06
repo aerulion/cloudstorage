@@ -63,8 +63,7 @@ public class CloudAccessPointGUI extends GUI {
             }
         }
         inventory.setItem(13, storedItem);
-        if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(29, Items.GUI_BUTTON_CSS_UPGRADES.get().clone());
+        inventory.setItem(29, Items.GUI_BUTTON_CSS_UPGRADES.get().clone());
         inventory.setItem(31, Items.GUI_BUTTON_WHOLE_INVENTORY.get().clone());
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_CSS_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CSS_ACCESS_PUBLIC.get());
@@ -103,12 +102,9 @@ public class CloudAccessPointGUI extends GUI {
                     return;
                 }
                 if (event.getRawSlot() == 29) {
-                    ItemStack itemStack = event.getInventory().getItem(29);
-                    if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
-                        SoundUtils.playSound(player, SoundType.UI_CLICK);
-                        new FetchCloudStorageSlotTask(dataContainer.getCloudStorageSlot().getUUID(), player, Inventory.UPGRADE);
-                        return;
-                    }
+                    SoundUtils.playSound(player, SoundType.UI_CLICK);
+                    new FetchCloudStorageSlotTask(dataContainer.getCloudStorageSlot().getUUID(), player, Inventory.UPGRADE);
+                    return;
                 }
                 if (event.getRawSlot() == 31) {
                     if (!Items.GUI_NO_ITEM.get().isSimilar(event.getInventory().getItem(13))) {

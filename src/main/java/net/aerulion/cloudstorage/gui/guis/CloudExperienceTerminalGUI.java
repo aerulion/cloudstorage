@@ -63,8 +63,7 @@ public class CloudExperienceTerminalGUI extends GUI {
         inventory.setItem(30, Items.GUI_BUTTON_1_LEVEL.get());
         inventory.setItem(31, Items.GUI_BUTTON_10_LEVEL.get());
         inventory.setItem(32, Items.GUI_BUTTON_30_LEVEL.get());
-        if (dataContainer.getCloudExperienceTerminal().getOWNER_UUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Items.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
+        inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Items.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudExperienceTerminal().getOWNER_UUID()));
         inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info").withLore(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider").build());
         fillSpacers();
@@ -116,11 +115,8 @@ public class CloudExperienceTerminalGUI extends GUI {
             return;
         }
         if (event.getRawSlot() == 28) {
-            ItemStack itemStack = event.getInventory().getItem(28);
-            if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
-                SoundUtils.playSound(player, SoundType.UI_CLICK);
-                new FetchCloudExperienceTerminalTask(dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), player, Inventory.UPGRADE);
-            }
+            SoundUtils.playSound(player, SoundType.UI_CLICK);
+            new FetchCloudExperienceTerminalTask(dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), player, Inventory.UPGRADE);
             return;
         }
         if (event.getRawSlot() == 30) {
