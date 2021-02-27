@@ -7,6 +7,7 @@ import net.aerulion.cloudstorage.gui.GuiHandler;
 import net.aerulion.cloudstorage.listener.*;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.console.ConsoleUtils;
+import net.kyori.adventure.text.format.TextColor;
 import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.PluginCommand;
@@ -27,6 +28,10 @@ public class Main extends JavaPlugin {
     public final static ChatColor PRIMARY_COLOR = ChatColor.of(new Color(25, 181, 254));
     public final static ChatColor DARK_ACCENT_COLOR = ChatColor.of(new Color(34, 49, 63));
     public final static ChatColor LIGHT_ACCENT_COLOR = ChatColor.of(new Color(141, 149, 157));
+    public final static TextColor ERROR_TEXT_COLOR = TextColor.color(252, 60, 60);
+    public final static TextColor PRIMARY_TEXT_COLOR = TextColor.color(25, 181, 254);
+    public final static TextColor DARK_ACCENT_TEXT_COLOR = TextColor.color(34, 49, 63);
+    public final static TextColor LIGHT_ACCENT_TEXT_COLOR = TextColor.color(141, 149, 157);
     public static final HashMap<String, String> openGUIs = new HashMap<>();
     public static List<String> DISABLED_WORLDS;
     public static boolean MAINTENANCE_MODE = true;

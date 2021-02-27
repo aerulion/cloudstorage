@@ -9,6 +9,8 @@ import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -39,7 +41,7 @@ public class CloudInterfaceGUI extends GUI {
     @Override
     public void setContent() {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudInterfaceOwner()));
-        inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Cloud Info").withLore(Main.LIGHT_ACCENT_COLOR + "%divider", Main.LIGHT_ACCENT_COLOR + "Netzwerk Eigentümer:", Main.PRIMARY_COLOR + offlinePlayer.getName(), Main.LIGHT_ACCENT_COLOR + "%divider").build());
+        inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_TEXT_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR)).build());
         inventory.setItem(11, Items.GUI_BUTTON_INTERFACE_HOTBAR.get());
         inventory.setItem(13, Items.GUI_BUTTON_INTERFACE_ALL.get());
         inventory.setItem(15, Items.GUI_BUTTON_INTERFACE_INVENTORY.get());
