@@ -39,9 +39,13 @@ public abstract class GUI implements InventoryHolder {
     }
 
     public void fillSpacers() {
+        fillSpacers(spacer);
+    }
+
+    public void fillSpacers(ItemStack itemStack) {
         for (int i = 0; i < getSlots(); i++) {
             if (inventory.getItem(i) == null)
-                inventory.setItem(i, spacer);
+                inventory.setItem(i, itemStack);
         }
     }
 

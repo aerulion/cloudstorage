@@ -18,6 +18,7 @@ import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -71,8 +72,9 @@ public class CloudAccessPointGUI extends GUI {
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_CSS_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CSS_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudStorageSlot().getOwnerUUID()));
-        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
-        fillSpacers();
+        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withCustomModelData(1).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
+        inventory.setItem(0, Items.GUI_SPACER_ACCESS_POINT.get());
+        fillSpacers(Items.GUI_SPACER_INVISIBLE.get());
     }
 
     @Override
