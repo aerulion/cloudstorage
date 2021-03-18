@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -112,8 +113,8 @@ public enum Items {
     GUI_SPACER_ACCESS_POINT(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).withCustomModelData(100).withDisplayName(Component.empty()).build()),
     GUI_SPACER_EXPERIENCE_TERMINAL(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).withCustomModelData(101).withDisplayName(Component.empty()).build()),
     GUI_SPACER_INVISIBLE(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).withCustomModelData(1).withDisplayName(Component.empty()).build()),
-    WIRELESS_CLOUD_ACCESS_POINT(ItemBuilder.of(Material.HEART_OF_THE_SEA).withDisplayName(Component.text("Wireless Cloud Access Point").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).withUnsafeEnchantment(Enchantment.DURABILITY, 1).build()),
-    WIRELESS_CLOUD_INTERFACE(ItemBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text("Wireless Cloud Interface").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).withUnsafeEnchantment(Enchantment.DURABILITY, 1).build());
+    WIRELESS_CLOUD_ACCESS_POINT(ItemBuilder.of(Material.HEART_OF_THE_SEA).withDisplayName(Component.text("Wireless Cloud Access Point").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).withUnsafeEnchantment(Enchantment.DURABILITY, 1).withItemFlags(ItemFlag.HIDE_ENCHANTS).build()),
+    WIRELESS_CLOUD_INTERFACE(ItemBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text("Wireless Cloud Interface").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).withUnsafeEnchantment(Enchantment.DURABILITY, 1).withItemFlags(ItemFlag.HIDE_ENCHANTS).build());
 
     private final ItemStack itemStack;
 
