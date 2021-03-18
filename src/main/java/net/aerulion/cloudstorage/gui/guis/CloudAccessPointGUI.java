@@ -37,7 +37,7 @@ public class CloudAccessPointGUI extends GUI {
 
     @Override
     public Component getTitle() {
-        return Component.text("Cloud Access Point").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
+        return Component.text("Cloud Access Point").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -53,13 +53,13 @@ public class CloudAccessPointGUI extends GUI {
             if (storedItemMeta != null) {
                 List<Component> lore = storedItemMeta.hasLore() ? storedItemMeta.lore() : new ArrayList<>();
                 if (lore != null) {
-                    Component amountComponent1 = Component.text("Eingelagert:").color(Main.PRIMARY_TEXT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE);
-                    Component amountComponent2 = Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getStoredAmount())).color(Main.PRIMARY_TEXT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text("/").color(Main.LIGHT_ACCENT_TEXT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getCapacity())).color(Main.PRIMARY_TEXT_COLOR));
+                    Component amountComponent1 = Component.text("Eingelagert:").color(Main.PRIMARY_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE);
+                    Component amountComponent2 = Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getStoredAmount())).color(Main.PRIMARY_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text("/").color(Main.LIGHT_ACCENT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getCapacity())).color(Main.PRIMARY_COLOR));
                     int pixelLength = Math.max(StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent1)), StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent2))) + 20;
-                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_TEXT_COLOR));
+                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_COLOR));
                     lore.add(ComponentUtils.generateCenteredComponent(amountComponent1, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
                     lore.add(ComponentUtils.generateCenteredComponent(amountComponent2, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
-                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_TEXT_COLOR));
+                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_COLOR));
                     storedItemMeta.lore(lore);
                     storedItem.setItemMeta(storedItemMeta);
                 }
@@ -71,7 +71,7 @@ public class CloudAccessPointGUI extends GUI {
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
             inventory.setItem(33, dataContainer.getCloudStorageSlot().isPrivate() ? Items.GUI_BUTTON_CSS_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CSS_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudStorageSlot().getOwnerUUID()));
-        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_TEXT_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR)).build());
+        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
         fillSpacers();
     }
 

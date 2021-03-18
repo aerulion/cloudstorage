@@ -36,7 +36,7 @@ public class CloudExperienceTerminalGUI extends GUI {
 
     @Override
     public Component getTitle() {
-        return Component.text("Cloud Experience Terminal").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
+        return Component.text("Cloud Experience Terminal").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -46,17 +46,17 @@ public class CloudExperienceTerminalGUI extends GUI {
 
     @Override
     public void setContent() {
-        inventory.setItem(13, GuiButtonBuilder.of(Material.EXPERIENCE_BOTTLE).withDisplayName(Component.text("Erfahrung").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)).withLore(
-                Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("Eingelagert:").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text(Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getStoredAmount())).color(Main.PRIMARY_TEXT_COLOR).append(Component.text("/").color(Main.LIGHT_ACCENT_TEXT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getCAPACITY())).color(Main.PRIMARY_TEXT_COLOR)),
-                Component.text("~").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(ExperienceUtils.getLevelEquivalent(dataContainer.getCloudExperienceTerminal().getStoredAmount()))).color(Main.PRIMARY_TEXT_COLOR)).append(Component.text(" Level").color(Main.LIGHT_ACCENT_TEXT_COLOR)),
-                Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("Linksklick:").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("Eigene Erfahrung einlagern").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("Rechtsklick:").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("Gesamte Erfahrung auslagern").color(Main.LIGHT_ACCENT_TEXT_COLOR),
-                Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR)
+        inventory.setItem(13, GuiButtonBuilder.of(Material.EXPERIENCE_BOTTLE).withDisplayName(Component.text("Erfahrung").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(
+                Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("Eingelagert:").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text(Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getStoredAmount())).color(Main.PRIMARY_COLOR).append(Component.text("/").color(Main.LIGHT_ACCENT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudExperienceTerminal().getCAPACITY())).color(Main.PRIMARY_COLOR)),
+                Component.text("~").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(ExperienceUtils.getLevelEquivalent(dataContainer.getCloudExperienceTerminal().getStoredAmount()))).color(Main.PRIMARY_COLOR)).append(Component.text(" Level").color(Main.LIGHT_ACCENT_COLOR)),
+                Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("Linksklick:").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("Eigene Erfahrung einlagern").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("Rechtsklick:").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("Gesamte Erfahrung auslagern").color(Main.LIGHT_ACCENT_COLOR),
+                Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)
         ).build());
         inventory.setItem(16, Items.GUI_BUTTON_EXP_BOTTLES.get());
         if (dataContainer.getCloudExperienceTerminal().getOWNER_UUID().equals(dataContainer.getOWNER_UUID()))
@@ -66,7 +66,7 @@ public class CloudExperienceTerminalGUI extends GUI {
         inventory.setItem(32, Items.GUI_BUTTON_30_LEVEL.get());
         inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Items.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudExperienceTerminal().getOWNER_UUID()));
-        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_TEXT_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR)).build());
+        inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
         fillSpacers();
     }
 

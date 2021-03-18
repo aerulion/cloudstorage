@@ -29,7 +29,7 @@ public class CloudInterfaceGUI extends GUI {
 
     @Override
     public Component getTitle() {
-        return Component.text("Cloud Interface").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
+        return Component.text("Cloud Interface").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -40,7 +40,7 @@ public class CloudInterfaceGUI extends GUI {
     @Override
     public void setContent() {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudInterfaceOwner()));
-        inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_TEXT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_TEXT_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_TEXT_COLOR)).build());
+        inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
         inventory.setItem(11, Items.GUI_BUTTON_INTERFACE_HOTBAR.get());
         inventory.setItem(13, Items.GUI_BUTTON_INTERFACE_ALL.get());
         inventory.setItem(15, Items.GUI_BUTTON_INTERFACE_INVENTORY.get());

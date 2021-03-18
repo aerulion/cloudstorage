@@ -22,10 +22,10 @@ public class Main extends JavaPlugin {
     public static Main plugin;
     public static Economy economy;
     public static WorldGuardPlugin worldGuard;
-    public final static TextColor ERROR_TEXT_COLOR = TextColor.color(252, 60, 60);
-    public final static TextColor PRIMARY_TEXT_COLOR = TextColor.color(25, 181, 254);
-    public final static TextColor DARK_ACCENT_TEXT_COLOR = TextColor.color(34, 49, 63);
-    public final static TextColor LIGHT_ACCENT_TEXT_COLOR = TextColor.color(141, 149, 157);
+    public final static TextColor ERROR_COLOR = TextColor.color(252, 60, 60);
+    public final static TextColor PRIMARY_COLOR = TextColor.color(25, 181, 254);
+    public final static TextColor DARK_ACCENT_COLOR = TextColor.color(34, 49, 63);
+    public final static TextColor LIGHT_ACCENT_COLOR = TextColor.color(141, 149, 157);
     public static final HashMap<String, String> openGUIs = new HashMap<>();
     public static List<String> DISABLED_WORLDS;
     public static boolean MAINTENANCE_MODE = true;

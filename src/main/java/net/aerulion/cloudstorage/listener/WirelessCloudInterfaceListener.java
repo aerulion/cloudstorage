@@ -67,7 +67,7 @@ public class WirelessCloudInterfaceListener implements Listener {
                                 if (event.getHand().equals(EquipmentSlot.OFF_HAND))
                                     event.getPlayer().getInventory().setItemInOffHand(wirelessCloudInterface);
                             }
-                            event.getPlayer().sendActionBar(Component.text("Modus:").color(Main.DARK_ACCENT_TEXT_COLOR).append(Component.text(nextMode.getDisplay()).color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)));
+                            event.getPlayer().sendActionBar(Component.text("Modus:").color(Main.DARK_ACCENT_COLOR).append(Component.text(nextMode.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)));
                             SoundUtils.playSound(event.getPlayer(), SoundType.UI_CLICK);
                             return;
                         }

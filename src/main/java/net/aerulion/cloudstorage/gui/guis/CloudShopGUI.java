@@ -24,7 +24,7 @@ public class CloudShopGUI extends GUI {
 
     @Override
     public Component getTitle() {
-        return Component.text("Cloud Shop").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
+        return Component.text("Cloud Shop").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override

@@ -34,13 +34,13 @@ public class CloudStorageStatsTask extends BukkitRunnable {
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
                 PLAYER.sendMessage("");
-                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Deine Cloud Statistik:").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Deine Cloud Statistik:").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD));
                 PLAYER.sendMessage("");
-                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Cloud Storage Slots: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getInt("STORAGESLOTS"))).color(Main.PRIMARY_TEXT_COLOR)));
-                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Gesamtkapazität: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("TOTALCAPACITY"))).color(Main.PRIMARY_TEXT_COLOR)));
-                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Eingelagerte Items: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT"))).color(Main.PRIMARY_TEXT_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Cloud Storage Slots: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getInt("STORAGESLOTS"))).color(Main.PRIMARY_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Gesamtkapazität: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("TOTALCAPACITY"))).color(Main.PRIMARY_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Eingelagerte Items: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT"))).color(Main.PRIMARY_COLOR)));
                 PLAYER.sendMessage("");
 
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
@@ -51,20 +51,20 @@ public class CloudStorageStatsTask extends BukkitRunnable {
                 for (int i = 1; i < (160 - stringBuilderFilled.length()); i++)
                     stringBuilderEmpty.append("|");
 
-                Component partFilled = Component.text(stringBuilderFilled.toString()).color(Main.PRIMARY_TEXT_COLOR)
+                Component partFilled = Component.text(stringBuilderFilled.toString()).color(Main.PRIMARY_COLOR)
                         .hoverEvent(HoverEvent.showText(
                                 Component.text(decimalFormat.format(((double) resultSet.getLong("STOREDAMOUNT") / resultSet.getLong("TOTALCAPACITY")) * 100D) + "%")
-                                        .color(Main.PRIMARY_TEXT_COLOR)
-                                        .append(Component.text(" genutzt").color(Main.LIGHT_ACCENT_TEXT_COLOR))));
-                Component partEmpty = Component.text(stringBuilderEmpty.toString()).color(Main.PRIMARY_TEXT_COLOR)
+                                        .color(Main.PRIMARY_COLOR)
+                                        .append(Component.text(" genutzt").color(Main.LIGHT_ACCENT_COLOR))));
+                Component partEmpty = Component.text(stringBuilderEmpty.toString()).color(Main.DARK_ACCENT_COLOR)
                         .hoverEvent(HoverEvent.showText(
                                 Component.text(decimalFormat.format(((double) (resultSet.getLong("TOTALCAPACITY") - resultSet.getLong("STOREDAMOUNT")) / resultSet.getLong("TOTALCAPACITY")) * 100D) + "%")
-                                        .color(Main.PRIMARY_TEXT_COLOR)
-                                        .append(Component.text(" verfügbar").color(Main.LIGHT_ACCENT_TEXT_COLOR))));
+                                        .color(Main.PRIMARY_COLOR)
+                                        .append(Component.text(" verfügbar").color(Main.LIGHT_ACCENT_COLOR))));
 
                 PLAYER.sendMessage(partFilled.append(partEmpty));
                 PLAYER.sendMessage("");
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());

@@ -29,7 +29,7 @@ public class CloudAccessPointUpgradeGUI extends GUI {
 
     @Override
     public Component getTitle() {
-        return Component.text("CSS Upgrades").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
+        return Component.text("CSS Upgrades").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
