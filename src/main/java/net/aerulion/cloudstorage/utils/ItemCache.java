@@ -1,8 +1,8 @@
 package net.aerulion.cloudstorage.utils;
 
-import net.aerulion.cloudstorage.Main;
 import net.aerulion.nucleus.api.base64.Base64Utils;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -52,6 +52,9 @@ public class ItemCache {
         }
         if (CACHE.get(player.getUniqueId().toString()).isEmpty())
             CACHE.remove(player.getUniqueId().toString());
-        player.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + itemsGiven + Messages.MESSAGE_CACHED_ITEMS_ADDED.getRaw() + (skipped ? Messages.MESSAGE_CACHED_ITEMS_LEFT.getRaw() : ""));
+        Component message = Messages.MESSAGE_CACHED_ITEMS_ADDED.get().replaceText(TextReplacementConfig.builder().replacement(String.valueOf(itemsGiven)).match("%amount%").build());
+        if (skipped)
+            message = message.append(Messages.MESSAGE_CACHED_ITEMS_LEFT.getRaw());
+        player.sendMessage(message);
     }
 }

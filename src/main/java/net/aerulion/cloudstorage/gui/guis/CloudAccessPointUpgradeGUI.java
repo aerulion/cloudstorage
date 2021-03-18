@@ -8,6 +8,8 @@ import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
@@ -26,8 +28,8 @@ public class CloudAccessPointUpgradeGUI extends GUI {
     }
 
     @Override
-    public String getTitle() {
-        return Main.PRIMARY_COLOR + "§lCSS Upgrades";
+    public Component getTitle() {
+        return Component.text("CSS Upgrades").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override

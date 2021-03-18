@@ -7,6 +7,8 @@ import net.aerulion.cloudstorage.task.FetchCloudExperienceTerminalTask;
 import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
@@ -23,8 +25,8 @@ public class CloudExperienceTerminalUpgradeGUI extends GUI {
     }
 
     @Override
-    public String getTitle() {
-        return Main.PRIMARY_COLOR + "§lCET Upgrades";
+    public Component getTitle() {
+        return Component.text("CET Upgrades").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override

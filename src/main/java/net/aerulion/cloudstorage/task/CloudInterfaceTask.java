@@ -10,6 +10,7 @@ import net.aerulion.nucleus.api.experience.ExperienceUtils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -97,7 +98,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
                 SoundUtils.playSound(PLAYER, SoundType.ALERT);
                 return;
             }
-            PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_ITEMS_STORED.get().replaceAll("%itemAmount", String.valueOf(storedItemAmount)).replaceAll("%expAmount", String.valueOf(storedExperienceAmount)));
+            PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_ITEMS_STORED.get().replaceText(TextReplacementConfig.builder().replacement(String.valueOf(storedItemAmount)).match("%itemAmount%").build()).replaceText(TextReplacementConfig.builder().replacement(String.valueOf(storedExperienceAmount)).match("%expAmount%").build()));
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
         } catch (
                 SQLException exception) {

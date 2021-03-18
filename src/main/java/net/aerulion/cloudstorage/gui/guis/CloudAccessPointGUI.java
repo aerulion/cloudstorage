@@ -7,13 +7,14 @@ import net.aerulion.cloudstorage.utils.CloudStorageSlot;
 import net.aerulion.cloudstorage.utils.Inventory;
 import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.Messages;
+import net.aerulion.nucleus.api.component.ComponentUtils;
 import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.aerulion.nucleus.api.string.StringUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -35,8 +36,8 @@ public class CloudAccessPointGUI extends GUI {
     }
 
     @Override
-    public String getTitle() {
-        return Main.PRIMARY_COLOR + "§lCloud Access Point";
+    public Component getTitle() {
+        return Component.text("Cloud Access Point").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -50,16 +51,16 @@ public class CloudAccessPointGUI extends GUI {
         if (dataContainer.getCloudStorageSlot().getStoredItem() != null) {
             ItemMeta storedItemMeta = storedItem.getItemMeta();
             if (storedItemMeta != null) {
-                List<String> lore = storedItemMeta.hasLore() ? storedItemMeta.getLore() : new ArrayList<>();
+                List<Component> lore = storedItemMeta.hasLore() ? storedItemMeta.lore() : new ArrayList<>();
                 if (lore != null) {
-                    String amountString1 = "§7Eingelagert:";
-                    String amountString2 = Main.PRIMARY_COLOR + Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getStoredAmount()) + "§7/" + Main.PRIMARY_COLOR + Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getCapacity());
-                    int pixelLength = Math.max(StringUtils.getPixelLength(amountString1), StringUtils.getPixelLength(amountString2)) + 20;
-                    lore.add("§7" + StringUtils.generateLine((int) Math.round(pixelLength / 4D)));
-                    lore.add(StringUtils.generateCenteredString(amountString1, (int) Math.round(pixelLength / 2D)) + "§r  ");
-                    lore.add(StringUtils.generateCenteredString(amountString2, (int) Math.round(pixelLength / 2D)) + "§r  ");
-                    lore.add("§7" + StringUtils.generateLine((int) Math.round(pixelLength / 4D)));
-                    storedItemMeta.setLore(lore);
+                    Component amountComponent1 = Component.text("Eingelagert:").color(Main.PRIMARY_TEXT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE);
+                    Component amountComponent2 = Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getStoredAmount())).color(Main.PRIMARY_TEXT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text("/").color(Main.LIGHT_ACCENT_TEXT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getCapacity())).color(Main.PRIMARY_TEXT_COLOR));
+                    int pixelLength = Math.max(StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent1)), StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent2))) + 20;
+                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_TEXT_COLOR));
+                    lore.add(ComponentUtils.generateCenteredComponent(amountComponent1, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
+                    lore.add(ComponentUtils.generateCenteredComponent(amountComponent2, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
+                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_TEXT_COLOR));
+                    storedItemMeta.lore(lore);
                     storedItem.setItemMeta(storedItemMeta);
                 }
             }

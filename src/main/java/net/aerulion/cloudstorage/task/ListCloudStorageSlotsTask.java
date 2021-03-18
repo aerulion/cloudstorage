@@ -5,13 +5,13 @@ import net.aerulion.cloudstorage.utils.CloudStorageSlot;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.chat.ChatUtils;
-import net.aerulion.nucleus.api.json.JsonUtils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.*;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.ClickEvent;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -60,37 +60,58 @@ public class ListCloudStorageSlotsTask extends BukkitRunnable {
             List<CloudStorageSlot> toBeSent = cloudStorageSlotList.subList(from, to);
             int count = from + 1;
 
-            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
+            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
             PLAYER.sendMessage("");
-            ChatUtils.sendCenteredChatMessage(PLAYER, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Deine Cloud Storage Slots:");
+            ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Deine Cloud Storage Slots:").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD));
             PLAYER.sendMessage("");
             for (CloudStorageSlot cloudStorageSlot : toBeSent) {
-                TextComponent mainMessage = new TextComponent("> ");
-                mainMessage.setColor(Main.LIGHT_ACCENT_COLOR);
-                for (BaseComponent baseComponent : new ComponentBuilder("Cloud Storage Slot ").color(Main.PRIMARY_COLOR).event(cloudStorageSlot.getStoredItem() == null ? new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("Leer").color(Main.PRIMARY_COLOR).create())) : new HoverEvent(HoverEvent.Action.SHOW_ITEM, new ComponentBuilder(JsonUtils.convertItemStackToJson(cloudStorageSlot.getStoredItem())).create())).append("#").color(Main.DARK_ACCENT_COLOR).append(String.valueOf(count)).color(Main.PRIMARY_COLOR).create())
-                    mainMessage.addExtra(baseComponent);
-                mainMessage.addExtra(new TextComponent("    "));
-                for (BaseComponent baseComponent : new ComponentBuilder("[").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder(String.valueOf(cloudStorageSlot.getStoredAmount())).color(Main.PRIMARY_COLOR).append("/").color(Main.DARK_ACCENT_COLOR).append(String.valueOf(cloudStorageSlot.getCapacity())).color(Main.PRIMARY_COLOR).create()))).color(Main.DARK_ACCENT_COLOR).append("Info").color(Main.PRIMARY_COLOR).bold(true).append("]").color(Main.DARK_ACCENT_COLOR).bold(false).create())
-                    mainMessage.addExtra(baseComponent);
-                mainMessage.addExtra(new TextComponent("    "));
-                for (BaseComponent baseComponent : new ComponentBuilder("[").event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("Klicke hier, um einen Access Point zu kaufen. Kosten: ").color(Main.LIGHT_ACCENT_COLOR).append("5.000 Ct").color(Main.PRIMARY_COLOR).create()))).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/cloud buy_access_point " + cloudStorageSlot.getUUID())).color(Main.DARK_ACCENT_COLOR).append("AP-Kaufen").color(Main.PRIMARY_COLOR).bold(true).append("]").color(Main.DARK_ACCENT_COLOR).bold(false).create())
-                    mainMessage.addExtra(baseComponent);
-                PLAYER.spigot().sendMessage(mainMessage);
+                Component slotName = Component.text("Cloud Storage Slot ").color(Main.PRIMARY_TEXT_COLOR)
+                        .append(Component.text("#").color(Main.DARK_ACCENT_TEXT_COLOR))
+                        .append(Component.text(String.valueOf(count)).color(Main.PRIMARY_TEXT_COLOR))
+                        .hoverEvent(cloudStorageSlot.getStoredItem() == null ?
+                                HoverEvent.showText(Component.text("Leer").color(Main.PRIMARY_TEXT_COLOR)) :
+                                cloudStorageSlot.getStoredItem().asHoverEvent());
+                Component spacer = Component.text("    ");
+                Component infoButton = Component.text("[").color(Main.DARK_ACCENT_TEXT_COLOR)
+                        .append(Component.text("Info").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD))
+                        .append(Component.text("]").color(Main.DARK_ACCENT_TEXT_COLOR))
+                        .hoverEvent(HoverEvent.showText(
+                                Component.text(String.valueOf(cloudStorageSlot.getStoredAmount())).color(Main.PRIMARY_TEXT_COLOR)
+                                        .append(Component.text("/").color(Main.DARK_ACCENT_TEXT_COLOR))
+                                        .append(Component.text(String.valueOf(cloudStorageSlot.getCapacity())).color(Main.PRIMARY_TEXT_COLOR))));
+                Component buyAPButton = Component.text("[").color(Main.DARK_ACCENT_TEXT_COLOR)
+                        .append(Component.text("AP-Kaufen").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD))
+                        .append(Component.text("]").color(Main.DARK_ACCENT_TEXT_COLOR))
+                        .hoverEvent(HoverEvent.showText(
+                                Component.text("Klicke hier, um einen Access Point zu kaufen. Kosten: ").color(Main.LIGHT_ACCENT_TEXT_COLOR)
+                                        .append(Component.text("5.000 CT").color(Main.PRIMARY_TEXT_COLOR))))
+                        .clickEvent(ClickEvent.suggestCommand("/cloud buy_access_point " + cloudStorageSlot.getUUID()));
+                Component message = Component.text("> ").color(Main.LIGHT_ACCENT_TEXT_COLOR)
+                        .append(slotName)
+                        .append(spacer)
+                        .append(infoButton)
+                        .append(spacer)
+                        .append(buyAPButton);
+                PLAYER.sendMessage(message);
                 count++;
             }
             if (cloudStorageSlotList.size() > 10) {
                 PLAYER.sendMessage("");
-                ChatUtils.sendCenteredChatMessage(PLAYER, Main.LIGHT_ACCENT_COLOR + "Seite " + Main.PRIMARY_COLOR + page + Main.DARK_ACCENT_COLOR + "/" + Main.PRIMARY_COLOR + (int) Math.ceil(cloudStorageSlotList.size() / 10D));
-                TextComponent pageButtons = new TextComponent("                           ");
-                for (BaseComponent baseComponent : page == 1 ? new ComponentBuilder("    ").create() : new ComponentBuilder("<<<").color(Main.PRIMARY_COLOR).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/cloudstorage:cloudstorage list " + (page - 1))).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("< Vorherige Seite").color(Main.PRIMARY_COLOR).create()))).create())
-                    pageButtons.addExtra(baseComponent);
-                pageButtons.addExtra("                ");
-                for (BaseComponent baseComponent : page == Math.ceil(cloudStorageSlotList.size() / 10D) ? new ComponentBuilder("    ").create() : new ComponentBuilder(">>>").color(Main.PRIMARY_COLOR).event(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/cloudstorage:cloudstorage list " + (page + 1))).event(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder("> Nächste Seite").color(Main.PRIMARY_COLOR).create()))).create())
-                    pageButtons.addExtra(baseComponent);
-                PLAYER.spigot().sendMessage(pageButtons);
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Seite ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(String.valueOf(page)).color(Main.PRIMARY_TEXT_COLOR)).append(Component.text("/").color(Main.DARK_ACCENT_TEXT_COLOR)).append(Component.text(String.valueOf((int) Math.ceil(cloudStorageSlotList.size() / 10D))).color(Main.PRIMARY_TEXT_COLOR)));
+                Component spacerFront = Component.text("                           ");
+                Component button1 = page == 1 ? Component.text("    ") :
+                        Component.text("<<<").color(Main.PRIMARY_TEXT_COLOR)
+                                .hoverEvent(HoverEvent.showText(Component.text("< Vorherige Seite").color(Main.PRIMARY_TEXT_COLOR)))
+                                .clickEvent(ClickEvent.runCommand("/cloudstorage:cloudstorage list " + (page - 1)));
+                Component spacerMiddle = Component.text("                ");
+                Component button2 = page == Math.ceil(cloudStorageSlotList.size() / 10D) ? Component.text("    ") :
+                        Component.text(">>>").color(Main.PRIMARY_TEXT_COLOR)
+                                .hoverEvent(HoverEvent.showText(Component.text("> Nächste Seite").color(Main.PRIMARY_TEXT_COLOR)))
+                                .clickEvent(ClickEvent.runCommand("/cloudstorage:cloudstorage list " + (page + 1)));
+                PLAYER.sendMessage(spacerFront.append(button1).append(spacerMiddle).append(button2));
             }
             PLAYER.sendMessage("");
-            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
+            ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
             preparedStatement.close();
             if (resultSet != null)
                 resultSet.close();

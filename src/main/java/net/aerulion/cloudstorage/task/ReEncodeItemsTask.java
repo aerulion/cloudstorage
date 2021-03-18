@@ -6,7 +6,7 @@ import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.command.CommandSender;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -49,7 +49,7 @@ public class ReEncodeItemsTask extends BukkitRunnable {
                 resultSet.close();
             }
             preparedStatement.close();
-            COMMAND_SENDER.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + changedValues + Messages.MESSAGE_ENTRIES_UPDATED.getRaw());
+            COMMAND_SENDER.sendMessage(Messages.MESSAGE_ENTRIES_UPDATED.get().replaceText(TextReplacementConfig.builder().replacement(String.valueOf(changedValues)).match("%amount%").build()));
             SoundUtils.playSound(COMMAND_SENDER, SoundType.SUCCESS);
         } catch (SQLException exception) {
             COMMAND_SENDER.sendMessage(Messages.ERROR_LOADING_DATA.get());

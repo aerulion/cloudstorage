@@ -5,7 +5,7 @@ import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.md_5.bungee.api.ChatColor;
+import net.kyori.adventure.text.TextReplacementConfig;
 import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -31,7 +31,7 @@ public class DeletePlayerDataTask extends BukkitRunnable {
             preparedStatement.setString(1, UUID);
             int affectedRows = preparedStatement.executeUpdate();
             preparedStatement.close();
-            COMMANDSENDER.sendMessage(Messages.PREFIX.getRaw() + Main.PRIMARY_COLOR + ChatColor.BOLD + affectedRows + Messages.MESSAGE_ENTRIES_DELETED.getRaw());
+            COMMANDSENDER.sendMessage(Messages.MESSAGE_ENTRIES_DELETED.get().replaceText(TextReplacementConfig.builder().replacement(String.valueOf(affectedRows)).match("%amount%").build()));
             SoundUtils.playSound(COMMANDSENDER, SoundType.SUCCESS);
         } catch (SQLException exception) {
             COMMANDSENDER.sendMessage(Messages.ERROR_DELETING_DATA.get());

@@ -6,8 +6,8 @@ import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.md_5.bungee.api.ChatMessageType;
-import net.md_5.bungee.api.chat.ComponentBuilder;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
@@ -67,7 +67,7 @@ public class WirelessCloudInterfaceListener implements Listener {
                                 if (event.getHand().equals(EquipmentSlot.OFF_HAND))
                                     event.getPlayer().getInventory().setItemInOffHand(wirelessCloudInterface);
                             }
-                            event.getPlayer().spigot().sendMessage(ChatMessageType.ACTION_BAR, new ComponentBuilder("Modus: ").color(Main.DARK_ACCENT_COLOR).append(nextMode.getDisplay()).color(Main.PRIMARY_COLOR).bold(true).create());
+                            event.getPlayer().sendActionBar(Component.text("Modus:").color(Main.DARK_ACCENT_TEXT_COLOR).append(Component.text(nextMode.getDisplay()).color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD)));
                             SoundUtils.playSound(event.getPlayer(), SoundType.UI_CLICK);
                             return;
                         }

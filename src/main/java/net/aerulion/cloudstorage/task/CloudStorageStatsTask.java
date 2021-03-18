@@ -6,11 +6,9 @@ import net.aerulion.nucleus.api.chat.ChatUtils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.md_5.bungee.api.ChatColor;
-import net.md_5.bungee.api.chat.ComponentBuilder;
-import net.md_5.bungee.api.chat.HoverEvent;
-import net.md_5.bungee.api.chat.TextComponent;
-import net.md_5.bungee.api.chat.hover.content.Text;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.event.HoverEvent;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -36,16 +34,15 @@ public class CloudStorageStatsTask extends BukkitRunnable {
             preparedStatement.setString(1, PLAYER.getUniqueId().toString());
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
                 PLAYER.sendMessage("");
-                ChatUtils.sendCenteredChatMessage(PLAYER, Main.PRIMARY_COLOR + ChatColor.BOLD.toString() + "Deine Cloud Statistik:");
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Deine Cloud Statistik:").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD));
                 PLAYER.sendMessage("");
-                ChatUtils.sendCenteredChatMessage(PLAYER, Main.LIGHT_ACCENT_COLOR + "Cloud Storage Slots: " + Main.PRIMARY_COLOR + Messages.decimalFormat.format(resultSet.getInt("STORAGESLOTS")));
-                ChatUtils.sendCenteredChatMessage(PLAYER, Main.LIGHT_ACCENT_COLOR + "Gesamtkapazität: " + Main.PRIMARY_COLOR + Messages.decimalFormat.format(resultSet.getLong("TOTALCAPACITY")));
-                ChatUtils.sendCenteredChatMessage(PLAYER, Main.LIGHT_ACCENT_COLOR + "Eingelagerte Items: " + Main.PRIMARY_COLOR + Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT")));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Cloud Storage Slots: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getInt("STORAGESLOTS"))).color(Main.PRIMARY_TEXT_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Gesamtkapazität: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("TOTALCAPACITY"))).color(Main.PRIMARY_TEXT_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Eingelagerte Items: ").color(Main.LIGHT_ACCENT_TEXT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT"))).color(Main.PRIMARY_TEXT_COLOR)));
                 PLAYER.sendMessage("");
 
-                TextComponent storageBar = new TextComponent();
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
                 StringBuilder stringBuilderFilled = new StringBuilder();
                 StringBuilder stringBuilderEmpty = new StringBuilder();
@@ -53,17 +50,21 @@ public class CloudStorageStatsTask extends BukkitRunnable {
                     stringBuilderFilled.append("|");
                 for (int i = 1; i < (160 - stringBuilderFilled.length()); i++)
                     stringBuilderEmpty.append("|");
-                TextComponent barFilled = new TextComponent(stringBuilderFilled.toString());
-                barFilled.setColor(Main.PRIMARY_COLOR);
-                barFilled.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder(decimalFormat.format(((double) resultSet.getLong("STOREDAMOUNT") / resultSet.getLong("TOTALCAPACITY")) * 100D)).color(Main.PRIMARY_COLOR).append("%§7 genutzt").create())));
-                TextComponent barEmpty = new TextComponent(stringBuilderEmpty.toString());
-                barEmpty.setColor(Main.DARK_ACCENT_COLOR);
-                barEmpty.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new Text(new ComponentBuilder(decimalFormat.format(((double) (resultSet.getLong("TOTALCAPACITY") - resultSet.getLong("STOREDAMOUNT")) / resultSet.getLong("TOTALCAPACITY")) * 100D)).color(Main.PRIMARY_COLOR).append("%§7 verfügbar").create())));
-                storageBar.addExtra(barFilled);
-                storageBar.addExtra(barEmpty);
-                PLAYER.spigot().sendMessage(storageBar);
+
+                Component partFilled = Component.text(stringBuilderFilled.toString()).color(Main.PRIMARY_TEXT_COLOR)
+                        .hoverEvent(HoverEvent.showText(
+                                Component.text(decimalFormat.format(((double) resultSet.getLong("STOREDAMOUNT") / resultSet.getLong("TOTALCAPACITY")) * 100D) + "%")
+                                        .color(Main.PRIMARY_TEXT_COLOR)
+                                        .append(Component.text(" genutzt").color(Main.LIGHT_ACCENT_TEXT_COLOR))));
+                Component partEmpty = Component.text(stringBuilderEmpty.toString()).color(Main.PRIMARY_TEXT_COLOR)
+                        .hoverEvent(HoverEvent.showText(
+                                Component.text(decimalFormat.format(((double) (resultSet.getLong("TOTALCAPACITY") - resultSet.getLong("STOREDAMOUNT")) / resultSet.getLong("TOTALCAPACITY")) * 100D) + "%")
+                                        .color(Main.PRIMARY_TEXT_COLOR)
+                                        .append(Component.text(" verfügbar").color(Main.LIGHT_ACCENT_TEXT_COLOR))));
+
+                PLAYER.sendMessage(partFilled.append(partEmpty));
                 PLAYER.sendMessage("");
-                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_COLOR);
+                ChatUtils.sendChatDividingLine(PLAYER, Main.LIGHT_ACCENT_TEXT_COLOR);
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());

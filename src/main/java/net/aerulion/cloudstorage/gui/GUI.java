@@ -1,8 +1,9 @@
 package net.aerulion.cloudstorage.gui;
 
 import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.nucleus.api.component.ComponentUtils;
 import net.aerulion.nucleus.api.string.CenterPixel;
-import net.aerulion.nucleus.api.string.StringUtils;
+import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -21,7 +22,7 @@ public abstract class GUI implements InventoryHolder {
         dataContainer = DataContainerManager.getDataContainer(player);
     }
 
-    public abstract String getTitle();
+    public abstract Component getTitle();
 
     public abstract int getSlots();
 
@@ -32,7 +33,7 @@ public abstract class GUI implements InventoryHolder {
     public abstract void handleClose(InventoryCloseEvent event);
 
     public void open() {
-        inventory = Bukkit.createInventory(this, getSlots(), StringUtils.generateCenteredString(getTitle(), CenterPixel.INVENTORY_TITLE));
+        inventory = Bukkit.createInventory(this, getSlots(), ComponentUtils.generateCenteredComponent(getTitle(), CenterPixel.INVENTORY_TITLE));
         this.setContent();
         dataContainer.getOwningPlayer().openInventory(inventory);
     }

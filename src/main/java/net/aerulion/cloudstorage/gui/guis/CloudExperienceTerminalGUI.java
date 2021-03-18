@@ -35,8 +35,8 @@ public class CloudExperienceTerminalGUI extends GUI {
     }
 
     @Override
-    public String getTitle() {
-        return Main.PRIMARY_COLOR + "§lCloud Experience Terminal";
+    public Component getTitle() {
+        return Component.text("Cloud Experience Terminal").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -195,7 +195,6 @@ public class CloudExperienceTerminalGUI extends GUI {
                 event.getCurrentItem().setAmount(event.getCurrentItem().getAmount() - amount);
                 new StoreExperienceTask(player, amount * 7, dataContainer.getCloudExperienceTerminal().getOWNER_UUID(), false);
             }
-            return;
         }
     }
 

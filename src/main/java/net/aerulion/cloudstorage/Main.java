@@ -8,14 +8,12 @@ import net.aerulion.cloudstorage.listener.*;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.console.ConsoleUtils;
 import net.kyori.adventure.text.format.TextColor;
-import net.md_5.bungee.api.ChatColor;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,10 +22,6 @@ public class Main extends JavaPlugin {
     public static Main plugin;
     public static Economy economy;
     public static WorldGuardPlugin worldGuard;
-    public final static ChatColor ERROR_COLOR = ChatColor.of(new Color(252, 60, 60));
-    public final static ChatColor PRIMARY_COLOR = ChatColor.of(new Color(25, 181, 254));
-    public final static ChatColor DARK_ACCENT_COLOR = ChatColor.of(new Color(34, 49, 63));
-    public final static ChatColor LIGHT_ACCENT_COLOR = ChatColor.of(new Color(141, 149, 157));
     public final static TextColor ERROR_TEXT_COLOR = TextColor.color(252, 60, 60);
     public final static TextColor PRIMARY_TEXT_COLOR = TextColor.color(25, 181, 254);
     public final static TextColor DARK_ACCENT_TEXT_COLOR = TextColor.color(34, 49, 63);

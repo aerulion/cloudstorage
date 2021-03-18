@@ -11,7 +11,6 @@ import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -29,8 +28,8 @@ public class CloudInterfaceGUI extends GUI {
     }
 
     @Override
-    public String getTitle() {
-        return Main.PRIMARY_COLOR + "§lCloud Interface";
+    public Component getTitle() {
+        return Component.text("Cloud Interface").color(Main.PRIMARY_TEXT_COLOR).decorate(TextDecoration.BOLD);
     }
 
     @Override
@@ -80,7 +79,6 @@ public class CloudInterfaceGUI extends GUI {
                 }
                 new CloudInterfaceTask(player, dataContainer.getCloudInterfaceOwner(), CloudInterfaceMode.INVENTORY_ONLY);
                 player.setCooldown(Material.STRUCTURE_VOID, 40);
-                return;
             }
         }
     }
