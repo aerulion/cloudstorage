@@ -98,7 +98,7 @@ public class CloudAccessPointUpgradeGUI extends GUI {
         if (event.getRawSlot() == 31)
             handleUpgrade(event.getWhoClicked(), Upgrade.UPGRADE_15, dataContainer.getCloudStorageSlot().getUUID(), event.getCurrentItem(), event.getInventory().getItem(25));
         if (event.getRawSlot() == 37) {
-            ItemStack itemStack = event.getInventory().getItem(33);
+            ItemStack itemStack = event.getInventory().getItem(37);
             if (itemStack != null && !itemStack.getType().equals(Material.BLACK_STAINED_GLASS_PANE)) {
                 Player player = (Player) event.getWhoClicked();
                 if (event.getClick().equals(ClickType.LEFT)) {
