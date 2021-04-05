@@ -39,24 +39,24 @@ public class CloudAccessPointUpgradeGUI extends GUI {
 
     @Override
     public void setContent() {
-        inventory.setItem(10, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_1.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_1_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_1.get());
-        inventory.setItem(11, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_2.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_2_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_2.get());
-        inventory.setItem(12, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_3.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_3_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_3.get());
-        inventory.setItem(13, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_4.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_4_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_4.get());
-        inventory.setItem(14, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_5.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_5_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_5.get());
-        inventory.setItem(15, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_6.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_6_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_6.get());
-        inventory.setItem(16, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_7.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_7_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_7.get());
-        inventory.setItem(19, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_8.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_8_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_8.get());
-        inventory.setItem(20, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_9.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_9_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_9.get());
-        inventory.setItem(21, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_10.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_10_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_10.get());
-        inventory.setItem(22, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_11.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_11_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_11.get());
-        inventory.setItem(23, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_12.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_12_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_12.get());
-        inventory.setItem(24, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_13.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_13_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_13.get());
-        inventory.setItem(25, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_14.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_14_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_14.get());
-        inventory.setItem(31, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_15.getCapacityItem() ? Items.GUI_BUTTON_UPGRADE_ITEM_15_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_ITEM_15.get());
+        inventory.setItem(10, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_1.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_1_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_1.get());
+        inventory.setItem(11, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_2.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_2_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_2.get());
+        inventory.setItem(12, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_3.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_3_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_3.get());
+        inventory.setItem(13, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_4.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_4_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_4.get());
+        inventory.setItem(14, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_5.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_5_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_5.get());
+        inventory.setItem(15, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_6.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_6_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_6.get());
+        inventory.setItem(16, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_7.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_7_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_7.get());
+        inventory.setItem(19, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_8.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_8_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_8.get());
+        inventory.setItem(20, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_9.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_9_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_9.get());
+        inventory.setItem(21, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_10.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_10_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_10.get());
+        inventory.setItem(22, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_11.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_11_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_11.get());
+        inventory.setItem(23, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_12.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_12_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_12.get());
+        inventory.setItem(24, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_13.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_13_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_13.get());
+        inventory.setItem(25, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_14.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_14_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_14.get());
+        inventory.setItem(31, dataContainer.getCloudStorageSlot().getCapacity() >= Upgrade.UPGRADE_15.getCapacityItem() ? Item.GUI_BUTTON_UPGRADE_ITEM_15_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_ITEM_15.get());
         if (dataContainer.getCloudStorageSlot().getOwnerUUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(37, Items.GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT.get());
-        inventory.setItem(43, Items.BACK.get());
+            inventory.setItem(37, Item.GUI_BUTTON_UPGRADE_ADDITIONAL_ACCESS_POINT.get());
+        inventory.setItem(43, Item.BACK.get());
         fillSpacers();
     }
 
@@ -117,10 +117,10 @@ public class CloudAccessPointUpgradeGUI extends GUI {
                         player.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
                         SoundUtils.playSound(player, SoundType.SUCCESS);
                         if (player.getInventory().firstEmpty() == -1) {
-                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
+                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Item.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
                             player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                         } else {
-                            player.getInventory().addItem(Items.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                            player.getInventory().addItem(Item.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
                         }
                         player.closeInventory();
                     } else {
@@ -145,10 +145,10 @@ public class CloudAccessPointUpgradeGUI extends GUI {
                         player.sendMessage(Messages.MESSAGE_WIRELESS_CLOUD_ACCESS_POINT_BOUGHT.get());
                         SoundUtils.playSound(player, SoundType.SUCCESS);
                         if (player.getInventory().firstEmpty() == -1) {
-                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
+                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Item.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
                             player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                         } else {
-                            player.getInventory().addItem(Items.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                            player.getInventory().addItem(Item.getWirelessCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
                         }
                         player.closeInventory();
                     } else {

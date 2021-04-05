@@ -1,8 +1,8 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
+import net.aerulion.cloudstorage.utils.Item;
 import net.aerulion.cloudstorage.utils.ItemCache;
-import net.aerulion.cloudstorage.utils.Items;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
@@ -50,10 +50,10 @@ public class BuyCloudAccessPointCommandTask extends BukkitRunnable {
                                 PLAYER.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
                                 SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
                                 if (PLAYER.getInventory().firstEmpty() == -1) {
-                                    ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Items.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString())), 1);
+                                    ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Item.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString())), 1);
                                     PLAYER.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                                 } else {
-                                    PLAYER.getInventory().addItem(Items.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString()));
+                                    PLAYER.getInventory().addItem(Item.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString()));
                                 }
                             } else {
                                 PLAYER.sendMessage(Messages.ERROR_TRANSACTION.get());

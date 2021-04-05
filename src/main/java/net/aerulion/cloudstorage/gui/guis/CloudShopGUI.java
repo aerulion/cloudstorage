@@ -34,10 +34,10 @@ public class CloudShopGUI extends GUI {
 
     @Override
     public void setContent() {
-        inventory.setItem(11, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_STORAGE_SLOT.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT.get() : Items.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT_NO_PERMISSION.get());
-        inventory.setItem(12, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_EXPERIENCE_TERMINAL.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL.get() : Items.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL_NO_PERMISSION.get());
-        inventory.setItem(14, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_INTERFACE.get()) ? Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE.get() : Items.GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION.get());
-        inventory.setItem(15, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get()) ? Items.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE.get() : Items.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE_NO_PERMISSION.get());
+        inventory.setItem(11, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_STORAGE_SLOT.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT.get() : Item.GUI_BUTTON_SHOP_CLOUD_STORAGE_SLOT_NO_PERMISSION.get());
+        inventory.setItem(12, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_EXPERIENCE_TERMINAL.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL.get() : Item.GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL_NO_PERMISSION.get());
+        inventory.setItem(14, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_INTERFACE.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_INTERFACE.get() : Item.GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION.get());
+        inventory.setItem(15, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get()) ? Item.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE.get() : Item.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE_NO_PERMISSION.get());
         fillSpacers();
     }
 
@@ -125,10 +125,10 @@ public class CloudShopGUI extends GUI {
                 player.sendMessage(Messages.MESSAGE_CLOUD_INTERFACE_BOUGHT.get());
                 SoundUtils.playSound(player, SoundType.SUCCESS);
                 if (player.getInventory().firstEmpty() == -1) {
-                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getCloudInterface(player.getUniqueId().toString())), 1);
+                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Item.getCloudInterface(player.getUniqueId().toString())), 1);
                     player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                 } else {
-                    player.getInventory().addItem(Items.getCloudInterface(player.getUniqueId().toString()));
+                    player.getInventory().addItem(Item.getCloudInterface(player.getUniqueId().toString()));
                 }
                 player.setCooldown(Material.PLAYER_HEAD, 20);
             } else {
@@ -161,10 +161,10 @@ public class CloudShopGUI extends GUI {
                 player.sendMessage(Messages.MESSAGE_WIRELESS_CLOUD_INTERFACE_BOUGHT.get());
                 SoundUtils.playSound(player, SoundType.SUCCESS);
                 if (player.getInventory().firstEmpty() == -1) {
-                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Items.getWirelessCloudInterface(player.getUniqueId().toString(), CloudInterfaceMode.ALL)), 1);
+                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Item.getWirelessCloudInterface(player.getUniqueId().toString(), CloudInterfaceMode.ALL)), 1);
                     player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                 } else {
-                    player.getInventory().addItem(Items.getWirelessCloudInterface(player.getUniqueId().toString(), CloudInterfaceMode.ALL));
+                    player.getInventory().addItem(Item.getWirelessCloudInterface(player.getUniqueId().toString(), CloudInterfaceMode.ALL));
                 }
                 player.setCooldown(Material.STRUCTURE_VOID, 20);
             } else {

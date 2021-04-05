@@ -40,7 +40,7 @@ public class CloudStorageStatsTask extends BukkitRunnable {
                 PLAYER.sendMessage("");
                 ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Cloud Storage Slots: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getInt("STORAGESLOTS"))).color(Main.PRIMARY_COLOR)));
                 ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Gesamtkapazität: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("TOTALCAPACITY"))).color(Main.PRIMARY_COLOR)));
-                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Eingelagerte Items: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT"))).color(Main.PRIMARY_COLOR)));
+                ChatUtils.sendCenteredChatMessage(PLAYER, Component.text("Eingelagerte Item: ").color(Main.LIGHT_ACCENT_COLOR).append(Component.text(Messages.decimalFormat.format(resultSet.getLong("STOREDAMOUNT"))).color(Main.PRIMARY_COLOR)));
                 PLAYER.sendMessage("");
 
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");

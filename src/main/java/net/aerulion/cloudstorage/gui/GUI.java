@@ -1,6 +1,6 @@
 package net.aerulion.cloudstorage.gui;
 
-import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.utils.Item;
 import net.aerulion.nucleus.api.component.ComponentUtils;
 import net.aerulion.nucleus.api.string.CenterPixel;
 import net.kyori.adventure.text.Component;
@@ -16,7 +16,7 @@ public abstract class GUI implements InventoryHolder {
 
     protected final DataContainer dataContainer;
     protected Inventory inventory;
-    protected final ItemStack spacer = Items.GUI_SPACER.get();
+    protected final ItemStack spacer = Item.GUI_SPACER.get();
 
     public GUI(Player player) {
         dataContainer = DataContainerManager.getDataContainer(player);

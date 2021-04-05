@@ -36,22 +36,22 @@ public class CloudExperienceTerminalUpgradeGUI extends GUI {
 
     @Override
     public void setContent() {
-        inventory.setItem(10, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_1.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_1_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_1.get());
-        inventory.setItem(11, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_2.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_2_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_2.get());
-        inventory.setItem(12, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_3.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_3_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_3.get());
-        inventory.setItem(13, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_4.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_4_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_4.get());
-        inventory.setItem(14, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_5.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_5_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_5.get());
-        inventory.setItem(15, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_6.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_6_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_6.get());
-        inventory.setItem(16, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_7.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_7_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_7.get());
-        inventory.setItem(19, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_8.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_8_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_8.get());
-        inventory.setItem(20, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_9.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_9_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_9.get());
-        inventory.setItem(21, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_10.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_10_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_10.get());
-        inventory.setItem(22, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_11.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_11_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_11.get());
-        inventory.setItem(23, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_12.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_12_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_12.get());
-        inventory.setItem(24, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_13.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_13_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_13.get());
-        inventory.setItem(25, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_14.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_14_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_14.get());
-        inventory.setItem(31, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_15.getCapacityExperience() ? Items.GUI_BUTTON_UPGRADE_EXPERIENCE_15_ACTIVE.get() : Items.GUI_BUTTON_UPGRADE_EXPERIENCE_15.get());
-        inventory.setItem(43, Items.BACK.get());
+        inventory.setItem(10, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_1.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_1_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_1.get());
+        inventory.setItem(11, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_2.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_2_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_2.get());
+        inventory.setItem(12, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_3.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_3_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_3.get());
+        inventory.setItem(13, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_4.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_4_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_4.get());
+        inventory.setItem(14, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_5.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_5_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_5.get());
+        inventory.setItem(15, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_6.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_6_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_6.get());
+        inventory.setItem(16, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_7.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_7_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_7.get());
+        inventory.setItem(19, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_8.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_8_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_8.get());
+        inventory.setItem(20, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_9.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_9_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_9.get());
+        inventory.setItem(21, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_10.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_10_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_10.get());
+        inventory.setItem(22, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_11.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_11_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_11.get());
+        inventory.setItem(23, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_12.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_12_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_12.get());
+        inventory.setItem(24, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_13.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_13_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_13.get());
+        inventory.setItem(25, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_14.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_14_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_14.get());
+        inventory.setItem(31, dataContainer.getCloudExperienceTerminal().getCAPACITY() >= Upgrade.UPGRADE_15.getCapacityExperience() ? Item.GUI_BUTTON_UPGRADE_EXPERIENCE_15_ACTIVE.get() : Item.GUI_BUTTON_UPGRADE_EXPERIENCE_15.get());
+        inventory.setItem(43, Item.BACK.get());
         fillSpacers();
     }
 

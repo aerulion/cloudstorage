@@ -20,7 +20,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.UUID;
 
-public enum Items {
+public enum Item {
     ACCESS_POINT(ItemBuilder.of(SkullUtils.getSkull("https://textures.minecraft.net/texture/3e9fc3c04c4d5a2a9291ebaad9fe8f85cb2f7719af8e47475a05405099471b2e", UUID.fromString("9e87186f-14bb-43fb-b0f9-9fcad97899f5"))).withDisplayName(Component.text("Cloud Access Point").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).build()),
     BACK(ItemBuilder.of(Material.DARK_OAK_DOOR).withDisplayName(Component.text("Zurück").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).build()),
     CLOUD_INTERFACE(ItemBuilder.of(SkullUtils.getSkull("https://textures.minecraft.net/texture/d4dff0c31510dc52c21a27b099d0bdf1a9f45c4bb6f8e9c2e98c897f2082d26", UUID.fromString("e58d68f0-b0d6-4593-b456-eea6d0599559"))).withDisplayName(Component.text("Cloud Interface").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE)).build()),
@@ -35,9 +35,9 @@ public enum Items {
     GUI_BUTTON_CSS_ACCESS_PUBLIC(GuiButtonBuilder.of(Material.COMMAND_BLOCK).withDisplayName(Component.text("Zugriff: Öffentlich").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Jeder mit Rechten auf").color(Main.LIGHT_ACCENT_COLOR), Component.text("dieser Region kann auf").color(Main.LIGHT_ACCENT_COLOR), Component.text("diesen CSS zugreifen.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).build()),
     GUI_BUTTON_CSS_UPGRADES(GuiButtonBuilder.of(Material.EMERALD).withDisplayName(Component.text("Upgrades").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Hier kannst du").color(Main.LIGHT_ACCENT_COLOR), Component.text("Upgrades für diesen").color(Main.LIGHT_ACCENT_COLOR), Component.text("CSS kaufen.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
     GUI_BUTTON_EXP_BOTTLES(GuiButtonBuilder.of(Material.HOPPER).withDisplayName(Component.text("Erfahrungsfläschchen").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Linksklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("64 Fläschchen auslagern").color(Main.LIGHT_ACCENT_COLOR), Component.text("Rechtsklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("Gesamtes Inventar füllen").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
-    GUI_BUTTON_INTERFACE_ALL(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.ALL.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Alle Items in deinem").color(Main.LIGHT_ACCENT_COLOR), Component.text("Inventar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
-    GUI_BUTTON_INTERFACE_HOTBAR(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.HOTBAR_ONLY.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Nur die Items in deiner").color(Main.LIGHT_ACCENT_COLOR), Component.text("Hotbar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
-    GUI_BUTTON_INTERFACE_INVENTORY(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.INVENTORY_ONLY.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Nur die Items in deinem").color(Main.LIGHT_ACCENT_COLOR), Component.text("oberen Inventar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
+    GUI_BUTTON_INTERFACE_ALL(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.ALL.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Alle Item in deinem").color(Main.LIGHT_ACCENT_COLOR), Component.text("Inventar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
+    GUI_BUTTON_INTERFACE_HOTBAR(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.HOTBAR_ONLY.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Nur die Item in deiner").color(Main.LIGHT_ACCENT_COLOR), Component.text("Hotbar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
+    GUI_BUTTON_INTERFACE_INVENTORY(GuiButtonBuilder.of(Material.STRUCTURE_VOID).withDisplayName(Component.text(CloudInterfaceMode.INVENTORY_ONLY.getDisplay()).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Nur die Item in deinem").color(Main.LIGHT_ACCENT_COLOR), Component.text("oberen Inventar einlagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).withGlow().build()),
     GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL(GuiButtonBuilder.of(SkullUtils.getSkull("https://textures.minecraft.net/texture/6a5589702f0d0a8f8aa3e9328b618f02055bf31e5adc625b9adb161a98d70b7f", UUID.fromString("3e2f0a9b-14ff-4731-88d8-75c13f937c2c"))).withDisplayName(Component.text("Cloud Experience Terminal").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Kaufe ein Cloud Experience Terminal").color(Main.LIGHT_ACCENT_COLOR), Component.text("für dein Cloud Netzwerk.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw(), Component.text("Preis:").color(Main.LIGHT_ACCENT_COLOR), Component.text(Messages.decimalFormat.format(Upgrade.EXPERIENCE_TERMINAL_BASE.getPrice()) + " CT").color(Main.PRIMARY_COLOR), Messages.DIVIDER.getRaw()).build()),
     GUI_BUTTON_SHOP_CLOUD_EXPERIENCE_TERMINAL_NO_PERMISSION(GuiButtonBuilder.of(SkullUtils.getSkull("https://textures.minecraft.net/texture/6a5589702f0d0a8f8aa3e9328b618f02055bf31e5adc625b9adb161a98d70b7f", UUID.fromString("3e2f0a9b-14ff-4731-88d8-75c13f937c2c"))).withDisplayName(Component.text("Cloud Experience Terminal").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Kaufe ein Cloud Experience Terminal").color(Main.LIGHT_ACCENT_COLOR), Component.text("für dein Cloud Netzwerk.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw(), Component.text("Du hast nicht die benötigten").color(Main.ERROR_COLOR), Component.text("Rechte, dies zu kaufen.").color(Main.ERROR_COLOR), Messages.DIVIDER.getRaw()).build()),
     GUI_BUTTON_SHOP_CLOUD_INTERFACE(GuiButtonBuilder.of(SkullUtils.getSkull("https://textures.minecraft.net/texture/d4dff0c31510dc52c21a27b099d0bdf1a9f45c4bb6f8e9c2e98c897f2082d26", UUID.fromString("e58d68f0-b0d6-4593-b456-eea6d0599559"))).withDisplayName(Component.text("Cloud Interface").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Kaufe ein Cloud Interface").color(Main.LIGHT_ACCENT_COLOR), Component.text("für dein Cloud Netzwerk.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw(), Component.text("Preis:").color(Main.LIGHT_ACCENT_COLOR), Component.text("25.000 CT").color(Main.PRIMARY_COLOR), Messages.DIVIDER.getRaw()).build()),
@@ -107,7 +107,7 @@ public enum Items {
     GUI_BUTTON_UPGRADE_ITEM_8_ACTIVE(getUpgradeItemActive(Upgrade.UPGRADE_8)),
     GUI_BUTTON_UPGRADE_ITEM_9(getUpgradeItem(Upgrade.UPGRADE_9)),
     GUI_BUTTON_UPGRADE_ITEM_9_ACTIVE(getUpgradeItemActive(Upgrade.UPGRADE_9)),
-    GUI_BUTTON_WHOLE_INVENTORY(GuiButtonBuilder.of(Material.CHEST).withDisplayName(Component.text("Gesamtes Inventar").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Linksklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("Alle Items einsortieren").color(Main.LIGHT_ACCENT_COLOR), Component.text("Rechtsklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("Gesamtes Inventar füllen").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).build()),
+    GUI_BUTTON_WHOLE_INVENTORY(GuiButtonBuilder.of(Material.CHEST).withDisplayName(Component.text("Gesamtes Inventar").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Linksklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("Alle Item einsortieren").color(Main.LIGHT_ACCENT_COLOR), Component.text("Rechtsklick:").color(Main.LIGHT_ACCENT_COLOR), Component.text("Gesamtes Inventar füllen").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).build()),
     GUI_NO_ITEM(GuiButtonBuilder.of(Material.LIGHT_BLUE_STAINED_GLASS_PANE).withDisplayName(Component.text("Dieser CSS ist leer").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Klicke auf ein Item in").color(Main.LIGHT_ACCENT_COLOR), Component.text("deinem Inventar, um").color(Main.LIGHT_ACCENT_COLOR), Component.text("es einzulagern.").color(Main.LIGHT_ACCENT_COLOR), Messages.DIVIDER.getRaw()).build()),
     GUI_SPACER(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).withDisplayName(Component.empty()).build()),
     GUI_SPACER_ACCESS_POINT(ItemBuilder.of(Material.BLACK_STAINED_GLASS_PANE).withCustomModelData(100).withDisplayName(Component.empty()).build()),
@@ -118,7 +118,7 @@ public enum Items {
 
     private final ItemStack itemStack;
 
-    Items(ItemStack itemStack) {
+    Item(ItemStack itemStack) {
         this.itemStack = itemStack;
     }
 
@@ -127,7 +127,7 @@ public enum Items {
     }
 
     private static ItemStack getUpgradeItem(Upgrade upgrade) {
-        return GuiButtonBuilder.of(upgrade.getMaterial()).withDisplayName(Component.text("Upgrade " + StringUtils.getRomanNumber(upgrade.getNumber())).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Maximale Kapazität:").color(Main.LIGHT_ACCENT_COLOR), Component.text(Messages.decimalFormat.format(upgrade.getCapacityItem()) + " Items").color(Main.PRIMARY_COLOR), Component.text("Preis:").color(Main.LIGHT_ACCENT_COLOR), Component.text(Messages.decimalFormat.format(upgrade.getPrice()) + " CT").color(Main.PRIMARY_COLOR), Messages.DIVIDER.getRaw()).build();
+        return GuiButtonBuilder.of(upgrade.getMaterial()).withDisplayName(Component.text("Upgrade " + StringUtils.getRomanNumber(upgrade.getNumber())).color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Messages.DIVIDER.getRaw(), Component.text("Maximale Kapazität:").color(Main.LIGHT_ACCENT_COLOR), Component.text(Messages.decimalFormat.format(upgrade.getCapacityItem()) + " Item").color(Main.PRIMARY_COLOR), Component.text("Preis:").color(Main.LIGHT_ACCENT_COLOR), Component.text(Messages.decimalFormat.format(upgrade.getPrice()) + " CT").color(Main.PRIMARY_COLOR), Messages.DIVIDER.getRaw()).build();
     }
 
     private static ItemStack getUpgradeItemActive(Upgrade upgrade) {
@@ -144,7 +144,7 @@ public enum Items {
 
     public static ItemStack getCloudExperienceTerminal(String uuid) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
-        ItemStack itemStack = Items.EXPERIENCE_TERMINAL.get();
+        ItemStack itemStack = Item.EXPERIENCE_TERMINAL.get();
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null && offlinePlayer.getName() != null)
             itemMeta.lore(Collections.singletonList(Component.text("Eigentümer: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(offlinePlayer.getName()).color(Main.PRIMARY_COLOR))));
@@ -155,7 +155,7 @@ public enum Items {
 
     public static ItemStack getCloudInterface(String uuid) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
-        ItemStack itemStack = Items.CLOUD_INTERFACE.get().clone();
+        ItemStack itemStack = Item.CLOUD_INTERFACE.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null && offlinePlayer.getName() != null)
             itemMeta.lore(Collections.singletonList(Component.text("Eigentümer: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(offlinePlayer.getName()).color(Main.PRIMARY_COLOR))));
@@ -166,7 +166,7 @@ public enum Items {
 
     public static ItemStack getWirelessCloudInterface(String uuid, CloudInterfaceMode cloudInterfaceMode) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(uuid));
-        ItemStack itemStack = Items.WIRELESS_CLOUD_INTERFACE.get().clone();
+        ItemStack itemStack = Item.WIRELESS_CLOUD_INTERFACE.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null && offlinePlayer.getName() != null)
             itemMeta.lore(Arrays.asList(Component.text("Eigentümer: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(offlinePlayer.getName()).color(Main.PRIMARY_COLOR)), Component.text("Modus: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(cloudInterfaceMode.getDisplay()).color(Main.PRIMARY_COLOR))));
@@ -178,7 +178,7 @@ public enum Items {
 
     public static ItemStack getCloudAccessPoint(String uuid, String owner) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(owner));
-        ItemStack itemStack = Items.ACCESS_POINT.get().clone();
+        ItemStack itemStack = Item.ACCESS_POINT.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null && offlinePlayer.getName() != null)
             itemMeta.lore(Collections.singletonList(Component.text("Eigentümer: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(offlinePlayer.getName()).color(Main.PRIMARY_COLOR))));
@@ -190,7 +190,7 @@ public enum Items {
 
     public static ItemStack getWirelessCloudAccessPoint(String uuid, String owner) {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(owner));
-        ItemStack itemStack = Items.WIRELESS_CLOUD_ACCESS_POINT.get().clone();
+        ItemStack itemStack = Item.WIRELESS_CLOUD_ACCESS_POINT.get().clone();
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta != null && offlinePlayer.getName() != null)
             itemMeta.lore(Collections.singletonList(Component.text("Eigentümer: ").color(Main.LIGHT_ACCENT_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text(offlinePlayer.getName()).color(Main.PRIMARY_COLOR))));

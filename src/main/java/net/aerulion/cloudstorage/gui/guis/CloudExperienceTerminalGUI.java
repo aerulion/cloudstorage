@@ -8,7 +8,7 @@ import net.aerulion.cloudstorage.task.ToggleCloudExperienceTerminalAccessTask;
 import net.aerulion.cloudstorage.task.WithdrawExperienceTask;
 import net.aerulion.cloudstorage.utils.CloudExperienceTerminal;
 import net.aerulion.cloudstorage.utils.Inventory;
-import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.utils.Item;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.experience.ExperienceUtils;
 import net.aerulion.nucleus.api.item.GuiButtonBuilder;
@@ -19,7 +19,6 @@ import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -59,17 +58,17 @@ public class CloudExperienceTerminalGUI extends GUI {
                 Component.text("Gesamte Erfahrung auslagern").color(Main.LIGHT_ACCENT_COLOR),
                 Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)
         ).build());
-        inventory.setItem(16, Items.GUI_BUTTON_EXP_BOTTLES.get());
+        inventory.setItem(16, Item.GUI_BUTTON_EXP_BOTTLES.get());
         if (dataContainer.getCloudExperienceTerminal().getOWNER_UUID().equals(dataContainer.getOWNER_UUID()))
-            inventory.setItem(28, Items.GUI_BUTTON_CET_UPGRADES.get());
-        inventory.setItem(30, Items.GUI_BUTTON_1_LEVEL.get());
-        inventory.setItem(31, Items.GUI_BUTTON_10_LEVEL.get());
-        inventory.setItem(32, Items.GUI_BUTTON_30_LEVEL.get());
-        inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Items.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Items.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
+            inventory.setItem(28, Item.GUI_BUTTON_CET_UPGRADES.get());
+        inventory.setItem(30, Item.GUI_BUTTON_1_LEVEL.get());
+        inventory.setItem(31, Item.GUI_BUTTON_10_LEVEL.get());
+        inventory.setItem(32, Item.GUI_BUTTON_30_LEVEL.get());
+        inventory.setItem(34, dataContainer.getCloudExperienceTerminal().isPRIVATE() ? Item.GUI_BUTTON_CET_ACCESS_PRIVATE.get() : Item.GUI_BUTTON_CET_ACCESS_PUBLIC.get());
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudExperienceTerminal().getOWNER_UUID()));
         inventory.setItem(44, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withCustomModelData(1).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
-        inventory.setItem(0, Items.GUI_SPACER_EXPERIENCE_TERMINAL.get());
-        fillSpacers(Items.GUI_SPACER_INVISIBLE.get());
+        inventory.setItem(0, Item.GUI_SPACER_EXPERIENCE_TERMINAL.get());
+        fillSpacers(Item.GUI_SPACER_INVISIBLE.get());
     }
 
     @Override

@@ -4,7 +4,7 @@ import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.gui.GUI;
 import net.aerulion.cloudstorage.task.CloudInterfaceTask;
 import net.aerulion.cloudstorage.utils.CloudInterfaceMode;
-import net.aerulion.cloudstorage.utils.Items;
+import net.aerulion.cloudstorage.utils.Item;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
@@ -41,9 +41,9 @@ public class CloudInterfaceGUI extends GUI {
     public void setContent() {
         OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(UUID.fromString(dataContainer.getCloudInterfaceOwner()));
         inventory.setItem(26, GuiButtonBuilder.of(Material.KNOWLEDGE_BOOK).withDisplayName(Component.text("Cloud Info").color(Main.PRIMARY_COLOR).decorate(TextDecoration.BOLD)).withLore(Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR), Component.text("Netzwerk Eigentümer:").color(Main.LIGHT_ACCENT_COLOR), Component.text(offlinePlayer.getName() == null ? "ERROR" : offlinePlayer.getName()).color(Main.PRIMARY_COLOR), Component.text("%divider").color(Main.LIGHT_ACCENT_COLOR)).build());
-        inventory.setItem(11, Items.GUI_BUTTON_INTERFACE_HOTBAR.get());
-        inventory.setItem(13, Items.GUI_BUTTON_INTERFACE_ALL.get());
-        inventory.setItem(15, Items.GUI_BUTTON_INTERFACE_INVENTORY.get());
+        inventory.setItem(11, Item.GUI_BUTTON_INTERFACE_HOTBAR.get());
+        inventory.setItem(13, Item.GUI_BUTTON_INTERFACE_ALL.get());
+        inventory.setItem(15, Item.GUI_BUTTON_INTERFACE_INVENTORY.get());
         fillSpacers();
     }
 

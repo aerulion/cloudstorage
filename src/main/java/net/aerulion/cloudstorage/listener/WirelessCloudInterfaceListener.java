@@ -58,7 +58,7 @@ public class WirelessCloudInterfaceListener implements Listener {
                                 nextMode = CloudInterfaceMode.ALL;
                             else
                                 nextMode = CloudInterfaceMode.ALL;
-                            ItemStack wirelessCloudInterface = Items.getWirelessCloudInterface(uuid, nextMode);
+                            ItemStack wirelessCloudInterface = Item.getWirelessCloudInterface(uuid, nextMode);
                             wirelessCloudInterface.setAmount(itemStack.getAmount());
                             EquipmentSlot hand = event.getHand();
                             if (hand != null) {
