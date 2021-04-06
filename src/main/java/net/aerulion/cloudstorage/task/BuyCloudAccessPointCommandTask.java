@@ -1,9 +1,8 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.utils.Item;
-import net.aerulion.cloudstorage.utils.ItemCache;
-import net.aerulion.cloudstorage.utils.Messages;
+import net.aerulion.cloudstorage.block.CloudStorageBlockType;
+import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
@@ -16,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 public class BuyCloudAccessPointCommandTask extends BukkitRunnable {
 
@@ -50,10 +50,20 @@ public class BuyCloudAccessPointCommandTask extends BukkitRunnable {
                                 PLAYER.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
                                 SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
                                 if (PLAYER.getInventory().firstEmpty() == -1) {
-                                    ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Item.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString())), 1);
+                                    ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(
+                                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT,
+                                                    Arrays.asList(
+                                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), UUID),
+                                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(),
+                                                                    PLAYER.getUniqueId().toString())))), 1);
                                     PLAYER.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                                 } else {
-                                    PLAYER.getInventory().addItem(Item.getCloudAccessPoint(UUID, PLAYER.getUniqueId().toString()));
+                                    PLAYER.getInventory().addItem(
+                                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT,
+                                                    Arrays.asList(
+                                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), UUID),
+                                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(),
+                                                                    PLAYER.getUniqueId().toString()))));
                                 }
                             } else {
                                 PLAYER.sendMessage(Messages.ERROR_TRANSACTION.get());

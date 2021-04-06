@@ -1,6 +1,7 @@
 package net.aerulion.cloudstorage.gui.guis;
 
 import net.aerulion.cloudstorage.Main;
+import net.aerulion.cloudstorage.block.CloudStorageBlockType;
 import net.aerulion.cloudstorage.gui.GUI;
 import net.aerulion.cloudstorage.task.BuyCloudStorageSlotUpgradeTask;
 import net.aerulion.cloudstorage.task.FetchCloudStorageSlotTask;
@@ -19,6 +20,8 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import java.util.Arrays;
 
 public class CloudAccessPointUpgradeGUI extends GUI {
 
@@ -117,10 +120,22 @@ public class CloudAccessPointUpgradeGUI extends GUI {
                         player.sendMessage(Messages.MESSAGE_CLOUD_ACCESS_POINT_BOUGHT.get());
                         SoundUtils.playSound(player, SoundType.SUCCESS);
                         if (player.getInventory().firstEmpty() == -1) {
-                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(Item.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString())), 1);
+                            ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(
+                                    Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT, Arrays.asList(
+                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(),
+                                                    dataContainer.getCloudStorageSlot().getUUID()),
+                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(),
+                                                    player.getUniqueId().toString())))
+                            ), 1);
                             player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
                         } else {
-                            player.getInventory().addItem(Item.getCloudAccessPoint(dataContainer.getCloudStorageSlot().getUUID(), player.getUniqueId().toString()));
+                            player.getInventory().addItem(
+                                    Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT, Arrays.asList(
+                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(),
+                                                    dataContainer.getCloudStorageSlot().getUUID()),
+                                            new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(),
+                                                    player.getUniqueId().toString())))
+                            );
                         }
                         player.closeInventory();
                     } else {

@@ -1,10 +1,8 @@
 package net.aerulion.cloudstorage.task;
 
 import net.aerulion.cloudstorage.Main;
-import net.aerulion.cloudstorage.utils.Item;
-import net.aerulion.cloudstorage.utils.ItemCache;
-import net.aerulion.cloudstorage.utils.Messages;
-import net.aerulion.cloudstorage.utils.Upgrade;
+import net.aerulion.cloudstorage.block.CloudStorageBlockType;
+import net.aerulion.cloudstorage.utils.*;
 import net.aerulion.nucleus.api.base64.Base64Utils;
 import net.aerulion.nucleus.api.mysql.MySQLUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
@@ -16,6 +14,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class BuyCloudStorageSlotTask extends BukkitRunnable {
@@ -40,10 +39,18 @@ public class BuyCloudStorageSlotTask extends BukkitRunnable {
             SoundUtils.playSound(PLAYER, SoundType.SUCCESS);
             PLAYER.sendMessage(Messages.MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT.get());
             if (PLAYER.getInventory().firstEmpty() == -1) {
-                ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(Item.getCloudAccessPoint(uuid, PLAYER.getUniqueId().toString())), 1);
+                ItemCache.addItemToCache(PLAYER, Base64Utils.encodeItemStack(
+                        Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT,
+                                Arrays.asList(new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid),
+                                        new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(), PLAYER.getUniqueId().toString())))
+                ), 1);
                 PLAYER.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
             } else {
-                PLAYER.getInventory().addItem(Item.getCloudAccessPoint(uuid, PLAYER.getUniqueId().toString()));
+                PLAYER.getInventory().addItem(
+                        Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_ACCESS_POINT,
+                                Arrays.asList(new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_ID.get(), uuid),
+                                        new MetaData(NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get(), PLAYER.getUniqueId().toString())))
+                );
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_BUYING_CLOUD_STORAGE_SLOT.get());

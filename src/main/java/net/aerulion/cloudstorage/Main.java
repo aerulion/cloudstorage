@@ -1,10 +1,15 @@
 package net.aerulion.cloudstorage;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import net.aerulion.cloudstorage.block.BlockManager;
 import net.aerulion.cloudstorage.cmd.CMD_cloudstorage;
 import net.aerulion.cloudstorage.file.ConfigFile;
 import net.aerulion.cloudstorage.gui.GuiHandler;
-import net.aerulion.cloudstorage.listener.*;
+import net.aerulion.cloudstorage.listener.LegacyConverter;
+import net.aerulion.cloudstorage.listener.PreventGrindstoneListener;
+import net.aerulion.cloudstorage.listener.WirelessCloudAccessPointListener;
+import net.aerulion.cloudstorage.listener.WirelessCloudInterfaceListener;
+import net.aerulion.cloudstorage.utils.ImportExportHandler;
 import net.aerulion.cloudstorage.utils.Messages;
 import net.aerulion.nucleus.api.console.ConsoleUtils;
 import net.kyori.adventure.text.format.TextColor;
@@ -29,13 +34,15 @@ public class Main extends JavaPlugin {
     public static final HashMap<String, String> openGUIs = new HashMap<>();
     public static List<String> DISABLED_WORLDS;
     public static boolean MAINTENANCE_MODE = true;
+    public static ImportExportHandler importExportHandler;
 
     @Override
     public void onEnable() {
         ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_ENABLING.get());
+        plugin = this;
         ConfigFile.copyDefault();
         DISABLED_WORLDS = ConfigFile.getFileConfiguration().getStringList("DisabledWorlds");
-        plugin = this;
+        importExportHandler = new ImportExportHandler();
         PluginManager pluginManager = getServer().getPluginManager();
         if (!setupEconomy()) {
             ConsoleUtils.sendColoredConsoleMessage(Messages.CONSOLE_VAULT_NOT_FOUND.get());
@@ -47,22 +54,13 @@ public class Main extends JavaPlugin {
             pluginManager.disablePlugin(this);
             return;
         }
-        pluginManager.registerEvents(new BreakCloudAccessPointListener(), this);
-        pluginManager.registerEvents(new BreakCloudInterfaceListener(), this);
-        pluginManager.registerEvents(new OpenCloudAccessPointListener(), this);
-        pluginManager.registerEvents(new OpenCloudInterfaceListener(), this);
-        pluginManager.registerEvents(new PlaceCloudAccessPointListener(), this);
-        pluginManager.registerEvents(new PlaceCloudInterfaceListener(), this);
-        pluginManager.registerEvents(new PreventDispenseListener(), this);
-        pluginManager.registerEvents(new PreventExplodeListener(), this);
+        pluginManager.registerEvents(new BlockManager(), this);
+        pluginManager.registerEvents(new GuiHandler(), this);
+        pluginManager.registerEvents(importExportHandler, this);
         pluginManager.registerEvents(new PreventGrindstoneListener(), this);
-        pluginManager.registerEvents(new PreventHopperListener(), this);
         pluginManager.registerEvents(new WirelessCloudAccessPointListener(), this);
         pluginManager.registerEvents(new WirelessCloudInterfaceListener(), this);
-        pluginManager.registerEvents(new GuiHandler(), this);
-        pluginManager.registerEvents(new PlaceCloudExperienceTerminalListener(), this);
-        pluginManager.registerEvents(new BreakCloudExperienceTerminalListener(), this);
-        pluginManager.registerEvents(new OpenCloudExperienceTerminalListener(), this);
+        pluginManager.registerEvents(new LegacyConverter(), this);
 
         PluginCommand cmdCloudStorage = getCommand("cloudstorage");
         if (cmdCloudStorage != null)

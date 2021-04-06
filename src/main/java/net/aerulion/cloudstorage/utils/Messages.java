@@ -49,6 +49,8 @@ public enum Messages {
     MESSAGE_CACHED_ITEMS_LEFT(Component.text(" Es sind weitere Item zwischengelagert.").color(Main.LIGHT_ACCENT_COLOR)),
     MESSAGE_CLOUD_ACCESS_POINT_BOUGHT(Component.text("Du hast erfolgreich einen Cloud Access Point gekauft.").color(Main.LIGHT_ACCENT_COLOR)),
     MESSAGE_CLOUD_EXPERIENCE_TERMINAL_BOUGHT(Component.text("Du hast erfolgreich ein Cloud Experience Terminal gekauft.").color(Main.LIGHT_ACCENT_COLOR)),
+    MESSAGE_CLOUD_EXPORT_BUS_BOUGHT(Component.text("Du hast erfolgreich ein Cloud Export Bus gekauft.").color(Main.LIGHT_ACCENT_COLOR)),
+    MESSAGE_CLOUD_IMPORT_BUS_BOUGHT(Component.text("Du hast erfolgreich ein Cloud Import Bus gekauft.").color(Main.LIGHT_ACCENT_COLOR)),
     MESSAGE_CLOUD_INTERFACE_BOUGHT(Component.text("Du hast erfolgreich ein Cloud Interface gekauft.").color(Main.LIGHT_ACCENT_COLOR)),
     MESSAGE_CLOUD_STORAGE_SLOT_BOUGHT(Component.text("Du hast erfolgreich einen zusätzlichen Cloud Storage Slot gekauft. Der damit verbundene Access Point wurde in dein Inventar gelegt.").color(Main.LIGHT_ACCENT_COLOR)),
     MESSAGE_ENTRIES_DELETED(Component.text("%amount% Einträge wurden erfolgreich gelöscht.").color(Main.LIGHT_ACCENT_COLOR)),
