@@ -26,10 +26,7 @@ public class CloudImportBusTask extends BukkitRunnable {
     @Override
     public void run() {
         ItemStack metaItem = blockInventoryHolder.getInventory().getItem(0);
-        if (metaItem == null) {
-            Main.importExportHandler.ACTIVE_IMPORT_BUSES.remove(blockInventoryHolder);
-            return;
-        }
+        if (metaItem == null) return;
         String ownerUUID = NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get());
         Location location = blockInventoryHolder.getBlock().getLocation();
         location.getNearbyEntities(10, 10, 10).stream()

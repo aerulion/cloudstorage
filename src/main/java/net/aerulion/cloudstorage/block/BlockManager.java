@@ -23,7 +23,7 @@ import java.util.*;
 
 public class BlockManager implements Listener {
 
-    public static HashMap<CloudStorageBlockType, CloudStorageBlock> BLOCKS = new HashMap<>();
+    public static final HashMap<CloudStorageBlockType, CloudStorageBlock> BLOCKS = new HashMap<>();
 
     static {
         BLOCKS.put(CloudStorageBlockType.CLOUD_ACCESS_POINT, new CloudAccessPointBlock());
