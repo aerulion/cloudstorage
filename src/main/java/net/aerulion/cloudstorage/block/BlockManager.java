@@ -45,6 +45,7 @@ public class BlockManager implements Listener {
             if (cloudStorageBlockType == null) return;
             BLOCKS.get(cloudStorageBlockType).handleBreak(event.getBlock().getLocation(), itemStack);
             blockInventoryHolder.getInventory().setItem(0, null);
+            //noinspection ConstantConditions
             Arrays.stream(blockInventoryHolder.getInventory().getContents())
                     .skip(1)
                     .filter(Objects::nonNull)
