@@ -11,6 +11,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -21,6 +22,7 @@ public class CloudExportBusGUI extends GUI {
     public CloudExportBusGUI(Player player, Block block) {
         super(player);
         this.block = block;
+        Main.importExportHandler.OPEN_EXPORT_GUIS.computeIfAbsent((BlockInventoryHolder) block.getState(), inventoryHolder -> new ArrayList<>()).add(this);
     }
 
     @Override
@@ -58,8 +60,8 @@ public class CloudExportBusGUI extends GUI {
 
     @Override
     public void handleClose(InventoryCloseEvent event) {
-        Main.importExportHandler.OPEN_EXPORT_GUIS.remove(
+        Main.importExportHandler.OPEN_EXPORT_GUIS.get(
                 ((BlockInventoryHolder) block.getState()).getInventory().getHolder()
-        );
+        ).remove(this);
     }
 }

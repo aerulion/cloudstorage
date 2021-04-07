@@ -12,6 +12,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 
 public class CloudImportBusTask extends BukkitRunnable {
@@ -44,11 +45,11 @@ public class CloudImportBusTask extends BukkitRunnable {
                     new StoreItemOrDropTask(
                             itemStack.clone(),
                             ownerUUID,
-                            location.add(0, 1, 0));
+                            location.clone().add(0, -1, 0));
                     itemStack.setAmount(0);
                 });
-        CloudImportBusGUI cloudImportBusGUI = Main.importExportHandler.OPEN_IMPORT_GUIS.get(blockInventoryHolder);
-        if (cloudImportBusGUI != null)
-            cloudImportBusGUI.setContent();
+        List<CloudImportBusGUI> cloudImportBusGUIList = Main.importExportHandler.OPEN_IMPORT_GUIS.get(blockInventoryHolder);
+        if (cloudImportBusGUIList != null)
+            cloudImportBusGUIList.forEach(CloudImportBusGUI::setContent);
     }
 }

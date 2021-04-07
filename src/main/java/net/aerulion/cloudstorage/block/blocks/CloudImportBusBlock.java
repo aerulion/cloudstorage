@@ -1,6 +1,5 @@
 package net.aerulion.cloudstorage.block.blocks;
 
-import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.block.CloudStorageBlock;
 import net.aerulion.cloudstorage.block.CloudStorageBlockType;
 import net.aerulion.cloudstorage.gui.guis.CloudImportBusGUI;
@@ -9,7 +8,6 @@ import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +30,6 @@ public class CloudImportBusBlock extends CloudStorageBlock {
 
     @Override
     public void openGUI(Player player, Block block, ItemStack itemStack) {
-        CloudImportBusGUI cloudImportBusGUI = new CloudImportBusGUI(player, getMetaData(itemStack).get(0).getValue(), block);
-        cloudImportBusGUI.open();
-        Main.importExportHandler.OPEN_IMPORT_GUIS.put(((BlockInventoryHolder) block.getState()).getInventory().getHolder(), cloudImportBusGUI);
+        new CloudImportBusGUI(player, getMetaData(itemStack).get(0).getValue(), block).open();
     }
 }
