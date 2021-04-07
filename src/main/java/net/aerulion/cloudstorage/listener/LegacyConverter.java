@@ -8,6 +8,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockDispenseEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
@@ -37,6 +38,11 @@ public class LegacyConverter implements Listener {
         ItemStack convertedItem = convertLegacyMetaItem(itemStack);
         if (!convertedItem.isSimilar(itemStack))
             event.setCurrentItem(convertedItem);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
+    public void listen(BlockDispenseEvent event) {
+        convertLegacyMetaItem((BlockInventoryHolder) event.getBlock().getState());
     }
 
     private void convertLegacyMetaItem(BlockInventoryHolder blockInventoryHolder) {
