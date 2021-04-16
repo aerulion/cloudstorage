@@ -45,7 +45,6 @@ public class BlockManager implements Listener {
             if (cloudStorageBlockType == null) return;
             BLOCKS.get(cloudStorageBlockType).handleBreak(event.getBlock().getLocation(), itemStack);
             blockInventoryHolder.getInventory().setItem(0, null);
-            //noinspection ConstantConditions
             Arrays.stream(blockInventoryHolder.getInventory().getContents())
                     .skip(1)
                     .filter(Objects::nonNull)
@@ -84,7 +83,7 @@ public class BlockManager implements Listener {
             event.setCancelled(true);
             if (Main.MAINTENANCE_MODE) {
                 event.getPlayer().sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(event.getPlayer(), SoundType.ALERT);
+                SoundUtils.playSound(event.getPlayer(), SoundType.INFO);
                 return;
             }
             if (Main.DISABLED_WORLDS.contains(event.getPlayer().getWorld().getName())

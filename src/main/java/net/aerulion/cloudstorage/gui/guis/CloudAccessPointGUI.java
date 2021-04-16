@@ -82,7 +82,7 @@ public class CloudAccessPointGUI extends GUI {
             Player player = (Player) event.getWhoClicked();
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if ((event.getRawSlot() >= 0 && event.getRawSlot() <= event.getView().getTopInventory().getSize() - 1)) {

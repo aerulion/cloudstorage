@@ -19,7 +19,7 @@ public class PreventGrindstoneListener implements Listener {
                 if (!NbtUtils.getNBTString(event.getCurrentItem(), NBT.KEY_CLOUD_INTERFACE_OWNER_UUID.get()).equals("") || !NbtUtils.getNBTString(event.getCurrentItem(), NBT.KEY_CLOUD_STORAGE_SLOT_OWNER_UUID.get()).equals("")) {
                     event.setCancelled(true);
                     event.getWhoClicked().sendMessage(Messages.MESSAGE_NO_GRINDSTONE.get());
-                    SoundUtils.playSound(event.getWhoClicked(), SoundType.ALERT);
+                    SoundUtils.playSound(event.getWhoClicked(), SoundType.INFO);
                 }
             }
         }

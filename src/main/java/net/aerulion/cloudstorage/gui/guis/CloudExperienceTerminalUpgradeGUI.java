@@ -59,7 +59,7 @@ public class CloudExperienceTerminalUpgradeGUI extends GUI {
     public void handleClick(InventoryClickEvent event) {
         if (Main.MAINTENANCE_MODE) {
             event.getWhoClicked().sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-            SoundUtils.playSound(event.getWhoClicked(), SoundType.ALERT);
+            SoundUtils.playSound(event.getWhoClicked(), SoundType.INFO);
             return;
         }
         if (event.getRawSlot() == 10)

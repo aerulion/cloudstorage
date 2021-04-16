@@ -29,7 +29,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if (args.length == 0 || (args.length == 1 && args[0].equalsIgnoreCase("stats"))) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {
@@ -66,7 +66,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if (args.length == 1 && args[0].equalsIgnoreCase("shop")) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {
@@ -89,6 +89,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
                 SoundUtils.playSound(commandSender, SoundType.ERROR);
                 return true;
             }
+            //noinspection deprecation
             OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(args[1]);
             if (!offlinePlayer.hasPlayedBefore()) {
                 commandSender.sendMessage(Messages.ERROR_PLAYER_NOT_FOUND.get());
@@ -101,7 +102,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if (args.length == 2 && args[0].equalsIgnoreCase("interface")) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {
@@ -128,7 +129,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if (args.length == 1 && args[0].equalsIgnoreCase("itemcache")) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {
@@ -150,7 +151,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if ((args.length == 1 || args.length == 2) && args[0].equalsIgnoreCase("list")) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {
@@ -179,7 +180,7 @@ public class CMD_cloudstorage implements CommandExecutor, TabCompleter {
         if (args.length == 2 && args[0].equalsIgnoreCase("buy_access_point")) {
             if (Main.MAINTENANCE_MODE) {
                 commandSender.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(commandSender, SoundType.ALERT);
+                SoundUtils.playSound(commandSender, SoundType.INFO);
                 return true;
             }
             if (!(commandSender instanceof Player)) {

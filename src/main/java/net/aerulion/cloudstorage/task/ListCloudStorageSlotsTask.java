@@ -43,7 +43,7 @@ public class ListCloudStorageSlotsTask extends BukkitRunnable {
             if (resultSet != null) {
                 if (!resultSet.next()) {
                     PLAYER.sendMessage(Messages.MESSAGE_NO_CLOUD_STORAGE_SLOT.get());
-                    SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                    SoundUtils.playSound(PLAYER, SoundType.INFO);
                     return;
                 } else {
                     do {

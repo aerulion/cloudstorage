@@ -42,7 +42,7 @@ public class CloudShopGUI extends GUI {
         inventory.setItem(13, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_INTERFACE.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_INTERFACE.get() : Item.GUI_BUTTON_SHOP_CLOUD_INTERFACE_NO_PERMISSION.get());
         inventory.setItem(14, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get()) ? Item.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE.get() : Item.GUI_BUTTON_SHOP_WIRELESS_CLOUD_INTERFACE_NO_PERMISSION.get());
         inventory.setItem(15, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_IMPORT_BUS.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_IMPORT_BUS.get() : Item.GUI_BUTTON_SHOP_CLOUD_IMPORT_BUS_NO_PERMISSION.get());
-        //inventory.setItem(16, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_EXPORT_BUS.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_EXPORT_BUS.get() : Item.GUI_BUTTON_SHOP_CLOUD_EXPORT_BUS_NO_PERMISSION.get());
+        inventory.setItem(16, dataContainer.getOwningPlayer().hasPermission(Permission.BUY_CLOUD_EXPORT_BUS.get()) ? Item.GUI_BUTTON_SHOP_CLOUD_EXPORT_BUS.get() : Item.GUI_BUTTON_SHOP_CLOUD_EXPORT_BUS_NO_PERMISSION.get());
         fillSpacers();
     }
 
@@ -54,7 +54,7 @@ public class CloudShopGUI extends GUI {
                 return;
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if (!player.hasPermission(Permission.BUY_CLOUD_STORAGE_SLOT.get())) {
@@ -83,7 +83,7 @@ public class CloudShopGUI extends GUI {
                 return;
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if (!player.hasPermission(Permission.BUY_CLOUD_EXPERIENCE_TERMINAL.get())) {
@@ -112,7 +112,7 @@ public class CloudShopGUI extends GUI {
                 return;
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if (!player.hasPermission(Permission.BUY_CLOUD_INTERFACE.get())) {
@@ -154,7 +154,7 @@ public class CloudShopGUI extends GUI {
                 return;
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if (!player.hasPermission(Permission.BUY_WIRELESS_CLOUD_INTERFACE.get())) {
@@ -190,7 +190,7 @@ public class CloudShopGUI extends GUI {
                 return;
             if (Main.MAINTENANCE_MODE) {
                 player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                SoundUtils.playSound(player, SoundType.ALERT);
+                SoundUtils.playSound(player, SoundType.INFO);
                 return;
             }
             if (!player.hasPermission(Permission.BUY_CLOUD_IMPORT_BUS.get())) {
@@ -226,47 +226,47 @@ public class CloudShopGUI extends GUI {
             }
             return;
         }
-//        if (event.getRawSlot() == 16) {
-//            Player player = (Player) event.getWhoClicked();
-//            if (player.hasCooldown(Material.PLAYER_HEAD))
-//                return;
-//            if (Main.MAINTENANCE_MODE) {
-//                player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-//                SoundUtils.playSound(player, SoundType.ALERT);
-//                return;
-//            }
-//            if (!player.hasPermission(Permission.BUY_CLOUD_EXPORT_BUS.get())) {
-//                player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
-//                SoundUtils.playSound(player, SoundType.ERROR);
-//                return;
-//            }
-//            if (!Main.economy.has(player, 25000D)) {
-//                player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
-//                SoundUtils.playSound(player, SoundType.ERROR);
-//                return;
-//            }
-//            EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 25000D);
-//            if (economyResponse.transactionSuccess()) {
-//                player.sendMessage(Messages.MESSAGE_CLOUD_EXPORT_BUS_BOUGHT.get());
-//                SoundUtils.playSound(player, SoundType.SUCCESS);
-//                if (player.getInventory().firstEmpty() == -1) {
-//                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(
-//                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_EXPORT_BUS, Collections.singletonList(
-//                                    new MetaData(NBT.KEY_CLOUD_EXPORT_BUS_OWNER_UUID.get(), player.getUniqueId().toString())))
-//                    ), 1);
-//                    player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
-//                } else {
-//                    player.getInventory().addItem(
-//                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_EXPORT_BUS, Collections.singletonList(
-//                                    new MetaData(NBT.KEY_CLOUD_EXPORT_BUS_OWNER_UUID.get(), player.getUniqueId().toString())))
-//                    );
-//                }
-//                player.setCooldown(Material.PLAYER_HEAD, 20);
-//            } else {
-//                player.sendMessage(Messages.ERROR_TRANSACTION.get());
-//                SoundUtils.playSound(player, SoundType.ERROR);
-//            }
-//        }
+        if (event.getRawSlot() == 16) {
+            Player player = (Player) event.getWhoClicked();
+            if (player.hasCooldown(Material.PLAYER_HEAD))
+                return;
+            if (Main.MAINTENANCE_MODE) {
+                player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
+                SoundUtils.playSound(player, SoundType.INFO);
+                return;
+            }
+            if (!player.hasPermission(Permission.BUY_CLOUD_EXPORT_BUS.get())) {
+                player.sendMessage(Messages.ERROR_NO_PERMISSION_BUY.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+                return;
+            }
+            if (!Main.economy.has(player, 25000D)) {
+                player.sendMessage(Messages.ERROR_NOT_ENOUGH_MONEY.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+                return;
+            }
+            EconomyResponse economyResponse = Main.economy.withdrawPlayer(player, 25000D);
+            if (economyResponse.transactionSuccess()) {
+                player.sendMessage(Messages.MESSAGE_CLOUD_EXPORT_BUS_BOUGHT.get());
+                SoundUtils.playSound(player, SoundType.SUCCESS);
+                if (player.getInventory().firstEmpty() == -1) {
+                    ItemCache.addItemToCache(player, Base64Utils.encodeItemStack(
+                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_EXPORT_BUS, Collections.singletonList(
+                                    new MetaData(NBT.KEY_CLOUD_EXPORT_BUS_OWNER_UUID.get(), player.getUniqueId().toString())))
+                    ), 1);
+                    player.sendMessage(Messages.MESSAGE_CACHED_INVENTORY_FULL.get());
+                } else {
+                    player.getInventory().addItem(
+                            Item.getBlockWithMetaData(CloudStorageBlockType.CLOUD_EXPORT_BUS, Collections.singletonList(
+                                    new MetaData(NBT.KEY_CLOUD_EXPORT_BUS_OWNER_UUID.get(), player.getUniqueId().toString())))
+                    );
+                }
+                player.setCooldown(Material.PLAYER_HEAD, 20);
+            } else {
+                player.sendMessage(Messages.ERROR_TRANSACTION.get());
+                SoundUtils.playSound(player, SoundType.ERROR);
+            }
+        }
     }
 
     @Override

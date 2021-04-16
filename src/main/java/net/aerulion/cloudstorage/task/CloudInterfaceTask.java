@@ -46,7 +46,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
                 if (resultSet2 != null) {
                     if (!resultSet2.next()) {
                         PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NO_AVAILABLE_EXPERIENCE_TERMINAL.get());
-                        SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                        SoundUtils.playSound(PLAYER, SoundType.INFO);
                     } else {
                         do {
                             CloudExperienceTerminal cloudExperienceTerminal = new CloudExperienceTerminal(resultSet2.getString("OWNER"), resultSet2.getInt("AMOUNT"), resultSet2.getInt("CAPACITY"), resultSet2.getBoolean("PRIVATE"));
@@ -66,7 +66,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
             if (resultSet != null) {
                 if (!resultSet.next()) {
                     PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NO_AVAILABLE_SLOTS.get());
-                    SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                    SoundUtils.playSound(PLAYER, SoundType.INFO);
                     return;
                 } else {
                     do {
@@ -95,7 +95,7 @@ public class CloudInterfaceTask extends BukkitRunnable {
             }
             if (storedItemAmount == 0 && storedExperienceAmount == 0) {
                 PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_NOTHING_STORED.get());
-                SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                SoundUtils.playSound(PLAYER, SoundType.INFO);
                 return;
             }
             PLAYER.sendMessage(Messages.MESSAGE_INTERFACE_ITEMS_STORED.get().replaceText(TextReplacementConfig.builder().replacement(String.valueOf(storedItemAmount)).match("%itemAmount%").build()).replaceText(TextReplacementConfig.builder().replacement(String.valueOf(storedExperienceAmount)).match("%expAmount%").build()));

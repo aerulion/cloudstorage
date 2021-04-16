@@ -48,7 +48,6 @@ public class CloudImportBusGUI extends GUI {
         for (int i = 36; i < 45; i++)
             inventory.setItem(i, Item.GUI_SPACER_INVISIBLE.get());
         BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) block.getState();
-        //noinspection ConstantConditions
         Arrays.stream(blockInventoryHolder.getInventory().getContents())
                 .skip(1)
                 .filter(Objects::nonNull)

@@ -29,7 +29,7 @@ public class WirelessCloudInterfaceListener implements Listener {
                         event.setCancelled(true);
                         if (Main.MAINTENANCE_MODE) {
                             event.getPlayer().sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                            SoundUtils.playSound(event.getPlayer(), SoundType.ALERT);
+                            SoundUtils.playSound(event.getPlayer(), SoundType.INFO);
                             return;
                         }
                         if (Main.DISABLED_WORLDS.contains(event.getPlayer().getWorld().getName()) && !event.getPlayer().hasPermission(Permission.BYPASS_WORLD.get())) {

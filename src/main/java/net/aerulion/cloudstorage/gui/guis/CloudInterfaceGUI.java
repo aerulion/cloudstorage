@@ -54,7 +54,7 @@ public class CloudInterfaceGUI extends GUI {
             if (event.getSlot() == 11) {
                 if (Main.MAINTENANCE_MODE) {
                     player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                    SoundUtils.playSound(player, SoundType.ALERT);
+                    SoundUtils.playSound(player, SoundType.INFO);
                     return;
                 }
                 new CloudInterfaceTask(player, dataContainer.getCloudInterfaceOwner(), CloudInterfaceMode.HOTBAR_ONLY);
@@ -64,7 +64,7 @@ public class CloudInterfaceGUI extends GUI {
             if (event.getSlot() == 13) {
                 if (Main.MAINTENANCE_MODE) {
                     player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                    SoundUtils.playSound(player, SoundType.ALERT);
+                    SoundUtils.playSound(player, SoundType.INFO);
                     return;
                 }
                 new CloudInterfaceTask(player, dataContainer.getCloudInterfaceOwner(), CloudInterfaceMode.ALL);
@@ -74,7 +74,7 @@ public class CloudInterfaceGUI extends GUI {
             if (event.getSlot() == 15) {
                 if (Main.MAINTENANCE_MODE) {
                     player.sendMessage(Messages.ERROR_MAINTENANCE_MODE.get());
-                    SoundUtils.playSound(player, SoundType.ALERT);
+                    SoundUtils.playSound(player, SoundType.INFO);
                     return;
                 }
                 new CloudInterfaceTask(player, dataContainer.getCloudInterfaceOwner(), CloudInterfaceMode.INVENTORY_ONLY);

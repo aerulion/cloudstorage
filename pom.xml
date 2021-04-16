@@ -6,7 +6,7 @@
 
     <groupId>net.aerulion</groupId>
     <artifactId>cloudstorage</artifactId>
-    <version>1.3</version>
+    <version>1.4.0</version>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -93,7 +93,7 @@
         <dependency>
             <groupId>net.aerulion</groupId>
             <artifactId>nucleus</artifactId>
-            <version>1.14</version>
+            <version>1.16.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

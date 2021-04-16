@@ -62,7 +62,7 @@ public class StoreInitialItemTask extends BukkitRunnable {
                 }
             } else {
                 PLAYER.sendMessage(Messages.MESSAGE_ITEM_ALREADY_STORED.get());
-                SoundUtils.playSound(PLAYER, SoundType.ALERT);
+                SoundUtils.playSound(PLAYER, SoundType.INFO);
             }
         } catch (SQLException exception) {
             PLAYER.sendMessage(Messages.ERROR_LOADING_DATA.get());

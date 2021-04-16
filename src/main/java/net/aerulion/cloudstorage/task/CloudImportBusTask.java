@@ -37,7 +37,6 @@ public class CloudImportBusTask extends BukkitRunnable {
                     entity.playSound(location, Sound.BLOCK_PISTON_EXTEND, 1F, 0.8F);
                     entity.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 0.5F);
                 });
-        //noinspection ConstantConditions
         Arrays.stream(blockInventoryHolder.getInventory().getContents())
                 .skip(1)
                 .filter(Objects::nonNull)
