@@ -3,7 +3,9 @@ package net.aerulion.cloudstorage.block;
 import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.block.blocks.*;
 import net.aerulion.cloudstorage.utils.Messages;
+import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.cloudstorage.utils.Permission;
+import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
 import org.bukkit.GameMode;
@@ -38,7 +40,7 @@ public class BlockManager implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         if (event.getBlock().getState() instanceof BlockInventoryHolder) {
             BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) event.getBlock().getState();
-            ItemStack itemStack = blockInventoryHolder.getInventory().getItem(0);
+            ItemStack itemStack = blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1);
             if (itemStack == null || !(itemStack.getType().equals(Material.PAPER) || itemStack.getType().equals(Material.WRITTEN_BOOK)))
                 return;
             CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(itemStack);
@@ -46,8 +48,8 @@ public class BlockManager implements Listener {
             BLOCKS.get(cloudStorageBlockType).handleBreak(event.getBlock().getLocation(), itemStack);
             blockInventoryHolder.getInventory().setItem(0, null);
             Arrays.stream(blockInventoryHolder.getInventory().getContents())
-                    .skip(1)
-                    .filter(Objects::nonNull)
+                    .filter(itemStack2 -> itemStack2 != null &&
+                            NbtUtils.getNBTString(itemStack2, NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals(""))
                     .forEach(drop -> event.getBlock().getLocation().getWorld().dropItemNaturally(event.getBlock().getLocation(), drop));
             event.setDropItems(false);
             blockInventoryHolder.getInventory().clear();
@@ -75,7 +77,7 @@ public class BlockManager implements Listener {
                 && !(event.getPlayer().isSneaking() && event.getItem() != null)
                 && event.getClickedBlock().getState() instanceof BlockInventoryHolder) {
             BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) event.getClickedBlock().getState();
-            ItemStack itemStack = blockInventoryHolder.getInventory().getItem(0);
+            ItemStack itemStack = blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1);
             if (itemStack == null || !(itemStack.getType().equals(Material.PAPER) || itemStack.getType().equals(Material.WRITTEN_BOOK)))
                 return;
             CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(itemStack);
@@ -108,9 +110,9 @@ public class BlockManager implements Listener {
     //Prevent Hopper Interaction
     @EventHandler(ignoreCancelled = true)
     public void onHopper(InventoryMoveItemEvent event) {
-        CloudStorageBlockType destinationType = CloudStorageBlockType.of(event.getDestination().getItem(0));
-        CloudStorageBlockType sourceType = CloudStorageBlockType.of(event.getSource().getItem(0));
-        if (sourceType != null)
+        CloudStorageBlockType destinationType = CloudStorageBlockType.of(event.getDestination().getItem(event.getDestination().getSize() - 1));
+        CloudStorageBlockType sourceType = CloudStorageBlockType.of(event.getSource().getItem(event.getSource().getSize() - 1));
+        if (sourceType != null && !(sourceType.equals(CloudStorageBlockType.CLOUD_EXPORT_BUS) && NbtUtils.getNBTString(event.getItem(), NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals("")))
             event.setCancelled(true);
         if (destinationType != null && !destinationType.equals(CloudStorageBlockType.CLOUD_IMPORT_BUS))
             event.setCancelled(true);
@@ -121,7 +123,7 @@ public class BlockManager implements Listener {
     public void onDispense(BlockDispenseEvent event) {
         if (event.getBlock().getState() instanceof BlockInventoryHolder) {
             BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) event.getBlock().getState();
-            CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(blockInventoryHolder.getInventory().getItem(0));
+            CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1));
             if (cloudStorageBlockType != null)
                 event.setCancelled(true);
         }
@@ -145,7 +147,7 @@ public class BlockManager implements Listener {
             Block block = blockIterator.next();
             if (block.getState() instanceof BlockInventoryHolder) {
                 BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) block.getState();
-                CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(blockInventoryHolder.getInventory().getItem(0));
+                CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1));
                 if (cloudStorageBlockType != null)
                     blockIterator.remove();
             }

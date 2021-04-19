@@ -13,7 +13,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 public class CloudImportBusTask extends BukkitRunnable {
 
@@ -26,7 +25,7 @@ public class CloudImportBusTask extends BukkitRunnable {
 
     @Override
     public void run() {
-        ItemStack metaItem = blockInventoryHolder.getInventory().getItem(0);
+        ItemStack metaItem = blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1);
         if (metaItem == null) return;
         String ownerUUID = NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get());
         Location location = blockInventoryHolder.getBlock().getLocation();
@@ -38,8 +37,8 @@ public class CloudImportBusTask extends BukkitRunnable {
                     entity.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 0.5F);
                 });
         Arrays.stream(blockInventoryHolder.getInventory().getContents())
-                .skip(1)
-                .filter(Objects::nonNull)
+                .filter(itemStack -> itemStack != null &&
+                        NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals(""))
                 .forEach(itemStack -> {
                     new StoreItemOrDropTask(
                             itemStack.clone(),

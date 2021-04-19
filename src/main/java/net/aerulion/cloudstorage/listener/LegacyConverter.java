@@ -48,9 +48,16 @@ public class LegacyConverter implements Listener {
     private void convertLegacyMetaItem(BlockInventoryHolder blockInventoryHolder) {
         ItemStack metaItem = blockInventoryHolder.getInventory().getItem(0);
         if (metaItem != null) {
+            if (!NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals("")) {
+                blockInventoryHolder.getInventory().setItem(blockInventoryHolder.getInventory().getSize() - 1, metaItem.clone());
+                metaItem.setAmount(0);
+                return;
+            }
             ItemStack converted = convertLegacyMetaItem(metaItem);
-            if (!converted.isSimilar(metaItem))
-                blockInventoryHolder.getInventory().setItem(0, converted);
+            if (!converted.isSimilar(metaItem)) {
+                blockInventoryHolder.getInventory().setItem(blockInventoryHolder.getInventory().getSize() - 1, converted.clone());
+                metaItem.setAmount(0);
+            }
         }
     }
 

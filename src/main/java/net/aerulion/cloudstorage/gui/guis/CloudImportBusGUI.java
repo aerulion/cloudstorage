@@ -3,6 +3,8 @@ package net.aerulion.cloudstorage.gui.guis;
 import net.aerulion.cloudstorage.Main;
 import net.aerulion.cloudstorage.gui.GUI;
 import net.aerulion.cloudstorage.utils.Item;
+import net.aerulion.cloudstorage.utils.NBT;
+import net.aerulion.nucleus.api.nbt.NbtUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.block.Block;
@@ -13,7 +15,6 @@ import org.bukkit.inventory.BlockInventoryHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Objects;
 
 public class CloudImportBusGUI extends GUI {
 
@@ -49,9 +50,9 @@ public class CloudImportBusGUI extends GUI {
             inventory.setItem(i, Item.GUI_SPACER_INVISIBLE.get());
         BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) block.getState();
         Arrays.stream(blockInventoryHolder.getInventory().getContents())
-                .skip(1)
-                .filter(Objects::nonNull)
-                .forEach(inventory::addItem);
+                .filter(itemStack -> itemStack != null &&
+                        NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals(""))
+                .forEach(itemStack -> inventory.addItem(itemStack.clone()));
         inventory.setItem(44, Item.getNetworkInfoBook(ownerUUID));
         dataContainer.getOwningPlayer().updateInventory();
     }

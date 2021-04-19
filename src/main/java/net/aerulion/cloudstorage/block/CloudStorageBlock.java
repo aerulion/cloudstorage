@@ -56,7 +56,7 @@ public abstract class CloudStorageBlock {
                 for (MetaData metaData : getMetaData(itemStack))
                     metaItem = NbtUtils.setNBTString(metaItem, metaData.getKey(), metaData.getValue());
                 BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) block.getState();
-                blockInventoryHolder.getInventory().setItem(0, metaItem);
+                blockInventoryHolder.getInventory().setItem(blockInventoryHolder.getInventory().getSize() - 1, metaItem);
             }
         }, 1L);
     }

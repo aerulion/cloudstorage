@@ -22,10 +22,11 @@ public class CloudImportBusBlock extends CloudStorageBlock {
 
     @Override
     public @NotNull List<MetaData> getMetaData(ItemStack itemStack) {
-        return Collections.singletonList(new MetaData(
-                NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get(),
-                NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get())
-        ));
+        return Collections.singletonList(
+                new MetaData(
+                        NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get(),
+                        NbtUtils.getNBTString(itemStack, NBT.KEY_CLOUD_IMPORT_BUS_OWNER_UUID.get()))
+        );
     }
 
     @Override
