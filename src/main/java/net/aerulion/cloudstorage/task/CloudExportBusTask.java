@@ -33,14 +33,6 @@ public class CloudExportBusTask extends BukkitRunnable {
         String ownerUUID = NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_EXPORT_BUS_OWNER_UUID.get());
         String associatedSlot = NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_EXPORT_BUS_ASSOCIATED_SLOT_UUID.get());
         if (ownerUUID.equals("") || associatedSlot.equals("")) return;
-        Location location = blockInventoryHolder.getBlock().getLocation();
-        location.getNearbyEntities(10, 10, 10).stream()
-                .filter(entity -> entity instanceof Player)
-                .map(entity -> (Player) entity)
-                .forEach(entity -> {
-                    entity.playSound(location, Sound.BLOCK_PISTON_CONTRACT, 1F, 0.8F);
-                    entity.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 0.5F);
-                });
         try (Connection connection = MySQLUtils.getConnection()) {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT ITEM, AMOUNT FROM aerulion_cloudstorage_slots WHERE UUID=?");
             preparedStatement.setString(1, associatedSlot);
@@ -48,7 +40,8 @@ public class CloudExportBusTask extends BukkitRunnable {
             if (resultSet == null || !resultSet.next()) return;
             ItemStack itemStack = Base64Utils.decodeItemStack(resultSet.getString("ITEM"));
             int amount = resultSet.getInt("AMOUNT");
-            int withdrawAmount = Math.min(26 * itemStack.getMaxStackSize(), amount);
+            if (amount <= 1) return;
+            int withdrawAmount = Math.min(26 * itemStack.getMaxStackSize(), amount - 1);
             PreparedStatement preparedStatement2 = connection.prepareStatement("UPDATE aerulion_cloudstorage_slots SET AMOUNT = IF(AMOUNT >= ?, AMOUNT - ?, AMOUNT), ITEM = IF(AMOUNT = 0, '', ITEM) WHERE UUID = ?");
             preparedStatement2.setInt(1, withdrawAmount);
             preparedStatement2.setInt(2, withdrawAmount);
@@ -62,5 +55,13 @@ public class CloudExportBusTask extends BukkitRunnable {
             }
         } catch (SQLException ignored) {
         }
+        Location location = blockInventoryHolder.getBlock().getLocation();
+        location.getNearbyEntities(10, 10, 10).stream()
+                .filter(entity -> entity instanceof Player)
+                .map(entity -> (Player) entity)
+                .forEach(entity -> {
+                    entity.playSound(location, Sound.BLOCK_PISTON_CONTRACT, 1F, 0.8F);
+                    entity.playSound(location, Sound.ENTITY_ENDERMAN_TELEPORT, 1F, 0.5F);
+                });
     }
 }
