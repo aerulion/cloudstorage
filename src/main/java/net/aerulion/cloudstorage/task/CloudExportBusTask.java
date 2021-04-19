@@ -55,7 +55,6 @@ public class CloudExportBusTask extends BukkitRunnable {
             preparedStatement2.setString(3, associatedSlot);
             int returnValue = preparedStatement2.executeUpdate();
             if (returnValue < 1) return;
-            System.out.println("Withdrawn: " + withdrawAmount);
             while (withdrawAmount > 0) {
                 int addedAmount = Math.min(itemStack.getMaxStackSize(), withdrawAmount);
                 blockInventoryHolder.getInventory().addItem(itemStack.clone().asQuantity(addedAmount));
