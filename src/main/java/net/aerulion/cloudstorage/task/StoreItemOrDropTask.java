@@ -33,10 +33,10 @@ public class StoreItemOrDropTask extends BukkitRunnable {
             preparedStatement.setString(2, ownerUUID);
             preparedStatement.setString(3, Base64Utils.encodeItemStack(itemStack.clone().asOne()));
             if (preparedStatement.executeUpdate() == 0)
-                Bukkit.getScheduler().runTask(Main.plugin, () -> location.getWorld().dropItem(location, itemStack));
+                Bukkit.getScheduler().runTask(Main.plugin, () -> location.getWorld().dropItem(location.clone().toCenterLocation(), itemStack));
             preparedStatement.close();
         } catch (SQLException exception) {
-            Bukkit.getScheduler().runTask(Main.plugin, () -> location.getWorld().dropItem(location, itemStack));
+            Bukkit.getScheduler().runTask(Main.plugin, () -> location.getWorld().dropItem(location.clone().toCenterLocation(), itemStack));
         }
     }
 }
