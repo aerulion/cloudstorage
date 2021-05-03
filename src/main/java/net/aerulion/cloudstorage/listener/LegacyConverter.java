@@ -3,6 +3,7 @@ package net.aerulion.cloudstorage.listener;
 import net.aerulion.cloudstorage.block.CloudStorageBlockType;
 import net.aerulion.cloudstorage.utils.NBT;
 import net.aerulion.nucleus.api.nbt.NbtUtils;
+import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -47,7 +48,7 @@ public class LegacyConverter implements Listener {
 
     private void convertLegacyMetaItem(BlockInventoryHolder blockInventoryHolder) {
         ItemStack metaItem = blockInventoryHolder.getInventory().getItem(0);
-        if (metaItem != null) {
+        if (metaItem != null && (metaItem.getType().equals(Material.PAPER) || metaItem.getType().equals(Material.WRITTEN_BOOK))) {
             if (!NbtUtils.getNBTString(metaItem, NBT.KEY_CLOUD_STORAGE_BLOCK_TYPE.get()).equals("")) {
                 blockInventoryHolder.getInventory().setItem(blockInventoryHolder.getInventory().getSize() - 1, metaItem.clone());
                 metaItem.setAmount(0);
