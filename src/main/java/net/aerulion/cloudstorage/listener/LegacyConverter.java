@@ -43,6 +43,9 @@ public class LegacyConverter implements Listener {
 
     @EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
     public void listen(BlockDispenseEvent event) {
+        ItemStack convertedItem = convertLegacyMetaItem(event.getItem());
+        if (!convertedItem.isSimilar(event.getItem()))
+            event.setItem(convertedItem);
         convertLegacyMetaItem((BlockInventoryHolder) event.getBlock().getState());
     }
 

@@ -21,7 +21,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.BlockInventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 public class BlockManager implements Listener {
 
@@ -124,7 +127,10 @@ public class BlockManager implements Listener {
         if (event.getBlock().getState() instanceof BlockInventoryHolder) {
             BlockInventoryHolder blockInventoryHolder = (BlockInventoryHolder) event.getBlock().getState();
             CloudStorageBlockType cloudStorageBlockType = CloudStorageBlockType.of(blockInventoryHolder.getInventory().getItem(blockInventoryHolder.getInventory().getSize() - 1));
-            if (cloudStorageBlockType != null)
+            CloudStorageBlockType cloudStorageBlockType2 = CloudStorageBlockType.of(event.getItem());
+            if (cloudStorageBlockType != null ||
+                    (cloudStorageBlockType2 != null && (event.getItem().getType().equals(Material.PAPER) ||
+                            event.getItem().getType().equals(Material.WRITTEN_BOOK))))
                 event.setCancelled(true);
         }
     }
