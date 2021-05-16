@@ -11,10 +11,8 @@ import net.aerulion.nucleus.api.component.ComponentUtils;
 import net.aerulion.nucleus.api.item.GuiButtonBuilder;
 import net.aerulion.nucleus.api.sound.SoundType;
 import net.aerulion.nucleus.api.sound.SoundUtils;
-import net.aerulion.nucleus.api.string.StringUtils;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -55,11 +53,11 @@ public class CloudAccessPointGUI extends GUI {
                 if (lore != null) {
                     Component amountComponent1 = Component.text("Eingelagert:").color(Main.PRIMARY_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE);
                     Component amountComponent2 = Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getStoredAmount())).color(Main.PRIMARY_COLOR).decoration(TextDecoration.ITALIC, TextDecoration.State.FALSE).append(Component.text("/").color(Main.LIGHT_ACCENT_COLOR)).append(Component.text(Messages.decimalFormat.format(dataContainer.getCloudStorageSlot().getCapacity())).color(Main.PRIMARY_COLOR));
-                    int pixelLength = Math.max(StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent1)), StringUtils.getPixelLength(LegacyComponentSerializer.legacySection().serialize(amountComponent2))) + 20;
-                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_COLOR));
+                    int pixelLength = Math.max(ComponentUtils.getPixelLength(amountComponent1), ComponentUtils.getPixelLength(amountComponent2)) + 20;
+                    lore.add(ComponentUtils.generateLine(pixelLength).color(Main.LIGHT_ACCENT_COLOR));
                     lore.add(ComponentUtils.generateCenteredComponent(amountComponent1, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
                     lore.add(ComponentUtils.generateCenteredComponent(amountComponent2, (int) Math.round(pixelLength / 2D)).append(Component.text("  ")));
-                    lore.add(Component.text(StringUtils.generateLine((int) Math.round(pixelLength / 4D))).color(Main.LIGHT_ACCENT_COLOR));
+                    lore.add(ComponentUtils.generateLine(pixelLength).color(Main.LIGHT_ACCENT_COLOR));
                     storedItemMeta.lore(lore);
                     storedItem.setItemMeta(storedItemMeta);
                 }
